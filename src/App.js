@@ -6,7 +6,6 @@ function App() {
     <>
       <GlobalStyle />
       <Button
-        isBig={false}
         bgColor="var(--brand-4)"
         fontColor="var(--grey-10)"
         borderColor="var(--grey-10)"
@@ -15,6 +14,9 @@ function App() {
         Big = False
       </Button>
       <Button
+        width="300px"
+        height="100px"
+        fontSize="20px"
         bgColor="var(--brand-4)"
         fontColor="var(--brand-1)"
         borderColor="var(--brand-1)"
