@@ -39,3 +39,33 @@ export const HeaderUpperContainer = styled.div`
     }
   } ;
 `;
+
+export const MenuOuterContainer = styled.div`
+  height: 421px;
+
+  .menu_item {
+    height: 78px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--grey-2);
+    padding-left: 16px;
+    cursor: pointer;
+
+    :hover {
+      transition: 0.3s;
+      background-color: var(--grey-5);
+    }
+  }
+
+  .inner_items {
+    border-bottom: 1px solid var(--grey-4);
+  }
+
+  .signup_btn {
+    margin-left: 16px;
+    margin-top: 15px;
+  }
+`;
