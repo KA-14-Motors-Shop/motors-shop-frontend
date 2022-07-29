@@ -1,6 +1,6 @@
 import { StyledButton } from "./styles";
 
-const Button = ({
+function Button({
   children,
   width = "146px",
   height = "48px",
@@ -10,7 +10,7 @@ const Button = ({
   borderColor = "var(--grey-0)",
   onHoverColor,
   ...rest
-}) => {
+}) {
   return (
     <StyledButton
       width={width}
@@ -25,6 +25,6 @@ const Button = ({
       {children}
     </StyledButton>
   );
-};
+}
 
 export default Button;
