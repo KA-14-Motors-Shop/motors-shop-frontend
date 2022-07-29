@@ -15,6 +15,20 @@ export const HeaderUpperContainer = styled.div`
     height: 15px;
   }
 
+  .mobile_menu_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: none;
+    margin-right: 16px;
+  }
+
+  .GiHamIcon {
+    width: 15px;
+    height: 20px;
+  }
+
   @media (max-width: 768px) {
     display: flex;
     justify-content: space-between;
