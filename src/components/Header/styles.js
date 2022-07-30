@@ -43,6 +43,21 @@ export const HeaderUpperContainer = styled.div`
 export const MenuOuterContainer = styled.div`
   height: 421px;
 
+  @keyframes growDown {
+    0% {
+      transform: scaleY(0);
+    }
+    80% {
+      transform: scaleY(1.1);
+    }
+    100% {
+      transform: scaleY(1);
+    }
+  }
+
+  animation: growDown 300ms ease-in-out forwards;
+  transform-origin: top center;
+
   .menu_item {
     height: 78px;
     display: flex;
