@@ -1,7 +1,13 @@
 import GlobalStyle from "./styles/global";
 import Button from "./components/Button";
+import AnuncioModal from "./components/modal";
+
+
+import {useState} from "react"
 
 function App() {
+  const [showModal, setShowModal] = useState(false)
+  const [changes, setChanges] = useState(false)
   return (
     <>
       <GlobalStyle />
@@ -10,10 +16,11 @@ function App() {
         fontColor="var(--grey-10)"
         borderColor="var(--grey-10)"
         onHoverColor="var(--brand-1)"
+        onClick = {() => {setShowModal(true)}}
       >
         Big = False
       </Button>
-      <Button
+      {/* <Button
         width="300px"
         height="100px"
         fontSize="20px"
@@ -23,7 +30,13 @@ function App() {
         onHoverColor="var(--brand-3)"
       >
         Big = True
-      </Button>
+      </Button> */}
+
+      {showModal && (<AnuncioModal
+        setShowModal={setShowModal}
+        setChanges = {setChanges}
+      />)}
+
     </>
   );
 }
