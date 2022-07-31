@@ -19,11 +19,6 @@ export const HeaderUpperContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    .mobile_bars {
-      width: 20px;
-      height: 15px;
-    }
-
     .mobile_menu_btn {
       display: flex;
       justify-content: center;
