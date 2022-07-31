@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { animated } from "react-spring";
 
 export const HeaderUpperContainer = styled.div`
   display: flex;
@@ -35,14 +36,14 @@ export const HeaderUpperContainer = styled.div`
   } ;
 `;
 
-export const MenuOuterContainer = styled.div`
+export const MenuOuterContainer = styled(animated.div)`
   @media (min-width: 769px) {
     display: none;
   }
 
   height: 421px;
 
-  @keyframes growDown {
+  /* @keyframes growDown {
     0% {
       transform: scaleY(0);
     }
@@ -55,7 +56,7 @@ export const MenuOuterContainer = styled.div`
   }
 
   animation: growDown 300ms ease-in-out forwards;
-  transform-origin: top center;
+  transform-origin: top center; */
 
   .menu_item {
     height: 78px;

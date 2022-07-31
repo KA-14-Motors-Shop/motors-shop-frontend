@@ -8,9 +8,17 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import Button from "../Button";
+import { useTransition } from "react-spring";
 
 const Header = ({ isLoggedIn = false }) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
+
+  const transition = useTransition(isMenuClicked, {
+    from: { height: 350, opacity: 0 },
+    enter: { y: 0, height: 421, opacity: 1 },
+    leave: { height: 350, opacity: 0 },
+    config: { duration: 350, tension: 120, friction: 14 },
+  });
   return (
     <>
       <HeaderUpperContainer>
@@ -28,29 +36,33 @@ const Header = ({ isLoggedIn = false }) => {
         </button>
       </HeaderUpperContainer>
 
-      {isMenuClicked && (
-        <MenuOuterContainer>
-          <div className="inner_items">
-            <ul className="items_ul">
-              <li className="menu_item">Carros</li>
-              <li className="menu_item">Motos</li>
-              <li className="menu_item">Leilão</li>
-            </ul>
-          </div>
+      {transition((style, item) =>
+        item ? (
+          <MenuOuterContainer style={style}>
+            <div className="inner_items">
+              <ul className="items_ul">
+                <li className="menu_item">Carros</li>
+                <li className="menu_item">Motos</li>
+                <li className="menu_item">Leilão</li>
+              </ul>
+            </div>
 
-          <div className="outer_items">
-            <ul className="items_ul">
-              <li className="menu_item">Fazer Login</li>
-            </ul>
-            <Button
-              className="signup_btn"
-              width="88vw"
-              borderColor="var(--grey-4)"
-            >
-              Cadastrar
-            </Button>
-          </div>
-        </MenuOuterContainer>
+            <div className="outer_items">
+              <ul className="items_ul">
+                <li className="menu_item">Fazer Login</li>
+              </ul>
+              <Button
+                className="signup_btn"
+                width="88vw"
+                borderColor="var(--grey-4)"
+              >
+                Cadastrar
+              </Button>
+            </div>
+          </MenuOuterContainer>
+        ) : (
+          ""
+        )
       )}
 
       <HeaderLowerContainer>
