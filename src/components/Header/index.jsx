@@ -82,8 +82,6 @@ const Header = ({ isLoggedIn = false }) => {
         <div className="buttons_container">
           <Button
             className="lower_header_btn"
-            width="80vw"
-            height="48px"
             borderColor="var(--grey-10)"
             bgColor="transparent"
             fontColor="var(--grey-10)"
