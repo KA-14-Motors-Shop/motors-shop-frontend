@@ -1,5 +1,6 @@
 import header_logo from "../../assets/header_logo.png";
 import {
+  DesktopNavBar,
   HeaderLowerContainer,
   HeaderUpperContainer,
   MenuOuterContainer,
@@ -15,6 +16,22 @@ const Header = ({ isLoggedIn = false }) => {
     <>
       <HeaderUpperContainer>
         <img className="logo" src={header_logo} alt="header_logo" />
+
+        <DesktopNavBar>
+          <div className="desktop_inner_menu">
+            <div className="d_menu_item">Carros</div>
+            <div className="d_menu_item">Motos</div>
+            <div className="d_menu_item">Leilão</div>
+          </div>
+
+          <div className="desktop_outer_menu">
+            <div className="d_menu_login">Fazer Login</div>
+
+            <Button width="133px" height="48px" borderColor="var(--grey-4)">
+              Cadastrar
+            </Button>
+          </div>
+        </DesktopNavBar>
 
         <button
           className="mobile_menu_btn"

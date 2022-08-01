@@ -129,3 +129,55 @@ export const HeaderLowerContainer = styled.div`
     }
   }
 `;
+
+export const DesktopNavBar = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+  display: flex;
+  height: inherit;
+  width: 73vw;
+  max-width: 600px;
+  font-family: "Inter", sans-serif;
+
+  .desktop_inner_menu {
+    height: inherit;
+    display: flex;
+    align-items: center;
+    border-right: 1.5px solid var(--grey-6);
+
+    .d_menu_item {
+      width: 89px;
+      height: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--grey-2);
+      font-weight: 600;
+      cursor: pointer;
+      :hover {
+        transition: 0.4s;
+        background-color: var(--grey-6);
+      }
+    }
+  }
+
+  .desktop_outer_menu {
+    display: flex;
+    align-items: center;
+    height: inherit;
+    .d_menu_login {
+      height: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      color: var(--grey-2);
+      font-weight: 600;
+      cursor: pointer;
+      :hover {
+        background-color: var(--grey-6);
+      }
+    }
+  }
+`;
