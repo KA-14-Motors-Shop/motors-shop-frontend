@@ -9,8 +9,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import Button from "../Button";
+import DefaultProfilePicture from "../DefaultProfilePicture";
 
-const Header = ({ isLoggedIn = false }) => {
+const Header = ({ isLoggedIn = false, username }) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   return (
     <>
@@ -23,14 +24,20 @@ const Header = ({ isLoggedIn = false }) => {
             <div className="d_menu_item">Motos</div>
             <div className="d_menu_item">Leilão</div>
           </div>
+          {isLoggedIn ? (
+            <div className="d_user_container">
+              <DefaultProfilePicture username={username} />
+              <div className="d_user_name_txt">{username}</div>
+            </div>
+          ) : (
+            <div className="desktop_outer_menu">
+              <div className="d_menu_login">Fazer Login</div>
 
-          <div className="desktop_outer_menu">
-            <div className="d_menu_login">Fazer Login</div>
-
-            <Button width="133px" height="48px" borderColor="var(--grey-4)">
-              Cadastrar
-            </Button>
-          </div>
+              <Button width="133px" height="48px" borderColor="var(--grey-4)">
+                Cadastrar
+              </Button>
+            </div>
+          )}
         </DesktopNavBar>
 
         <button

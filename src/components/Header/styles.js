@@ -211,8 +211,28 @@ export const DesktopNavBar = styled.div`
       font-weight: 600;
       cursor: pointer;
       :hover {
+        transition: 0.4s;
         background-color: var(--grey-6);
       }
+    }
+  }
+
+  .d_user_container {
+    height: inherit;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    :hover {
+      transition: 0.4s;
+      background-color: var(--grey-6);
+    }
+
+    .d_user_name_txt {
+      margin-left: 10px;
+      color: var(--grey-2);
+      font-size: 16px;
     }
   }
 `;
