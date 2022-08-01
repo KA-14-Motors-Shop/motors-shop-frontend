@@ -17,6 +17,20 @@ width: 100%;
     border-radius: 8px;
  }
 
+ .generic-modal{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   padding: 5px 20px;
+   background-color:whitesmoke;
+   width: 500px;
+   height: 300px;
+   border-radius: 8px;
+ }
+
+
+ 
+
  input {        /* Somente para testes */
     width: 150px; 
     height: 50px; 
@@ -40,6 +54,11 @@ width: 100%;
 
  }
 
+ @media only screen and (max-width: 425px) {
+   .generic-modal{
+      width:100%;
+   }
+ } 
 
 
 
