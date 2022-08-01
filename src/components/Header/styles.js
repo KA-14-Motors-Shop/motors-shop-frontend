@@ -175,6 +175,19 @@ export const DesktopNavBar = styled.div`
   max-width: 600px;
   font-family: "Inter", sans-serif;
 
+  .ddown_item {
+    padding-left: 22px;
+    color: var(--grey-2);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    :hover {
+      transition: 0.4s;
+      background: var(--grey-6);
+    }
+  }
+
   .desktop_inner_menu {
     height: inherit;
     display: flex;
@@ -223,6 +236,8 @@ export const DesktopNavBar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    cursor: pointer;
 
     :hover {
       transition: 0.4s;
