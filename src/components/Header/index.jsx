@@ -20,7 +20,6 @@ const Header = ({ isLoggedIn = false, username }) => {
 
   useEffect(() => {
     const closeDropdown = (e) => {
-      console.log(ddownRef.current);
       if (
         e.target !== ddownRef.current &&
         e.target !== ddownRef.current.children[0] &&
