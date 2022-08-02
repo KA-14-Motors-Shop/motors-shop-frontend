@@ -92,16 +92,31 @@ const UpperHeader = ({ isLoggedIn = false, username }) => {
           </div>
 
           <div className="outer_items">
-            <ul className="items_ul">
-              <li className="menu_item">Fazer Login</li>
-            </ul>
-            <Button
-              className="signup_btn"
-              width="88vw"
-              borderColor="var(--grey-4)"
-            >
-              Cadastrar
-            </Button>
+            {isLoggedIn ? (
+              <>
+                <div className="m_usercontainer">
+                  <DefaultProfilePicture username={username} />
+                  <div className="m_username">{username}</div>
+                </div>
+                <ul className="items_ul">
+                  <li className="menu_item">Sair</li>
+                </ul>
+              </>
+            ) : (
+              <>
+                <ul className="items_ul">
+                  <li className="menu_item">Fazer Login</li>
+                </ul>
+
+                <Button
+                  className="signup_btn"
+                  width="88vw"
+                  borderColor="var(--grey-4)"
+                >
+                  Cadastrar
+                </Button>
+              </>
+            )}
           </div>
         </MenuOuterContainer>
       )}

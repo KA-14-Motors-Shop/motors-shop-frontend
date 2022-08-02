@@ -164,4 +164,23 @@ export const MenuOuterContainer = styled.div`
     margin-left: 16px;
     margin-top: 15px;
   }
+
+  .m_usercontainer {
+    height: 78px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 16px;
+    :hover {
+      transition: 0.4s;
+      background-color: var(--grey-5);
+    }
+
+    .m_username {
+      margin-left: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--grey-2);
+    }
+  }
 `;
