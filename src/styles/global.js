@@ -45,7 +45,7 @@ const GlobalStyle = createGlobalStyle`
   --random-12: #30007D;
 }
 
-body, html {
+body, html,label {
  font-family: "Inter", sans-serif;
 }
 
