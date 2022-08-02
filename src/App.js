@@ -1,11 +1,11 @@
 import GlobalStyle from "./styles/global";
-import Header from "./components/Header";
+import HomeHeader from "./components/HomeHeader";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Header username={"Junior Testing"} isLoggedIn={true} />
+      <HomeHeader username={"Junior Testing"} isLoggedIn={false} />
     </>
   );
 }
