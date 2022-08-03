@@ -1,6 +1,6 @@
 import CardContainer from "./styled";
 import Car from "./carro.png";
-import Button from "../Button";
+import Button from "../../Button";
 
 const ProductCardAdm = ({
   id,
