@@ -1,7 +1,7 @@
 import CardContainer from "./styled";
 import Car from "./Photo.png";
 import { BsClock } from "react-icons/bs";
-import Button from "../Button";
+import Button from "../../Button";
 
 const ProductCardAuctionAdm = ({
   id,
