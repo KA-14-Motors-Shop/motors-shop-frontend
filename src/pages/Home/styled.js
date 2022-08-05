@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const MainHome = styled.main`
+const MainHome = styled.main`
   margin-top: 38px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  .home-list-section {
+  .home-section {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -17,11 +17,14 @@ export const MainHome = styled.main`
     white-space: normal;
   }
 
-  .auction-list {
+  .home-list {
     overflow-y: hidden;
     white-space: nowrap;
-    gap: 8px;
     display: -webkit-inline-box;
+  }
+
+  .auction-list {
+    gap: 8px;
     height: 510px;
     margin-top: 37px;
   }
@@ -36,10 +39,7 @@ export const MainHome = styled.main`
     }
 
     ul {
-      overflow-y: hidden;
-      white-space: nowrap;
       gap: 12px;
-      display: -webkit-inline-box;
     }
   }
 
@@ -52,10 +52,7 @@ export const MainHome = styled.main`
     }
 
     ul {
-      overflow-y: hidden;
-      white-space: nowrap;
       gap: 12px;
-      display: -webkit-inline-box;
     }
   }
 
@@ -65,7 +62,7 @@ export const MainHome = styled.main`
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     .auction-list {
       gap: 24px;
     }
@@ -81,10 +78,24 @@ export const MainHome = styled.main`
         gap: 48px;
       }
     }
+
+    .home-list::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .home-list::-webkit-scrollbar-track {
+      background: var(--grey-6);
+      border-radius: 4px;
+    }
+
+    .home-list::-webkit-scrollbar-thumb {
+      background-color: var(--brand-1);
+      border-radius: 20px;
+    }
   }
 
   @media (min-width: 845px) {
-    .home-list-section {
+    .home-section {
       padding-left: 60px;
     }
 
@@ -95,53 +106,4 @@ export const MainHome = styled.main`
   }
 `;
 
-export const FooterHome = styled.footer`
-  background-color: var(--grey-0);
-  color: var(--white-fixed);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h3 {
-    margin-top: 45px;
-    font-size: 25px;
-  }
-
-  span {
-    font-size: 18px;
-  }
-
-  p {
-    font-size: 14px;
-    font-weight: 400;
-    margin: 60px 0px;
-  }
-
-  button {
-    margin-bottom: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    font-weight: 900;
-  }
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    height: 140px;
-    align-items: center;
-    justify-content: space-around;
-
-    h3 {
-      margin: 0;
-    }
-
-    p {
-      margin: 0;
-    }
-
-    button {
-      margin: 0;
-    }
-  }
-`;
+export default MainHome;

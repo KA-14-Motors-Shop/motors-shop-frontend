@@ -2,6 +2,7 @@ import CardContainer from "./styled";
 import Car from "./Photo.png";
 import { BsClock } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
+import DefaultProfilePicture from "../../DefaultProfilePicture";
 
 const ProductCardAuction = ({
   id,
@@ -15,7 +16,7 @@ const ProductCardAuction = ({
   price,
 }) => {
   return (
-    <CardContainer>
+    <CardContainer number={parseInt(Math.random() * (13 - 1) + 1)}>
       <section className="product-section">
         <figure>
           <img src={Car} alt="Car_image" />
@@ -40,7 +41,11 @@ const ProductCardAuction = ({
           </p>
 
           <div className="owner-div">
-            <div>R</div>
+            <DefaultProfilePicture
+              username="Rodrigo Tavares"
+              width="32px"
+              height="32px"
+            />
             <span>Rodrigo Tavares</span>
           </div>
 
