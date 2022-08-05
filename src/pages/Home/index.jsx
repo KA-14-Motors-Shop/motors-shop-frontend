@@ -1,9 +1,8 @@
 import ProductCardAuction from "../../components/Cards/ProductCardAuction";
 import HomeHeader from "../../components/HomeHeader";
-import { MainHome, FooterHome } from "./styled";
+import MainHome from "./styled";
 import ProductCard from "../../components/Cards/ProductCard";
-import Button from "../../components/Button";
-import { IoIosArrowUp } from "react-icons/io";
+import Footer from "../../components/Footer";
 
 const Home = ({}) => {
   return (
@@ -39,23 +38,7 @@ const Home = ({}) => {
           </ul>
         </section>
       </MainHome>
-      <FooterHome>
-        <h3>
-          Motors <span>shop</span>
-        </h3>
-        <p>© 2022 - Todos os direitos reservados.</p>
-        <Button
-          width="53px"
-          height="50px"
-          bgColor="var(--grey-1)"
-          fontColor="var(--white-fixed)"
-          onClick={() => {
-            window.scrollTo(0, 0);
-          }}
-        >
-          <IoIosArrowUp />
-        </Button>
-      </FooterHome>
+      <Footer />
     </>
   );
 };

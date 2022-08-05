@@ -66,17 +66,8 @@ const CardContainer = styled.li`
     margin: 16px 0px;
 
     div {
-      width: 32px;
-      height: 32px;
       background-color: ${(props) => `var(--random-${props.number})`};
-      color: var(--white-fixed);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       margin-right: 8px;
-      font-size: 14px;
-      font-weight: 500;
     }
 
     span {

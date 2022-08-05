@@ -1,5 +1,6 @@
 import CardContainer from "./styled";
 import Car from "./carro.png";
+import DefaultProfilePicture from "../../DefaultProfilePicture";
 
 const ProductCard = ({
   id,
@@ -30,7 +31,11 @@ const ProductCard = ({
       </p>
 
       <div className="owner-div">
-        <div>R</div>
+        <DefaultProfilePicture
+          username="Anunciante"
+          width="32px"
+          height="32px"
+        />
         <span>Anunciante</span>
       </div>
 

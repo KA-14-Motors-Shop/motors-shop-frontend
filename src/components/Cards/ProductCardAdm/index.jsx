@@ -12,7 +12,7 @@ const ProductCardAdm = ({
   price,
 }) => {
   return (
-    <CardContainer number={parseInt(Math.random() * (13 - 1) + 1)}>
+    <CardContainer>
       <figure>
         <img src={Car} alt="Car_Image" />
         <figcaption>Car Image</figcaption>

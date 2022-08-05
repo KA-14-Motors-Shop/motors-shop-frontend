@@ -100,13 +100,7 @@ const CardContainer = styled.li`
         color: var(--white-fixed);
 
         div {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: var(--brand-1);
+          background-color: ${(props) => `var(--random-${props.number})`};
           margin-right: 8px;
         }
       }
