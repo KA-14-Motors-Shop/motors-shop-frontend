@@ -6,7 +6,7 @@ export const MainHome = styled.main`
   flex-direction: column;
   align-items: center;
 
-  .home-list-section {
+  .home-section {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -17,11 +17,14 @@ export const MainHome = styled.main`
     white-space: normal;
   }
 
-  .auction-list {
+  .home-list {
     overflow-y: hidden;
     white-space: nowrap;
-    gap: 8px;
     display: -webkit-inline-box;
+  }
+
+  .auction-list {
+    gap: 8px;
     height: 510px;
     margin-top: 37px;
   }
@@ -36,10 +39,7 @@ export const MainHome = styled.main`
     }
 
     ul {
-      overflow-y: hidden;
-      white-space: nowrap;
       gap: 12px;
-      display: -webkit-inline-box;
     }
   }
 
@@ -52,10 +52,7 @@ export const MainHome = styled.main`
     }
 
     ul {
-      overflow-y: hidden;
-      white-space: nowrap;
       gap: 12px;
-      display: -webkit-inline-box;
     }
   }
 
@@ -65,7 +62,7 @@ export const MainHome = styled.main`
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     .auction-list {
       gap: 24px;
     }
@@ -81,10 +78,24 @@ export const MainHome = styled.main`
         gap: 48px;
       }
     }
+
+    .home-list::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .home-list::-webkit-scrollbar-track {
+      background: var(--grey-6);
+      border-radius: 4px;
+    }
+
+    .home-list::-webkit-scrollbar-thumb {
+      background-color: var(--brand-1);
+      border-radius: 20px;
+    }
   }
 
   @media (min-width: 845px) {
-    .home-list-section {
+    .home-section {
       padding-left: 60px;
     }
 
@@ -126,7 +137,7 @@ export const FooterHome = styled.footer`
     font-weight: 900;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     flex-direction: row;
     height: 140px;
     align-items: center;
