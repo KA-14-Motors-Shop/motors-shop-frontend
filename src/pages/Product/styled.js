@@ -7,6 +7,8 @@ export const ProductMain = styled.main`
     var(--grey-8) 87%,
     var(--brand-1) 13%
   );
+  display: flex;
+  justify-content: center;
 
   .product-infos-section {
     display: flex;
@@ -344,6 +346,28 @@ export const ProductMain = styled.main`
         width: 108px;
         height: 108px;
       }
+    }
+  }
+
+  @media (min-width: 769px) {
+    .product-main-section {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1320px;
+    }
+
+    .product-infos-section {
+      width: 60%;
+    }
+
+    .product-complementary-section {
+      width: 40%;
+      margin-top: 0px;
+    }
+
+    .product-comments-section {
+      width: 100%;
+      max-width: 792px;
     }
   }
 `;
