@@ -26,7 +26,8 @@ export const ProductMain = styled.main`
       align-items: center;
 
       img {
-        width: 293px;
+        width: 96%;
+        max-width: 441px;
       }
 
       figcaption {
@@ -128,7 +129,7 @@ export const ProductMain = styled.main`
     h3 {
       font-size: 20px;
       font-weight: 600;
-      margin: 36px 0px 32px;
+      margin: 36px 0px -13px;
       width: 79%;
     }
 
@@ -139,6 +140,7 @@ export const ProductMain = styled.main`
       gap: 5px;
       margin-bottom: 36px;
       width: 93%;
+      height: 275px;
     }
 
     figure {
@@ -149,6 +151,7 @@ export const ProductMain = styled.main`
       align-items: center;
       border-radius: 4px;
       background-color: var(--grey-7);
+      margin-top: auto;
     }
 
     img {
@@ -221,7 +224,7 @@ export const ProductMain = styled.main`
 
     ul {
       margin-left: 28px;
-      width: 76%;
+      width: 81%;
       display: flex;
       flex-direction: column;
       gap: 44px;
@@ -268,11 +271,18 @@ export const ProductMain = styled.main`
     margin: 24px 0px 45px;
     display: flex;
     flex-direction: column;
+  }
+
+  .write-comment-div {
+    margin-left: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
 
     textarea {
-      width: 80%;
+      width: 86%;
+      max-width: 485px;
       height: 128px;
-      margin-left: 26px;
       padding: 10px;
       font-family: Inter;
       font-size: 16px;
@@ -280,10 +290,11 @@ export const ProductMain = styled.main`
       color: var(--grey-3);
       border: 2px solid var(--grey-7);
       border-radius: 4px;
+      resize: none;
     }
 
     button {
-      margin: 24px 0px 24px 26px;
+      margin-top: 24px;
     }
   }
 
@@ -338,6 +349,10 @@ export const ProductMain = styled.main`
 
   @media (min-width: 465px) {
     .pictures-div {
+      h3 {
+        margin-bottom: 0px;
+      }
+
       div {
         gap: 10px;
       }
@@ -347,9 +362,110 @@ export const ProductMain = styled.main`
         height: 108px;
       }
     }
+
+    .title-div {
+      align-items: center;
+
+      h1 {
+        width: 88%;
+        margin-left: 0;
+        margin-bottom: 41px;
+      }
+
+      button {
+        align-self: flex-start;
+        margin-left: 6%;
+      }
+    }
+
+    .infos-div {
+      width: 88%;
+      align-items: center;
+
+      h6 {
+        margin-left: auto;
+        margin-top: 0;
+      }
+    }
+
+    .description-div {
+      h3 {
+        margin-left: 6%;
+      }
+
+      p {
+        margin-left: 6%;
+        margin-right: 6%;
+      }
+    }
+
+    .list-comments-div {
+      h3 {
+        margin-left: 6%;
+      }
+
+      ul {
+        margin-left: 6%;
+        margin-right: 6%;
+        width: auto;
+      }
+    }
+
+    .creator-comment-div {
+      margin-left: 6%;
+    }
+
+    .write-comment-div {
+      margin-left: 6%;
+      margin-right: 6%;
+
+      textarea {
+        width: 100%;
+      }
+    }
+
+    .comment-examples-div {
+      margin-left: 6%;
+    }
+  }
+
+  @media (min-width: 710px) {
+    .write-comment-div {
+      border: 2px solid var(--grey-7);
+      border-radius: 4px;
+      justify-content: space-around;
+
+      textarea {
+        border: none;
+        width: 480px;
+      }
+
+      button {
+        margin-top: 0px;
+        align-self: flex-end;
+        margin-bottom: 13px;
+      }
+    }
   }
 
   @media (min-width: 769px) {
+    background-image: linear-gradient(
+      to top,
+      var(--grey-8) 77%,
+      var(--brand-1) 23%
+    );
+
+    .pictures-div {
+      h3 {
+        margin-bottom: 32px;
+      }
+
+      figure {
+        width: 90px;
+        height: 90px;
+      }
+    }
+
     .product-main-section {
       display: flex;
       flex-wrap: wrap;
@@ -368,6 +484,60 @@ export const ProductMain = styled.main`
     .product-comments-section {
       width: 100%;
       max-width: 792px;
+    }
+
+    .write-comment-div {
+      justify-content: space-between;
+
+      textarea {
+        padding: 0;
+        margin: 20px 0px 10px 20px;
+        padding-right: 7px;
+        width: 490px;
+        max-width: 490px;
+        cursor: auto;
+      }
+
+      textarea::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      textarea::-webkit-scrollbar-track {
+        background: var(--grey-6);
+        border-radius: 4px;
+      }
+
+      textarea::-webkit-scrollbar-thumb {
+        background-color: var(--brand-1);
+        border-radius: 20px;
+      }
+
+      button {
+        margin-right: 11px;
+      }
+    }
+  }
+
+  @media (min-width: 967px) {
+    .pictures-div {
+      h3 {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  @media (min-width: 1146px) {
+    background-image: linear-gradient(
+      to top,
+      var(--grey-8) 71%,
+      var(--brand-1) 29%
+    );
+
+    .pictures-div {
+      figure {
+        width: 108px;
+        height: 108px;
+      }
     }
   }
 `;

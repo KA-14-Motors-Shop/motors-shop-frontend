@@ -5,8 +5,11 @@ import PrimaryPhoto from "../../components/Cards/ProductCardAuction/Photo.png";
 import Button from "../../components/Button";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
 import { BsDot } from "react-icons/bs";
+import { useState } from "react";
 
 const ProductPage = () => {
+  const [commentValue, setCommentValue] = useState();
+
   return (
     <>
       <Header />
@@ -131,6 +134,7 @@ const ProductPage = () => {
                     type specimen book.
                   </p>
                 </li>
+
                 <li>
                   <div className="comment-header-div">
                     <DefaultProfilePicture
@@ -185,28 +189,34 @@ const ProductPage = () => {
                 />
                 <span>Samuel Leão</span>
               </div>
-              <textarea
-                name=""
-                id=""
-                cols="30"
-                rows="10"
-                placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
-              />
+              <div className="write-comment-div">
+                <textarea
+                  value={commentValue}
+                  onChange={(evt) => setCommentValue(evt.target.value)}
+                  placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
+                />
 
-              <Button
-                width="108px"
-                height="38px"
-                bgColor="var(--brand-1)"
-                borderColor="var(--brand-1)"
-                fontColor="var(--white-fixed)"
-                fontSize="14px"
-              >
-                Comentar
-              </Button>
+                <Button
+                  width="108px"
+                  height="38px"
+                  bgColor="var(--brand-1)"
+                  borderColor="var(--brand-1)"
+                  fontColor="var(--white-fixed)"
+                  fontSize="14px"
+                >
+                  Comentar
+                </Button>
+              </div>
               <div className="comment-examples-div">
-                <span>Gostei muito!</span>
-                <span>Incrível</span>
-                <span>Recomendarei para meus amigos!</span>
+                <span onClick={(evt) => setCommentValue(evt.target.innerText)}>
+                  Gostei muito!
+                </span>
+                <span onClick={(evt) => setCommentValue(evt.target.innerText)}>
+                  Incrível
+                </span>
+                <span onClick={(evt) => setCommentValue(evt.target.innerText)}>
+                  Recomendarei para meus amigos!
+                </span>
               </div>
             </div>
           </section>
