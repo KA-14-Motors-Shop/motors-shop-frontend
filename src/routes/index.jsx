@@ -3,6 +3,7 @@ import Route from "./route";
 import Home from "../pages/Home";
 import ProductPage from "../pages/Product";
 import UserProduct from "../pages/UserProducts";
+import Profile from "../pages/Profile";
 
 const Routes = () => {
   return (
@@ -10,6 +11,7 @@ const Routes = () => {
       <Route isPublic component={Home} exact path="/" />
       <Route isPublic component={ProductPage} exact path="/product" />
       <Route isPublic component={UserProduct} exact path="/userProduct" />
+      <Route isPublic component={Profile} exact path="/profile" />
     </Switch>
   );
 };

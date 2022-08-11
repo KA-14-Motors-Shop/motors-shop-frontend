@@ -6,12 +6,21 @@ import Button from "../../components/Button";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
 import { BsDot } from "react-icons/bs";
 import { useState } from "react";
+import { useContext } from "react";
+import { ModalContext } from "../../providers/modal";
+import AnuncioModal from "../../components/modal";
 
 const ProductPage = () => {
   const [commentValue, setCommentValue] = useState();
+  const { showModal, setShowModal } = useContext(ModalContext);
 
   return (
     <>
+      {showModal && (
+        <AnuncioModal title={"Example Modal"}>
+          <div>Banana</div>
+        </AnuncioModal>
+      )}
       <Header />
       <ProductMain>
         <section className="product-main-section">
@@ -41,6 +50,7 @@ const ProductPage = () => {
                 bgColor="var(--brand-1)"
                 fontColor="var(--white-fixed)"
                 fontSize="14px"
+                onClick={() => setShowModal(!showModal)}
               >
                 Comprar
               </Button>

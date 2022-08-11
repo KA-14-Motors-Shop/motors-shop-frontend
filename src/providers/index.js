@@ -1,7 +1,12 @@
 import { AuthProvider } from "./auth";
+import { ModalProvider } from "./modal";
 
 const Providers = ({ children }) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <ModalProvider>
+      <AuthProvider>{children}</AuthProvider>
+    </ModalProvider>
+  );
 };
 
 export default Providers;
