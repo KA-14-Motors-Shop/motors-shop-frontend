@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const HeaderLowerContainer = styled.div`
-  width: 100vw;
   height: 503px;
   background-color: var(--brand-2);
   display: flex;
