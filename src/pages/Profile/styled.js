@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const MainProducts = styled.main`
+const MainProfile = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,6 +14,7 @@ const MainProducts = styled.main`
     width: 95%;
     max-width: 1240px;
     margin-top: 65px;
+    margin-bottom: 37px;
     background-color: var(--grey-10);
     border-radius: 4px;
     display: flex;
@@ -22,6 +23,11 @@ const MainProducts = styled.main`
     div {
       margin: 40px 0px 24px 29px;
       font-size: 36px;
+    }
+
+    button {
+      margin-left: 29px;
+      margin-bottom: 40px;
     }
 
     .user-title-div {
@@ -51,7 +57,7 @@ const MainProducts = styled.main`
     p {
       margin-left: 29px;
       width: 79%;
-      margin-bottom: 40px;
+      margin-bottom: 10px;
       line-height: 28px;
       color: var(--grey-2);
     }
@@ -72,10 +78,18 @@ const MainProducts = styled.main`
     overflow-y: hidden;
     white-space: nowrap;
     display: -webkit-inline-box;
+    padding-bottom: 20px;
+    padding-right: 20px;
+  }
+
+  .auction-list {
+    gap: 8px;
+    height: 460px;
+    margin-top: 37px;
   }
 
   .car-list-section {
-    margin-top: 44px;
+    margin-top: 52px;
     padding-left: 23px;
     margin-bottom: 92px;
 
@@ -116,6 +130,16 @@ const MainProducts = styled.main`
         margin-left: 4%;
         margin-right: 4%;
       }
+
+      button {
+        margin-left: 4%;
+      }
+    }
+  }
+
+  @media (min-width: 500px) {
+    .auction-list {
+      height: 380px;
     }
   }
 
@@ -125,7 +149,23 @@ const MainProducts = styled.main`
       var(--grey-8) 83%,
       var(--brand-1) 17%
     );
+
+    .user-infos-section {
+      margin-bottom: 89px;
+    }
+
+    .products-list {
+      padding-bottom: 10px;
+    }
+
+    .auction-list {
+      gap: 24px;
+    }
+
     .car-list-section {
+      margin-top: 200px;
+      margin-bottom: 200px;
+
       ul {
         gap: 48px;
       }
@@ -156,7 +196,12 @@ const MainProducts = styled.main`
     .products-section {
       padding-left: 60px;
     }
+
+    .auction-list {
+      height: 400px;
+      margin-top: 40px;
+    }
   }
 `;
 
-export default MainProducts;
+export default MainProfile;
