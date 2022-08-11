@@ -21,6 +21,7 @@ const MainHome = styled.main`
     overflow-y: hidden;
     white-space: nowrap;
     display: -webkit-inline-box;
+    padding-right: 20px;
   }
 
   .auction-list {
