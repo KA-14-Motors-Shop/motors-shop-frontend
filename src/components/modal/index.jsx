@@ -1,5 +1,5 @@
 import * as styles from "./styles";
-import { GrClose } from "react-icons/gr";
+import { IoMdClose } from "react-icons/io";
 import { useContext, useEffect, useState } from "react";
 import { ModalContext } from "../../providers/modal";
 
@@ -18,9 +18,9 @@ const AnuncioModal = ({ title, children }) => {
   return (
     <styles.GenericModal height={rootHeight}>
       <div className="generic-modal">
-        <div>
+        <div className="modal-header-div">
           <h2>{title}</h2>
-          <GrClose
+          <IoMdClose
             onClick={() => {
               setShowModal(!showModal);
               console.log(showModal);
