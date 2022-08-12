@@ -1,5 +1,42 @@
 import styled from "styled-components";
 
+export const ModalContainer = styled.section`
+  figure {
+    height: 239px;
+    margin-top: 48px;
+    margin-bottom: 28px;
+    background-color: var(--grey-7);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  figcaption {
+    display: none;
+  }
+
+  .move-gallery-div {
+    margin: 0;
+    position: absolute;
+    width: calc(93%);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  svg {
+    color: var(--brand-1);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+`;
+
 export const ProductMain = styled.main`
   padding-top: 45px;
   background-image: linear-gradient(
