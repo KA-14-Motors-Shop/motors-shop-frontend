@@ -1,6 +1,6 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { ProductMain } from "./styled";
+import { ModalContainer, ProductMain } from "./styled";
 import PrimaryPhoto from "../../components/Cards/ProductCardAuction/Photo.png";
 import Button from "../../components/Button";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { ModalContext } from "../../providers/modal";
 import AnuncioModal from "../../components/modal";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 const ProductPage = () => {
   const [commentValue, setCommentValue] = useState();
@@ -16,11 +17,21 @@ const ProductPage = () => {
 
   return (
     <>
-      {showModal && (
-        <AnuncioModal title={"Example Modal"}>
-          <div>Banana</div>
-        </AnuncioModal>
-      )}
+      <ModalContainer>
+        {showModal && (
+          <AnuncioModal title={"Example Modal"}>
+            <figure>
+              <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
+              <figcaption>Car Primary Photo</figcaption>
+              <div className="move-gallery-div">
+                <AiOutlineLeft />
+                <AiOutlineRight />
+              </div>
+            </figure>
+          </AnuncioModal>
+        )}
+      </ModalContainer>
+
       <Header />
       <ProductMain>
         <section className="product-main-section">

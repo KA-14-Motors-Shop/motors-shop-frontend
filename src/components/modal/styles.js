@@ -11,28 +11,35 @@ export const GenericModal = styled.div`
 
   .generic-modal {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    padding: 5px 20px;
+    padding: 0px 20px;
     background-color: var(--white-fixed);
     width: 90%;
     max-width: 500px;
-    height: 300px;
     border-radius: 8px;
     position: absolute;
     top: 120px;
 
-    div {
+    .modal-header-div {
+      margin-top: 30px;
       width: 100%;
       display: flex;
       justify-content: space-between;
-    }
-  }
+      height: 25px;
+      align-items: center;
 
-  h2 {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    max-height: 20px;
+      h2 {
+        font-size: 16px;
+        font-weight: 500;
+        max-height: 20px;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+        color: var(--grey-4);
+      }
+    }
   }
 `;
