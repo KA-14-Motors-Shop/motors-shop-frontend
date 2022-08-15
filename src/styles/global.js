@@ -43,9 +43,10 @@ const GlobalStyle = createGlobalStyle`
   --random-10: #6100FF;
   --random-11: #5700E3;
   --random-12: #30007D;
+  --black-1:#000000;
 }
 
-body, html,label {
+body, html,label,input,textarea {
  font-family: "Inter", sans-serif;
 }
 
