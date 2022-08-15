@@ -7,7 +7,7 @@ height: 1630px;
 border: none ;
 border-radius: 4px;
 
-background-color: var(--grey-10);
+background-color: var(--white-fixed);
 /* background-color: grey; */
 
 display: flex;
