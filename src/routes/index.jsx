@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import ProductPage from "../pages/Product";
 import UserProduct from "../pages/UserProducts";
 import Profile from "../pages/Profile";
+import Login from "../pages/Login";
 
 const Routes = () => {
   return (
@@ -12,6 +13,7 @@ const Routes = () => {
       <Route isPublic component={ProductPage} exact path="/product" />
       <Route isPublic component={UserProduct} exact path="/userProduct" />
       <Route isPublic component={Profile} exact path="/profile" />
+      <Route isPublic component={Login} exact patch="/login" />
     </Switch>
   );
 };
