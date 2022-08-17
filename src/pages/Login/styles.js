@@ -24,6 +24,7 @@ export const InnerContainer = styled.div`
 
   .login-form {
     background-color: var(--grey-10);
+    border-radius: 4px;
   }
 
   .new-acc-question {
@@ -50,11 +51,10 @@ export const InnerContainer = styled.div`
       width: 343px;
       height: 542px;
       background-color: var(--grey-10);
-      border-radius: 4px;
 
       .login-title {
         padding-left: 28px;
-        height: 90px;
+        height: 85px;
         display: flex;
         align-items: center;
       }
@@ -62,7 +62,7 @@ export const InnerContainer = styled.div`
       .sc-idiyUo {
         /* CONTAINER DO INPUT */
         margin-left: 10px;
-        margin-bottom: 15px;
+        margin-top: 10px;
       }
 
       .login-form-btn-container {
@@ -81,6 +81,54 @@ export const InnerContainer = styled.div`
         justify-content: center;
         padding-left: 10px;
         cursor: pointer;
+      }
+    }
+  }
+
+  @media (min-width: 769px) {
+    .login-form {
+      width: 412px;
+      height: 542px;
+
+      .login-title {
+        height: 95px;
+        display: flex;
+        align-items: center;
+        padding-left: 48px;
+      }
+
+      .sc-idiyUo {
+        /* CONTAINER DO INPUT */
+        padding-left: 38px;
+      }
+
+      .forgot-password {
+        display: flex;
+        justify-content: flex-end;
+        color: var(--grey-2);
+        font-size: 14px;
+        font-weight: 500;
+        font-family: "Inter", sans-serif;
+        padding-right: 50px;
+        margin-bottom: 21px;
+      }
+
+      .login-form-btn-container {
+        display: flex;
+        justify-content: center;
+      }
+
+      .login-form-btn {
+        width: 315px;
+      }
+
+      .new-acc-question {
+        display: flex;
+        justify-content: center;
+      }
+
+      .txtbox {
+        width: 315px;
       }
     }
   }
