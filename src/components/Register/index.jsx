@@ -2,12 +2,13 @@ import CardRegisterContainer from "./styles";
 
 import Button from "../Button";
 import Input from "../input";
+import api from "../../services/api"
 
 import {useForm} from "react-hook-form"
 import * as yup from "yup"
 import {yupResolver} from "@hookform/resolvers/yup"
 import { useState } from "react";
-
+import {toast} from "react-toastify"
 
 
 const CardRegister = () => {
@@ -39,14 +40,19 @@ const {register,
     resolver:yupResolver(schema),
 })
 
-const onSubmitFunction = (data) => {
+const onSubmitFunction = async (data) => {
     const newData = {...data, type:account}
     delete newData.confirm_password
+
+    const response =  await api.get(`${Number(data.cep)}/json/`).catch((err) => { toast.error("Este cep é inválido. Tente novamente.")})
+    
+    console.log(response.data)
     console.log(newData)
 }
 const onErrors = (er) => {
         console.log(er)
 }
+
 
     return (
         
