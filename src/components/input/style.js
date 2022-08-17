@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 export const Container = styled.div`
   padding: 5px 3px;
@@ -6,10 +6,16 @@ export const Container = styled.div`
 
     label{
         text-align: left;
-        width: 37px;
+        width: 37px; 
         height: 17px;
         padding: 10px;
-        color: var(--grey-1);
+
+        ${(props) =>  props.isErrored && css` color: var(--alert-1); ` }
+
+    }
+
+    .label-div{
+
     }
 `
 
@@ -27,12 +33,15 @@ border : 1px solid var(--grey-8);
 padding: 0px 16px 0px 16px;
 margin-top: 4px;
 
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    
-    &::placeholder {
-        color: var(--grey-3);
+${(props) =>  props.isErrored && css` border-color: var(--alert-1); `}
+
+align-items: center;
+width: 100%;
+height: 100%;
+
+&::placeholder {
+    color: var(--grey-3);
+    ${(props) =>  props.isErrored && css` color: var(--alert-1); `}
     }
 }
 textarea {

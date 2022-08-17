@@ -8,6 +8,7 @@ background-color: var(--grey-8);
     align-items: center;
     justify-content: center;
     padding: 48px 0 90px 0;
+    width: 100%;
 
 
 `

@@ -36,7 +36,7 @@ padding: 0 0 0 10px ;
 }
 
 .container label{
-    color: var(--grey-1);
+    /* color: var(--grey-1); */
     font-size: 17px;
 }
 
@@ -46,15 +46,23 @@ p{
     color: var(--black-1);
 }
 
+.span-errored{
+    height: 0px;
+    color: var(--alert-1);
+    margin-left: 50%;
+}
+
 
 @media  (max-width: 320px){
 
+    width: 100%;
 
     .btn-comprador{
         margin-right: 10px;
     }
     .btn-finalizar{
         width: 230px;
+
     }
 
     .div-endereco-row .container input{

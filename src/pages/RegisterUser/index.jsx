@@ -1,12 +1,12 @@
+import CardRegisterSection from "./styled"
+
 import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import CardRegister from "../../components/Register"
-import CardRegisterSection from "./styled"
 
-
-
-
-
+// import {useForm} from "react-hook-form"
+// import * as yup from "yup"
+// import {yupResolver} from "@hookform/resolvers/yup"
 
 const RegisterUserPage = () => {
 
@@ -15,7 +15,7 @@ const RegisterUserPage = () => {
         <Header  username={"Samuel Leão"}></Header>
 
         <CardRegisterSection className="section-register">
-        <CardRegister></CardRegister>
+        <CardRegister/>
         </CardRegisterSection>
 
         <Footer />
