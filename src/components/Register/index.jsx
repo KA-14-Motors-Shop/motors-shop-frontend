@@ -13,7 +13,6 @@ import { useState } from "react";
 const CardRegister = () => {
 
 const [account,setAccount] = useState("buyer")
-// const [errored,setErrored] = useState(false)
  
 const schema = yup.object().shape({
     name:yup.string().required("Nome e um campo obrigatorio"),
@@ -32,6 +31,7 @@ const schema = yup.object().shape({
     password:yup.string().required("Senha e um campo obrigatorio"),
     confirm_password:yup.string().oneOf([yup.ref("password")], "As senhas devem coincidir").required("Senha e um campo obrigatorio"),
 })
+
 const {register,
     handleSubmit,
      formState:{errors},
@@ -45,10 +45,7 @@ const onSubmitFunction = (data) => {
     console.log(newData)
 }
 const onErrors = (er) => {
-    if (er.name){
         console.log(er)
-    }
-
 }
 
     return (
