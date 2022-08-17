@@ -75,7 +75,7 @@ const onErrors = (er) => {
         <Input register={register} errored = {errors.state} name="state" inputOrNot={true} className="div-input" width={"152px"} height={"48px"} label={"Estado"} placeholder = {"Digitar Estado"}></Input>
         <Input register={register} errored = {errors.city} name="city" inputOrNot={true} className="div-input" width={"152px"} height={"48px"} label={"Cidade"} placeholder = {"Digitar Cidade"}></Input>
         </div>
-        
+
         <Input register={register} errored = {errors.street} name="street" inputOrNot={true} className="div-input" width={"315px"} height={"48px"} label={"Rua"} placeholder = {"Digitar Rua"}></Input>
 
 
