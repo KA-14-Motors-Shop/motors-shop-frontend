@@ -8,7 +8,6 @@ border: none ;
 border-radius: 4px;
 
 background-color: var(--white-fixed);
-/* background-color: grey; */
 
 display: flex;
 flex-direction: column;
