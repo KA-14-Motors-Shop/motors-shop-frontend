@@ -45,7 +45,13 @@ const Login = () => {
           </div>
           <div className="new-acc-question">Ainda não possui conta?</div>
           <div className="login-form-btn-container">
-            <Button className="login-form-btn">Cadastrar</Button>
+            <Button
+              type="button"
+              className="login-form-btn"
+              onClick={() => console.log("click")}
+            >
+              Cadastrar
+            </Button>
           </div>
         </form>
       </InnerContainer>
