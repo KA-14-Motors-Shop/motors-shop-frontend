@@ -3,8 +3,24 @@ import Footer from "../../components/Footer";
 import Button from "../../components/Button";
 import { InnerContainer, MainContainer } from "./styles";
 import Input from "../../components/input";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const schema = yup.object().shape({
+    email: yup.string().required("Campo obrigatório").email("Email inválido"),
+    password: yup.string().required("Campo obrigatório"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
   const handleLogin = (data) => {
     console.log(data);
   };
@@ -13,7 +29,7 @@ const Login = () => {
     <MainContainer>
       <Header />
       <InnerContainer>
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleSubmit(handleLogin)}>
           <h2 className="login-title">Login</h2>
 
           <Input
@@ -22,6 +38,7 @@ const Login = () => {
             label="Usuário"
             width="315px"
             height="54px"
+            {...register("email")}
           ></Input>
 
           <Input
@@ -30,11 +47,13 @@ const Login = () => {
             label="Senha"
             width="315px"
             height="54px"
+            {...register("password")}
           ></Input>
 
           <div className="forgot-password">Esqueci minha senha</div>
           <div className="login-form-btn-container">
             <Button
+              type="submit"
               className="login-form-btn"
               bgColor="var(--brand-1)"
               borderColor="var(--brand-1)"
