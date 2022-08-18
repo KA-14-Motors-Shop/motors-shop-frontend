@@ -33,21 +33,28 @@ const Login = () => {
           <h2 className="login-title">Login</h2>
 
           <Input
-            className="txtbox user-login"
+            inputOrNot={true}
+            name="email"
+            register={register}
+            errored={errors?.email}
+            className={"txtbox user-login"}
             placeholder="Digitar usuário"
             label="Usuário"
             width="315px"
             height="54px"
-            {...register("email")}
           ></Input>
 
           <Input
+            inputOrNot={true}
+            name="password"
+            register={register}
+            errored={errors?.password}
             className="txtbox password"
             placeholder="Digitar senha"
             label="Senha"
             width="315px"
             height="54px"
-            {...register("password")}
+            type="password"
           ></Input>
 
           <div className="forgot-password">Esqueci minha senha</div>

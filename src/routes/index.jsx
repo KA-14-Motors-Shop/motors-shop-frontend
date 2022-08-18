@@ -5,6 +5,7 @@ import ProductPage from "../pages/Product";
 import UserProduct from "../pages/UserProducts";
 import Profile from "../pages/Profile";
 import Login from "../pages/Login";
+import RegisterUserPage from "../pages/RegisterUser";
 
 const Routes = () => {
   return (
@@ -14,6 +15,7 @@ const Routes = () => {
       <Route isPublic component={UserProduct} exact path="/userProduct" />
       <Route isPublic component={Profile} exact path="/profile" />
       <Route isPublic component={Login} exact patch="/login" />
+      <Route isPublic component={RegisterUserPage} exact path="/register" />
     </Switch>
   );
 };
