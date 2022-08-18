@@ -34,6 +34,7 @@ export const InnerContainer = styled.div`
     font-family: "Inter", sans-serif;
     margin-top: 24px;
     margin-bottom: 24px;
+    cursor: pointer;
   }
 
   @media (max-width: 768px) {

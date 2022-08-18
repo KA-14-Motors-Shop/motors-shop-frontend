@@ -4,11 +4,11 @@ import Button from "../../components/Button";
 import { InnerContainer, MainContainer } from "./styles";
 import Input from "../../components/input";
 
-const handleLogin = (data) => {
-  console.log(data);
-};
-
 const Login = () => {
+  const handleLogin = (data) => {
+    console.log(data);
+  };
+
   return (
     <MainContainer>
       <Header />
