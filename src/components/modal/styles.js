@@ -20,6 +20,7 @@ export const GenericModal = styled.div`
     border-radius: 8px;
     position: absolute;
     top: 120px;
+    z-index: 1;
 
     .modal-header-div {
       margin-top: 30px;
