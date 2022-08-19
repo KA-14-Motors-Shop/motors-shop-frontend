@@ -12,6 +12,7 @@ import Input from "../../components/input";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { apiDeploy, apiLocal } from "../../services/api";
 
 const Profile = () => {
   const { showModal, setShowModal } = useContext(ModalContext);
@@ -48,15 +49,37 @@ const Profile = () => {
     setGalleryImages([]);
   };
 
-  const onSubmitFunction = async (data) => {
+  const onSubmitFunction = (data) => {
     const completeData = {
       ...data,
       type: advertisementType,
       vehicle_type: vehicleType,
       front: frontImage,
-      images: galleryImages,
     };
-    console.log(completeData);
+
+    // const request = new FormData();
+
+    // Object.keys(completeData).forEach((key) => {
+    //   request.append(key, completeData[key]);
+    // });
+
+    // request.append("is_active", true);
+
+    // galleryImages.forEach((img) => {
+    //   request.append("image", img);
+    // });
+
+    // api
+    //   .post("/ads", request, {
+    //     headers: {
+    //       "Content-type": "multipart/form-data",
+    //       Authorization:
+    //         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1aUBtYWlsLmNvbSIsImlhdCI6MTY2MDg5MjkxMywiZXhwIjoxNjYwOTc5MzEzfQ.E6T3WL0ELxkFLSfKRKvzK-3L7nuX85-_f-OZ7p_XYiE",
+    //     },
+    //   })
+    //   .then((resp) => console.log(resp))
+    //   .catch((err) => console.log(err));
+
     setShowModal(!showModal);
   };
 
