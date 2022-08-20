@@ -1,7 +1,13 @@
-import axios from "axios"
+import axios from "axios";
 
-const api = axios.create({
-    baseURL: "https://viacep.com.br/ws/"
+export const apiCep = axios.create({
+  baseURL: "https://viacep.com.br/ws/",
 });
 
-export default api
+export const apiDeploy = axios.create({
+  baseURL: "https://motors-shop.herokuapp.com/",
+});
+
+export const apiLocal = axios.create({
+  baseURL: "http://localhost:3001/",
+});

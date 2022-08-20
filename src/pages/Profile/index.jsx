@@ -5,10 +5,16 @@ import DefaultProfilePicture from "../../components/DefaultProfilePicture";
 import Button from "../../components/Button";
 import ProductCardAdm from "../../components/Cards/ProductCardAdm";
 import ProductCardAuctionAdm from "../../components/Cards/ProductCardAuctionAdm";
+import { useContext } from "react";
+import { ModalContext } from "../../providers/modal";
+import CreateAdModal from "../../components/profileModals/CreateAd";
 
 const Profile = () => {
+  const { showModal, setShowModal } = useContext(ModalContext);
+
   return (
     <>
+      {showModal && <CreateAdModal />}
       <Header isLoggedIn username={"Samuel Leão"} />
       <MainProfile>
         <section className="user-infos-section">
@@ -30,6 +36,7 @@ const Profile = () => {
             width="160px"
             fontColor="var(--brand-1)"
             borderColor="var(--brand-1)"
+            onClick={() => setShowModal(!showModal)}
           >
             Criar Anúncio
           </Button>

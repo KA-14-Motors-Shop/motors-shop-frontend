@@ -19,7 +19,7 @@ const ProductPage = () => {
     <>
       <ModalContainer>
         {showModal && (
-          <AnuncioModal title={"Example Modal"}>
+          <AnuncioModal title={"Imagem do veículo"}>
             <figure>
               <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
               <figcaption>Car Primary Photo</figcaption>
