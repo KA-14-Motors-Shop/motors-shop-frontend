@@ -14,7 +14,7 @@ const Routes = () => {
       <Route isPublic component={ProductPage} exact path="/product" />
       <Route isPublic component={UserProduct} exact path="/userProduct" />
       <Route isPublic component={Profile} exact path="/profile" />
-      <Route isPublic component={Login} exact patch="/login" />
+      <Route isPublic component={Login} exact path="/login" />
       <Route isPublic component={RegisterUserPage} exact path="/register" />
     </Switch>
   );

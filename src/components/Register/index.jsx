@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
 
+
   const schema = yup.object().shape({
     name: yup.string().required("Nome e um campo obrigatorio"),
     email: yup.string().required("email e um campo obrigatorio").email(),
@@ -213,9 +214,9 @@ const CardRegister = () => {
           <Button
             onClick={() => setAccount("buyer")}
             className="btn-comprador"
-            bgColor={"var(--brand-1)"}
-            borderColor={"var(--brand-1)"}
-            fontColor={"var(--white-fixed)"}
+            bgColor={account === "buyer" ? ("var(--brand-1)") : ("var(--grey-4)")}
+            borderColor={account === "buyer" ? ("var(--brand-1)") : ("var(--grey-4)")}
+            fontColor={account === "buyer" ? ("var(--white-fixed)") : ("var(--grey-0)")}
             type={"button"}
             width={"140px"}
             height={"48px"}
@@ -224,9 +225,9 @@ const CardRegister = () => {
           </Button>
           <Button
             onClick={() => setAccount("seller")}
-            bgColor={"var(--grey-4)"}
-            borderColor={"var(--grey-4)"}
-            fontColor={"var(--grey-0)"}
+            bgColor={account === "seller" ? ("var(--brand-1)") : ("var(--grey-4)")}
+            borderColor={account === "seller" ? ("var(--brand-1)") : ("var(--grey-4)")}
+            fontColor={account === "seller" ? ("var(--white-fixed)") : ("var(--grey-0)")}
             type={"button"}
             width={"140px"}
             height={"48px"}
