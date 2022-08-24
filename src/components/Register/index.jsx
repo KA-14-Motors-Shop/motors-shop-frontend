@@ -12,7 +12,21 @@ import { toast } from "react-toastify";
 
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
+  const [cepState, setCepState] = useState("")
+  const [objCep, setObjCep]     = useState(null)
 
+  const handleCepChange = async (e) => {
+    setCepState(e.target.value)
+
+   const cep =  await apiCep
+      .get(`${Number(e.target.value)}/json/`)
+      .catch((err) => {
+        setObjCep(null)
+      });
+
+      setObjCep(cep.data)
+    // console.log(cep.data)
+  }
 
   const schema = yup.object().shape({
     name: yup.string().required("Nome e um campo obrigatorio"),
@@ -46,6 +60,7 @@ const CardRegister = () => {
   });
 
   const onSubmitFunction = async (data) => {
+
     const newData = { ...data, type: account };
     delete newData.confirm_password;
 
@@ -55,8 +70,9 @@ const CardRegister = () => {
         toast.error("Este cep é inválido. Tente novamente.");
       });
 
-    console.log(response.data);
+    // console.log("OBJETO CEP :",response.data);
     console.log(newData);
+
   };
   const onErrors = (er) => {
     console.log(er);
@@ -145,6 +161,7 @@ const CardRegister = () => {
           height={"48px"}
           label={"CEP"}
           placeholder={"Ex: 00000.000"}
+          onChange = {handleCepChange}
         ></Input>
 
         <div className="div-endereco-row">
@@ -158,6 +175,8 @@ const CardRegister = () => {
             height={"48px"}
             label={"Estado"}
             placeholder={"Digitar Estado"}
+            value = { objCep ? (objCep.uf) :  (null)}
+            // value = { null}
           ></Input>
           <Input
             register={register}
@@ -169,6 +188,7 @@ const CardRegister = () => {
             height={"48px"}
             label={"Cidade"}
             placeholder={"Digitar Cidade"}
+            // value = { objCep && objCep.localidade}
           ></Input>
         </div>
 
@@ -182,6 +202,7 @@ const CardRegister = () => {
           height={"48px"}
           label={"Rua"}
           placeholder={"Digitar Rua"}
+          // value = { objCep && objCep.logradouro}
         ></Input>
 
         <div className="div-endereco-row">
