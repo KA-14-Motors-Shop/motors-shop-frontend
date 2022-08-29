@@ -6,20 +6,22 @@ import Button from "../../components/Button";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
 import { BsDot } from "react-icons/bs";
 import { useState } from "react";
-import { useContext } from "react";
-import { ModalContext } from "../../providers/modal";
 import AnuncioModal from "../../components/modal";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 const ProductPage = () => {
+  const [galleryModal, setGalleryModal] = useState(false);
   const [commentValue, setCommentValue] = useState();
-  const { showModal, setShowModal } = useContext(ModalContext);
 
   return (
     <>
       <ModalContainer>
-        {showModal && (
-          <AnuncioModal title={"Imagem do veículo"}>
+        {galleryModal && (
+          <AnuncioModal
+            title={"Imagem do veículo"}
+            modalState={galleryModal}
+            setModalState={setGalleryModal}
+          >
             <figure>
               <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
               <figcaption>Car Primary Photo</figcaption>
@@ -61,7 +63,7 @@ const ProductPage = () => {
                 bgColor="var(--brand-1)"
                 fontColor="var(--white-fixed)"
                 fontSize="14px"
-                onClick={() => setShowModal(!showModal)}
+                onClick={() => setGalleryModal(!galleryModal)}
               >
                 Comprar
               </Button>

@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useContext } from "react";
-import { ModalContext } from "../../../providers/modal";
 import ModalContainer from "./styled";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -10,9 +8,7 @@ import AnuncioModal from "../../modal";
 import Button from "../../Button";
 import Input from "../../input";
 
-const CreateAdModal = () => {
-  const { showModal, setShowModal } = useContext(ModalContext);
-
+const CreateAdModal = ({ modalState, setModalState }) => {
   const [advertisementType, setAdvertisementType] = useState("sale");
   const [vehicleType, setVehicleType] = useState("car");
   const [frontImage, setFrontImage] = useState(null);
@@ -79,12 +75,16 @@ const CreateAdModal = () => {
     //   .then((resp) => console.log(resp))
     //   .catch((err) => console.log(err));
 
-    setShowModal(!showModal);
+    setModalState(!modalState);
   };
 
   return (
     <ModalContainer adType={advertisementType} vhType={vehicleType}>
-      <AnuncioModal title={"Criar anúncio"}>
+      <AnuncioModal
+        title={"Criar anúncio"}
+        modalState={modalState}
+        setModalState={setModalState}
+      >
         <form onSubmit={handleSubmit(onSubmitFunction)}>
           <h6>Tipo de anúncio</h6>
           <div className="advertisement-buttons-div">
@@ -257,7 +257,7 @@ const CreateAdModal = () => {
               borderColor="var(--grey-6)"
               fontColor="var(--grey-2)"
               className="cancel-button"
-              onClick={() => setShowModal(!showModal)}
+              onClick={() => setModalState(!modalState)}
             >
               Cancelar
             </Button>
