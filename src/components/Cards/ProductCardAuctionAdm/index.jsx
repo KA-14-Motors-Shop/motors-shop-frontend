@@ -12,6 +12,8 @@ const ProductCardAuctionAdm = ({
   kilometers,
   year,
   price,
+  editFunction,
+  seeFunction,
 }) => {
   return (
     <CardContainer>
@@ -59,6 +61,7 @@ const ProductCardAuctionAdm = ({
           borderColor="var(--grey-10)"
           fontSize="14px"
           className="edit-button"
+          onClick={editFunction}
         >
           Editar
         </Button>
@@ -70,6 +73,7 @@ const ProductCardAuctionAdm = ({
           borderColor="var(--grey-10)"
           fontSize="14px"
           className="see-button"
+          onClick={seeFunction}
         >
           Ver como
         </Button>

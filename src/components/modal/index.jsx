@@ -1,10 +1,8 @@
 import * as styles from "./styles";
 import { IoMdClose } from "react-icons/io";
-import { useContext, useEffect, useState } from "react";
-import { ModalContext } from "../../providers/modal";
+import { useEffect, useState } from "react";
 
-const AnuncioModal = ({ title, children }) => {
-  const { showModal, setShowModal } = useContext(ModalContext);
+const AnuncioModal = ({ title, children, modalState, setModalState }) => {
   const [rootHeight, setRootHeight] = useState(
     window.getComputedStyle(document.getElementById("root")).height
   );
@@ -13,7 +11,7 @@ const AnuncioModal = ({ title, children }) => {
     setRootHeight(
       window.getComputedStyle(document.getElementById("root")).height
     );
-  }, [showModal]);
+  }, [modalState]);
 
   return (
     <styles.GenericModal height={rootHeight}>
@@ -22,8 +20,7 @@ const AnuncioModal = ({ title, children }) => {
           <h2>{title}</h2>
           <IoMdClose
             onClick={() => {
-              setShowModal(!showModal);
-              console.log(showModal);
+              setModalState(!modalState);
             }}
           />
         </div>
