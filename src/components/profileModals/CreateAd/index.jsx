@@ -3,7 +3,7 @@ import ModalContainer from "./styled";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { apiDeploy, apiLocal } from "../../../services/api";
+// import { apiDeploy, apiLocal } from "../../../services/api";
 import AnuncioModal from "../../modal";
 import Button from "../../Button";
 import Input from "../../input";
@@ -35,11 +35,6 @@ const CreateAdModal = ({ modalState, setModalState }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-
-  const cleanImages = () => {
-    setFrontImage(null);
-    setGalleryImages([]);
-  };
 
   const onSubmitFunction = (data) => {
     const completeData = {

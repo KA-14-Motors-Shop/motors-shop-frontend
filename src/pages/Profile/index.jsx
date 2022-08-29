@@ -7,9 +7,11 @@ import ProductCardAdm from "../../components/Cards/ProductCardAdm";
 import ProductCardAuctionAdm from "../../components/Cards/ProductCardAuctionAdm";
 import CreateAdModal from "../../components/profileModals/CreateAd";
 import { useState } from "react";
+import UpdateAdModal from "../../components/profileModals/UpdateAd";
 
 const Profile = () => {
   const [createAdModal, setCreateAdModal] = useState(false);
+  const [updateAdModal, setUpdateAdModal] = useState(false);
 
   return (
     <>
@@ -17,6 +19,12 @@ const Profile = () => {
         <CreateAdModal
           modalState={createAdModal}
           setModalState={setCreateAdModal}
+        />
+      )}
+      {updateAdModal && (
+        <UpdateAdModal
+          modalState={updateAdModal}
+          setModalState={setUpdateAdModal}
         />
       )}
       <Header isLoggedIn username={"Samuel Leão"} />
@@ -48,7 +56,9 @@ const Profile = () => {
         <section className="products-section">
           <h2>Leilão</h2>
           <ul className="auction-list products-list">
-            <ProductCardAuctionAdm />
+            <ProductCardAuctionAdm
+              editFunction={() => setUpdateAdModal(!updateAdModal)}
+            />
             <ProductCardAuctionAdm />
             <ProductCardAuctionAdm />
           </ul>
