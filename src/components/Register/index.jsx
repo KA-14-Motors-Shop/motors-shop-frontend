@@ -20,12 +20,13 @@ const CardRegister = () => {
 
    const cep =  await apiCep
       .get(`${Number(e.target.value)}/json/`)
+      .then((dataCep) =>  setObjCep(dataCep.data))
       .catch((err) => {
         setObjCep(null)
       });
 
-      setObjCep(cep.data)
-    // console.log(cep.data)
+      // setObjCep(cep.data)
+    console.log(objCep.data)
   }
 
   const schema = yup.object().shape({
