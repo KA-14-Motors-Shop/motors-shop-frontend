@@ -6,8 +6,11 @@ import Input from "../../components/input";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { apiDeploy } from "../../services/api";
+import { toast } from "react-toastify";
+import { Redirect, useHistory } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ auth, setAuth }) => {
   const schema = yup.object().shape({
     email: yup.string().required("Campo obrigatório").email("Email inválido"),
     password: yup.string().required("Campo obrigatório"),
@@ -21,8 +24,26 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleLogin = (data) => {
-    console.log(data);
+  const history = useHistory();
+
+  if (auth) {
+    return <Redirect to="/profile" />;
+  }
+
+  const handleLogin = async (data) => {
+    const response = await apiDeploy.post("/login", data).catch((err) => {
+      toast.error("Erro na autenticação, verifique seu e-mail ou senha");
+    });
+
+    const { Token_JWT } = response.data;
+
+    localStorage.setItem("@MotorsShop:token", Token_JWT);
+
+    toast.success("Login feito com sucesso");
+
+    setAuth(true);
+
+    history.push("/profile");
   };
 
   return (
