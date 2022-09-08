@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import { useContext } from "react";
 import { AdvertisementsContext } from "../../providers/advertisements";
 
-const Home = ({}) => {
+const Home = () => {
   const { advertisements } = useContext(AdvertisementsContext);
 
   const auctionAds = advertisements.filter(({ type }) => type === "auction");
