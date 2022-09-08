@@ -7,27 +7,34 @@ import { apiCep } from "../../services/api";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { toast } from "react-toastify";
 
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
   const [cepState, setCepState] = useState("")
-  const [objCep, setObjCep]     = useState(null)
+  const [objCep, setObjCep]     = useState({})
 
   const handleCepChange = async (e) => {
     setCepState(e.target.value)
 
-   const cep =  await apiCep
-      .get(`${Number(e.target.value)}/json/`)
-      .then((dataCep) =>  setObjCep(dataCep.data))
-      .catch((err) => {
-        setObjCep(null)
-      });
+    if( cepState.length >= 7) {
 
-      // setObjCep(cep.data)
-    console.log(objCep.data)
+        const cep =  await apiCep
+        .get(`${Number(e.target.value)}/json/`)
+        .catch((err) => {
+            console.log(err)
+        });
+      console.log(cep.data)
+     cep.data && setObjCep({estado : cep.data.uf,cidade : cep.data.localidade, rua: cep.data.logradouro})
   }
+}
+
+
+  useEffect(()=>{
+    console.log(objCep)
+  },[objCep])
+
 
   const schema = yup.object().shape({
     name: yup.string().required("Nome e um campo obrigatorio"),
@@ -176,8 +183,7 @@ const CardRegister = () => {
             height={"48px"}
             label={"Estado"}
             placeholder={"Digitar Estado"}
-            value = { objCep ? (objCep.uf) :  (null)}
-            // value = { null}
+            value = { objCep.cidade && objCep.estado}
           ></Input>
           <Input
             register={register}
@@ -189,7 +195,9 @@ const CardRegister = () => {
             height={"48px"}
             label={"Cidade"}
             placeholder={"Digitar Cidade"}
-            // value = { objCep && objCep.localidade}
+            value = { objCep.cidade && objCep.cidade}
+
+            
           ></Input>
         </div>
 
@@ -203,7 +211,7 @@ const CardRegister = () => {
           height={"48px"}
           label={"Rua"}
           placeholder={"Digitar Rua"}
-          // value = { objCep && objCep.logradouro}
+          value = { objCep && objCep.rua}
         ></Input>
 
         <div className="div-endereco-row">
