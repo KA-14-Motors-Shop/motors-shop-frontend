@@ -1,52 +1,45 @@
 import CardContainer from "./styled";
-import Car from "./carro.png";
 import DefaultProfilePicture from "../../DefaultProfilePicture";
 
 const ProductCard = ({
   id,
-  img,
+  images,
   title,
   description,
   owner,
-  kilometers,
+  mileage,
   year,
   price,
   onClick,
 }) => {
   return (
-    <CardContainer number={parseInt(Math.random() * (13 - 1) + 1)}>
+    <CardContainer number={parseInt(Math.random() * (13 - 1) + 1)} id={id}>
       <figure>
-        <img src={Car} alt="Car_Image" />
-        <figcaption>Car Image</figcaption>
+        <img src={images.url} alt={`${title}_front_image`} />
+        <figcaption>{`${title} Front Image`}</figcaption>
       </figure>
 
-      <h5>Product title 1 line</h5>
+      <h5>{title}</h5>
 
-      <p>
-        Lorem ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem dolor sit amet consectetur adipisicing elit. Ut
-        exercitationem, doloribus eos voluptate et vero quidem quae voluptates
-        velit, quod ullam praesentium dolorem magnam consequuntur odio sit id
-        cum porro?
-      </p>
+      <p>{description}</p>
 
       <div className="owner-div">
         <DefaultProfilePicture
-          username="Anunciante"
+          username={owner.name}
           width="32px"
           height="32px"
         />
-        <span>Anunciante</span>
+        <span>{owner.name}</span>
       </div>
 
       <div className="infos-div">
         <div>
-          <span>0 Km</span>
+          <span>{mileage} Km</span>
         </div>
         <div>
-          <span>2019</span>
+          <span>{year}</span>
         </div>
-        <h6>R$ 20.000.00</h6>
+        <h6>R$ {price}</h6>
       </div>
     </CardContainer>
   );
