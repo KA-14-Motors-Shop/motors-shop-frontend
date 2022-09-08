@@ -11,7 +11,7 @@ const Routes = () => {
   return (
     <Switch>
       <Route isPublic component={Home} exact path="/" />
-      <Route isPublic component={ProductPage} exact path="/product" />
+      <Route isPublic component={ProductPage} exact path="/product/:id" />
       <Route isPublic component={UserProduct} exact path="/userProduct" />
       <Route isPublic component={Profile} exact path="/profile" />
       <Route isPublic component={Login} exact path="/login" />
@@ -21,12 +21,3 @@ const Routes = () => {
 };
 
 export default Routes;
-
-
-
-
-
-
-
-
-

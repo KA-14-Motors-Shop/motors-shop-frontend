@@ -1,26 +1,32 @@
 import CardContainer from "./styled";
-import Car from "./Photo.png";
 import { BsClock } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
 import DefaultProfilePicture from "../../DefaultProfilePicture";
+import { useHistory } from "react-router-dom";
 
 const ProductCardAuction = ({
   id,
   time,
-  img,
+  images,
   title,
   description,
   owner,
-  kilometers,
+  mileage,
   year,
   price,
 }) => {
+  const history = useHistory();
+
   return (
-    <CardContainer number={parseInt(Math.random() * (13 - 1) + 1)}>
+    <CardContainer
+      number={parseInt(Math.random() * (13 - 1) + 1)}
+      id={id}
+      onClick={() => history.push(`/product/${id}`)}
+    >
       <section className="product-section">
         <figure>
-          <img src={Car} alt="Car_image" />
-          <figcaption>Car Image</figcaption>
+          <img src={images.url} alt={`${title}_front_image`} />
+          <figcaption>{`${title} Front Image`}</figcaption>
         </figure>
 
         <div className="auction-div">
@@ -30,33 +36,27 @@ const ProductCardAuction = ({
             </span>
           </div>
 
-          <h5>Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 </h5>
+          <h5>{title} </h5>
 
-          <p>
-            Lorem ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem dolor sit amet consectetur adipisicing elit. Ut
-            exercitationem, doloribus eos voluptate et vero quidem quae
-            voluptates velit, quod ullam praesentium dolorem magnam consequuntur
-            odio sit id cum porro?
-          </p>
+          <p>{description}</p>
 
           <div className="owner-div">
             <DefaultProfilePicture
-              username="Rodrigo Tavares"
+              username={owner.name}
               width="32px"
               height="32px"
             />
-            <span>Rodrigo Tavares</span>
+            <span>{owner.name}</span>
           </div>
 
           <div className="infos-div">
             <div>
-              <span>2013</span>
+              <span>{year}</span>
             </div>
             <div>
-              <span>0 Km</span>
+              <span>{mileage} Km</span>
             </div>
-            <h6>R$ 20.000.00</h6>
+            <h6>R$ {price}</h6>
           </div>
         </div>
       </section>

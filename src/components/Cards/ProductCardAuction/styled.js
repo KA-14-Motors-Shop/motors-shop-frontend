@@ -200,12 +200,12 @@ const CardContainer = styled.li`
 
       .auction-div {
         h5 {
-          height: 20px;
+          height: 25px;
           -webkit-line-clamp: 1;
         }
 
         p {
-          height: 22px;
+          height: 25px;
           -webkit-line-clamp: 1;
         }
 
