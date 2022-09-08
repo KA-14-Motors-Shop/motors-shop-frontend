@@ -2,6 +2,7 @@ import CardContainer from "./styled";
 import { BsClock } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
 import DefaultProfilePicture from "../../DefaultProfilePicture";
+import { useHistory } from "react-router-dom";
 
 const ProductCardAuction = ({
   id,
@@ -14,8 +15,14 @@ const ProductCardAuction = ({
   year,
   price,
 }) => {
+  const history = useHistory();
+
   return (
-    <CardContainer number={parseInt(Math.random() * (13 - 1) + 1)} id={id}>
+    <CardContainer
+      number={parseInt(Math.random() * (13 - 1) + 1)}
+      id={id}
+      onClick={() => history.push(`/product/${id}`)}
+    >
       <section className="product-section">
         <figure>
           <img src={images.url} alt={`${title}_front_image`} />

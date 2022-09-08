@@ -1,5 +1,6 @@
 import CardContainer from "./styled";
 import DefaultProfilePicture from "../../DefaultProfilePicture";
+import { useHistory } from "react-router-dom";
 
 const ProductCard = ({
   id,
@@ -10,10 +11,14 @@ const ProductCard = ({
   mileage,
   year,
   price,
-  onClick,
 }) => {
+  const history = useHistory();
+
   return (
-    <CardContainer number={parseInt(Math.random() * (13 - 1) + 1)} id={id}>
+    <CardContainer
+      number={parseInt(Math.random() * (13 - 1) + 1)}
+      onClick={() => history.push(`/product/${id}`)}
+    >
       <figure>
         <img src={images.url} alt={`${title}_front_image`} />
         <figcaption>{`${title} Front Image`}</figcaption>

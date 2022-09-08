@@ -5,13 +5,34 @@ import PrimaryPhoto from "../../components/Cards/ProductCardAuction/Photo.png";
 import Button from "../../components/Button";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
 import { BsDot } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AnuncioModal from "../../components/modal";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { useParams } from "react-router-dom";
+import { apiDeploy } from "../../services/api";
 
 const ProductPage = () => {
   const [galleryModal, setGalleryModal] = useState(false);
   const [commentValue, setCommentValue] = useState();
+  const [product, setProduct] = useState([]);
+  const [frontImage, setFrontImages] = useState([]);
+  const [gallery, setGallery] = useState([]);
+  const [owner, setOwner] = useState([]);
+
+  const params = useParams();
+
+  useEffect(() => {
+    apiDeploy
+      .get(`ads/${params.id}`)
+      .then((resp) => {
+        setProduct(resp.data);
+        setFrontImages(resp.data.images.find(({ is_front }) => is_front));
+        setGallery(resp.data.images.filter(({ is_front }) => !is_front));
+        setOwner(resp.data.owner);
+        window.scrollTo(0, 0);
+      })
+      .catch((err) => console.log(err));
+  }, [params.id]);
 
   return (
     <>
@@ -39,22 +60,23 @@ const ProductPage = () => {
         <section className="product-main-section">
           <section className="product-infos-section">
             <figure>
-              <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
-              <figcaption>Car Primary Photo</figcaption>
+              <img
+                src={frontImage.url}
+                alt={`${product.title}_Principal_Image`}
+              />
+              <figcaption>{`${product.title} Principal Image`}</figcaption>
             </figure>
 
             <div className="title-div">
-              <h1>
-                Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200{" "}
-              </h1>
+              <h1>{product.title}</h1>
               <div className="infos-div">
                 <div>
-                  <span>2013</span>
+                  <span>{product.year}</span>
                 </div>
                 <div>
-                  <span>0 KM</span>
+                  <span>{product.mileage} KM</span>
                 </div>
-                <h6>R$ 00.000,00</h6>
+                <h6>R$ {product.price}</h6>
               </div>
 
               <Button
@@ -71,12 +93,7 @@ const ProductPage = () => {
 
             <div className="description-div">
               <h3>Descrição</h3>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
+              <p>{product.description}</p>
             </div>
           </section>
 
@@ -84,44 +101,25 @@ const ProductPage = () => {
             <div className="pictures-div">
               <h3>Fotos</h3>
               <div>
-                <figure>
-                  <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
-                  <figcaption>Car Primary Photo</figcaption>
-                </figure>
-                <figure>
-                  <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
-                  <figcaption>Car Primary Photo</figcaption>
-                </figure>
-                <figure>
-                  <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
-                  <figcaption>Car Primary Photo</figcaption>
-                </figure>
-                <figure>
-                  <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
-                  <figcaption>Car Primary Photo</figcaption>
-                </figure>
-                <figure>
-                  <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
-                  <figcaption>Car Primary Photo</figcaption>
-                </figure>
-                <figure>
-                  <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
-                  <figcaption>Car Primary Photo</figcaption>
-                </figure>
+                {gallery.map(({ url, id }) => {
+                  return (
+                    <figure key={id}>
+                      <img src={url} alt="Car_Photo" />
+                      <figcaption>Car Photo</figcaption>
+                    </figure>
+                  );
+                })}
               </div>
             </div>
 
             <div className="owner-div">
               <DefaultProfilePicture
-                username="Samuel Leão"
+                username={owner.name}
                 width="77px"
                 height="77px"
               />
-              <h3>Samuel Leão</h3>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's
-              </p>
+              <h3>{owner.name}</h3>
+              <p>{owner.description}</p>
               <Button
                 width="206px"
                 bgColor="var(--grey-0)"

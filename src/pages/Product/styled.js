@@ -105,15 +105,12 @@ export const ProductMain = styled.main`
     flex-wrap: wrap;
 
     div {
-      width: 50px;
       height: 32px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       background-color: var(--brand-4);
       border-radius: 4px;
       color: var(--brand-1);
       margin-right: 12px;
+      padding: 5px;
     }
 
     h6 {
@@ -178,6 +175,7 @@ export const ProductMain = styled.main`
       margin-bottom: 36px;
       width: 93%;
       height: 275px;
+      cursor: pointer;
     }
 
     figure {
