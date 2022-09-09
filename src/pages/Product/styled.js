@@ -14,7 +14,7 @@ export const ModalContainer = styled.section`
 
   img {
     width: 100%;
-    max-width: 300px;
+    max-height: 100%;
   }
 
   figcaption {
@@ -24,15 +24,15 @@ export const ModalContainer = styled.section`
   .move-gallery-div {
     margin: 0;
     position: absolute;
-    width: calc(93%);
+    width: calc(102%);
     display: flex;
     justify-content: space-between;
   }
 
   svg {
     color: var(--brand-1);
-    width: 30px;
-    height: 30px;
+    width: 33px;
+    height: 33px;
     cursor: pointer;
   }
 `;

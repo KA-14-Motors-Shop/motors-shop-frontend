@@ -18,6 +18,7 @@ const ProductPage = () => {
   const [frontImage, setFrontImages] = useState([]);
   const [gallery, setGallery] = useState([]);
   const [owner, setOwner] = useState([]);
+  const [modalImage, setModalImage] = useState(0);
 
   const params = useParams();
 
@@ -34,6 +35,18 @@ const ProductPage = () => {
       .catch((err) => console.log(err));
   }, [params.id]);
 
+  const changeModalImage = (comand) => {
+    if (comand === "add") {
+      modalImage === gallery.length - 1
+        ? setModalImage(0)
+        : setModalImage(modalImage + 1);
+    } else if (comand === "sub") {
+      modalImage === 0
+        ? setModalImage(gallery.length - 1)
+        : setModalImage(modalImage - 1);
+    }
+  };
+
   return (
     <>
       <ModalContainer>
@@ -44,11 +57,24 @@ const ProductPage = () => {
             setModalState={setGalleryModal}
           >
             <figure>
-              <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
-              <figcaption>Car Primary Photo</figcaption>
+              <img
+                src={gallery[modalImage].url}
+                alt={`${product.title}_Image`}
+              />
+              <figcaption>{product.title} Image</figcaption>
               <div className="move-gallery-div">
-                <AiOutlineLeft />
-                <AiOutlineRight />
+                <AiOutlineLeft
+                  onClick={() => {
+                    changeModalImage("sub");
+                    console.log(gallery[modalImage]);
+                  }}
+                />
+                <AiOutlineRight
+                  onClick={() => {
+                    changeModalImage("add");
+                    console.log(gallery[modalImage]);
+                  }}
+                />
               </div>
             </figure>
           </AnuncioModal>
@@ -85,7 +111,6 @@ const ProductPage = () => {
                 bgColor="var(--brand-1)"
                 fontColor="var(--white-fixed)"
                 fontSize="14px"
-                onClick={() => setGalleryModal(!galleryModal)}
               >
                 Comprar
               </Button>
@@ -100,7 +125,10 @@ const ProductPage = () => {
           <section className="product-complementary-section">
             <div className="pictures-div">
               <h3>Fotos</h3>
-              <div>
+              <div
+                onClick={() => setGalleryModal(!galleryModal)}
+                data-testid="galleryDiv"
+              >
                 {gallery.map(({ url, id }) => {
                   return (
                     <figure key={id}>
