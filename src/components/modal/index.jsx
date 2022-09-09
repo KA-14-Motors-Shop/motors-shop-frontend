@@ -4,13 +4,11 @@ import { useEffect, useState } from "react";
 
 const AnuncioModal = ({ title, children, modalState, setModalState }) => {
   const [rootHeight, setRootHeight] = useState(
-    window.getComputedStyle(document.getElementById("root")).height
+    getComputedStyle(document.getElementById("root")).height
   );
 
   useEffect(() => {
-    setRootHeight(
-      window.getComputedStyle(document.getElementById("root")).height
-    );
+    setRootHeight(getComputedStyle(document.getElementById("root")).height);
   }, [modalState]);
 
   return (
