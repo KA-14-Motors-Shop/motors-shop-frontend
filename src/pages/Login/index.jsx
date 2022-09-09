@@ -102,7 +102,7 @@ const Login = () => {
             <Button
               type="button"
               className="login-form-btn"
-              onClick={() => console.log("click")}
+              onClick={() => history.push("/register")}
             >
               Cadastrar
             </Button>
