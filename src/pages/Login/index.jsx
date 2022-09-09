@@ -9,12 +9,16 @@ import { useForm } from "react-hook-form";
 import { apiDeploy } from "../../services/api";
 import { toast } from "react-toastify";
 import { Redirect, useHistory } from "react-router-dom";
+import { AuthContext } from "../../providers/auth";
+import { useContext } from "react";
 
-const Login = ({ auth, setAuth }) => {
+const Login = () => {
   const schema = yup.object().shape({
     email: yup.string().required("Campo obrigatório").email("Email inválido"),
     password: yup.string().required("Campo obrigatório"),
   });
+
+  const { authenticated, setAuthenticated } = useContext(AuthContext);
 
   const {
     register,
@@ -26,24 +30,28 @@ const Login = ({ auth, setAuth }) => {
 
   const history = useHistory();
 
-  if (auth) {
+  if (authenticated) {
     return <Redirect to="/profile" />;
   }
 
-  const handleLogin = async (data) => {
-    const response = await apiDeploy.post("/login", data).catch((err) => {
-      toast.error("Erro na autenticação, verifique seu e-mail ou senha");
-    });
+  const handleLogin = (data) => {
+    apiDeploy
+      .post("/login", data)
+      .then((res) => {
+        const { Token_JWT } = res.data;
 
-    const { Token_JWT } = response.data;
+        localStorage.setItem("@MotorShop:token", Token_JWT);
 
-    localStorage.setItem("@MotorsShop:token", Token_JWT);
+        toast.success("Login feito com sucesso");
 
-    toast.success("Login feito com sucesso");
+        setAuthenticated(true);
 
-    setAuth(true);
-
-    history.push("/profile");
+        history.push("/profile");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Erro na autenticação, verifique seu e-mail ou senha");
+      });
   };
 
   return (
