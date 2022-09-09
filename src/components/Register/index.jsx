@@ -12,6 +12,22 @@ import { toast } from "react-toastify";
 
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
+  const [cepState, setCepState] = useState("")
+  const [objCep, setObjCep]     = useState(null)
+
+  const handleCepChange = async (e) => {
+    setCepState(e.target.value)
+
+   const cep =  await apiCep
+      .get(`${Number(e.target.value)}/json/`)
+      .then((dataCep) =>  setObjCep(dataCep.data))
+      .catch((err) => {
+        setObjCep(null)
+      });
+
+      // setObjCep(cep.data)
+    console.log(objCep.data)
+  }
 
   const schema = yup.object().shape({
     name: yup.string().required("Nome e um campo obrigatorio"),
@@ -45,6 +61,7 @@ const CardRegister = () => {
   });
 
   const onSubmitFunction = async (data) => {
+
     const newData = { ...data, type: account };
     delete newData.confirm_password;
 
@@ -54,8 +71,9 @@ const CardRegister = () => {
         toast.error("Este cep é inválido. Tente novamente.");
       });
 
-    console.log(response.data);
+    // console.log("OBJETO CEP :",response.data);
     console.log(newData);
+
   };
   const onErrors = (er) => {
     console.log(er);
@@ -144,6 +162,7 @@ const CardRegister = () => {
           height={"48px"}
           label={"CEP"}
           placeholder={"Ex: 00000.000"}
+          onChange = {handleCepChange}
         ></Input>
 
         <div className="div-endereco-row">
@@ -157,6 +176,8 @@ const CardRegister = () => {
             height={"48px"}
             label={"Estado"}
             placeholder={"Digitar Estado"}
+            value = { objCep ? (objCep.uf) :  (null)}
+            // value = { null}
           ></Input>
           <Input
             register={register}
@@ -168,6 +189,7 @@ const CardRegister = () => {
             height={"48px"}
             label={"Cidade"}
             placeholder={"Digitar Cidade"}
+            // value = { objCep && objCep.localidade}
           ></Input>
         </div>
 
@@ -181,6 +203,7 @@ const CardRegister = () => {
           height={"48px"}
           label={"Rua"}
           placeholder={"Digitar Rua"}
+          // value = { objCep && objCep.logradouro}
         ></Input>
 
         <div className="div-endereco-row">
@@ -213,9 +236,9 @@ const CardRegister = () => {
           <Button
             onClick={() => setAccount("buyer")}
             className="btn-comprador"
-            bgColor={"var(--brand-1)"}
-            borderColor={"var(--brand-1)"}
-            fontColor={"var(--white-fixed)"}
+            bgColor={account === "buyer" ? ("var(--brand-1)") : ("var(--grey-4)")}
+            borderColor={account === "buyer" ? ("var(--brand-1)") : ("var(--grey-4)")}
+            fontColor={account === "buyer" ? ("var(--white-fixed)") : ("var(--grey-0)")}
             type={"button"}
             width={"140px"}
             height={"48px"}
@@ -224,9 +247,9 @@ const CardRegister = () => {
           </Button>
           <Button
             onClick={() => setAccount("seller")}
-            bgColor={"var(--grey-4)"}
-            borderColor={"var(--grey-4)"}
-            fontColor={"var(--grey-0)"}
+            bgColor={account === "seller" ? ("var(--brand-1)") : ("var(--grey-4)")}
+            borderColor={account === "seller" ? ("var(--brand-1)") : ("var(--grey-4)")}
+            fontColor={account === "seller" ? ("var(--white-fixed)") : ("var(--grey-0)")}
             type={"button"}
             width={"140px"}
             height={"48px"}

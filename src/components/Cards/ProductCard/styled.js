@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const CardContainer = styled.li`
   width: 80%;
-  height: 355px;
+  height: 380px;
 
   @media (min-width: 390px) {
     width: 312px;
@@ -80,22 +80,21 @@ const CardContainer = styled.li`
   .infos-div {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
     div {
-      width: 51px;
       height: 32px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       margin-right: 12px;
       background-color: var(--brand-4);
       color: var(--brand-1);
       font-size: 14px;
       font-weight: 500;
+      padding: 5px;
     }
 
     h6 {
-      margin-left: auto;
+      width: 100%;
+      margin-top: 10px;
       color: var(--grey-1);
       font-size: 16px;
       font-weight: 600;

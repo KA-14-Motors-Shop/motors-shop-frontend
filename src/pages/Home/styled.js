@@ -41,6 +41,7 @@ const MainHome = styled.main`
 
     ul {
       gap: 12px;
+      padding-bottom: 15px;
     }
   }
 
@@ -54,6 +55,7 @@ const MainHome = styled.main`
 
     ul {
       gap: 12px;
+      padding-bottom: 15px;
     }
   }
 
