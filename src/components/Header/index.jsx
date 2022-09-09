@@ -70,9 +70,19 @@ const Header = ({ isLoggedIn = false, username }) => {
             </div>
           ) : (
             <div className="desktop_outer_menu">
-              <div className="d_menu_login">Fazer Login</div>
+              <div
+                className="d_menu_login"
+                onClick={() => history.push("/login")}
+              >
+                Fazer Login
+              </div>
 
-              <Button width="133px" height="48px" borderColor="var(--grey-4)">
+              <Button
+                width="133px"
+                height="48px"
+                borderColor="var(--grey-4)"
+                onClick={() => history.push("/register")}
+              >
                 Cadastrar
               </Button>
             </div>
@@ -120,13 +130,19 @@ const Header = ({ isLoggedIn = false, username }) => {
             ) : (
               <>
                 <ul className="items_ul">
-                  <li className="menu_item">Fazer Login</li>
+                  <li
+                    className="menu_item"
+                    onClick={() => history.push("/login")}
+                  >
+                    Fazer Login
+                  </li>
                 </ul>
 
                 <Button
                   className="signup_btn"
                   width="88vw"
                   borderColor="var(--grey-4)"
+                  onClick={() => history.push("/register")}
                 >
                   Cadastrar
                 </Button>
