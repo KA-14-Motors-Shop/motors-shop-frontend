@@ -49,7 +49,6 @@ const Login = () => {
         history.push("/profile");
       })
       .catch((err) => {
-        console.log(err);
         toast.error("Erro na autenticação, verifique seu e-mail ou senha");
       });
   };
