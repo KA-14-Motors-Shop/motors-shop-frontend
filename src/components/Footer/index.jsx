@@ -3,6 +3,10 @@ import FooterContainer from "./styled";
 import { IoIosArrowUp } from "react-icons/io";
 
 const Footer = () => {
+  const scrollPage = () => {
+    return window.scrollTo(0, 0);
+  };
+
   return (
     <FooterContainer>
       <h3>
@@ -14,9 +18,7 @@ const Footer = () => {
         height="50px"
         bgColor="var(--grey-1)"
         fontColor="var(--white-fixed)"
-        onClick={() => {
-          window.scrollTo(0, 0);
-        }}
+        onClick={scrollPage}
       >
         <IoIosArrowUp />
       </Button>
