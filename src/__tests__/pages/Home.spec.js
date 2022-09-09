@@ -31,10 +31,10 @@ const providerProps = [
     type: "sale",
     created_at: "2021-10-05T17:16:18.198Z",
     updatedAt: "2021-10-05T17:16:18.198Z",
-    title: "Moto",
+    title: "Dodge",
     year: 2019,
     mileage: 0,
-    description: "Moto GT muito potente",
+    description: "Dodge GT muito potente",
     price: "300000.00",
     vehicle_type: "car",
     is_active: true,
@@ -48,10 +48,10 @@ const providerProps = [
     type: "sale",
     created_at: "2021-10-05T17:16:18.198Z",
     updatedAt: "2021-10-05T17:16:18.198Z",
-    title: "Dodge",
+    title: "Moto",
     year: 2019,
     mileage: 0,
-    description: "Dodge GT muito potente",
+    description: "Moto GT muito potente",
     price: "300000.00",
     vehicle_type: "motorcycle",
     is_active: true,
@@ -110,8 +110,54 @@ describe("Home Page Tests", () => {
 
     fireEvent.click(auctionCard);
 
-    // await waitFor(() => {
-    //   expect(mockHistoryPush).toHaveBeenCalled();
-    // });
+    await waitFor(() => {
+      expect(mockHistoryPush).toHaveBeenCalledWith(
+        `/product/${auctionCard.id}`
+      );
+    });
+  });
+
+  test("should be able to go to car page", async () => {
+    apiMock.onGet("ads").replyOnce(200, providerProps);
+
+    await render(
+      <AdvertisemenstProvider>
+        <Home />
+      </AdvertisemenstProvider>
+    );
+
+    const lis = await screen.findAllByRole("listitem");
+
+    const carCard = lis.find((value) =>
+      String(value["innerHTML"]).includes("Dodge")
+    );
+
+    fireEvent.click(carCard);
+
+    await waitFor(() => {
+      expect(mockHistoryPush).toHaveBeenCalledWith(`/product/2`);
+    });
+  });
+
+  test("should be able to go to motorcycle page", async () => {
+    apiMock.onGet("ads").replyOnce(200, providerProps);
+
+    await render(
+      <AdvertisemenstProvider>
+        <Home />
+      </AdvertisemenstProvider>
+    );
+
+    const lis = await screen.findAllByRole("listitem");
+
+    const motorcycleCard = lis.find((value) =>
+      String(value["innerHTML"]).includes("Moto")
+    );
+
+    fireEvent.click(motorcycleCard);
+
+    await waitFor(() => {
+      expect(mockHistoryPush).toHaveBeenCalledWith(`/product/3`);
+    });
   });
 });
