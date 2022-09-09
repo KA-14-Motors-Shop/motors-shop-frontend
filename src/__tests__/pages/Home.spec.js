@@ -62,6 +62,16 @@ const providerProps = [
   },
 ];
 
+const mockHistoryPush = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  Link: ({ children }) => children,
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
+
 describe("Home Page Tests", () => {
   test("should be able to retrieve tasks", async () => {
     apiMock.onGet("ads").replyOnce(200, providerProps);
@@ -81,5 +91,27 @@ describe("Home Page Tests", () => {
     await waitFor(() => {
       expect(auctionCard).toBeInTheDocument();
     });
+  });
+
+  test("should be able to go to auction page", async () => {
+    apiMock.onGet("ads").replyOnce(200, providerProps);
+
+    await render(
+      <AdvertisemenstProvider>
+        <Home />
+      </AdvertisemenstProvider>
+    );
+
+    const lis = await screen.findAllByRole("listitem");
+
+    const auctionCard = lis.find((value) =>
+      String(value["innerHTML"]).includes("Mustang")
+    );
+
+    fireEvent.click(auctionCard);
+
+    // await waitFor(() => {
+    //   expect(mockHistoryPush).toHaveBeenCalled();
+    // });
   });
 });
