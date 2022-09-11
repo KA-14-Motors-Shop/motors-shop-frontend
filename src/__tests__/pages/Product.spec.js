@@ -72,7 +72,7 @@ describe("Home Page Tests", () => {
     });
   });
 
-  test("should be able to go to open gallery modal", async () => {
+  test("should be able to open gallery modal", async () => {
     apiMock.onGet("ads/1").replyOnce(200, providerProps);
 
     await render(
@@ -87,6 +87,24 @@ describe("Home Page Tests", () => {
 
     await waitFor(() => {
       expect(screen.getByText(/Imagem do veículo/)).toBeInTheDocument();
+    });
+  });
+
+  test("should be able to go to user products page", async () => {
+    apiMock.onGet("ads/1").replyOnce(200, providerProps);
+
+    await render(
+      <div id="root">
+        <ProductPage />
+      </div>
+    );
+
+    const allAdsButton = await screen.findByText(/Ver todos anúncios/);
+
+    fireEvent.click(allAdsButton);
+
+    await waitFor(() => {
+      expect(mockHistoryPush).toHaveBeenCalled();
     });
   });
 });
