@@ -38,6 +38,10 @@ export const InnerContainer = styled.div`
   }
 
   @media (max-width: 768px) {
+    label {
+      padding-left: 20px;
+    }
+
     .forgot-password {
       display: flex;
       justify-content: flex-end;
@@ -63,7 +67,6 @@ export const InnerContainer = styled.div`
       .sc-idiyUo {
         /* CONTAINER DO INPUT */
         margin-left: 10px;
-        margin-top: 10px;
       }
 
       .login-form-btn-container {
@@ -87,6 +90,10 @@ export const InnerContainer = styled.div`
   }
 
   @media (min-width: 769px) {
+    label {
+      padding-left: 39px;
+    }
+
     .login-form {
       width: 412px;
       height: 542px;
