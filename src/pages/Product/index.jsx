@@ -1,14 +1,13 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { ModalContainer, ProductMain } from "./styled";
-import PrimaryPhoto from "../../components/Cards/ProductCardAuction/Photo.png";
 import Button from "../../components/Button";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
 import { BsDot } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import AnuncioModal from "../../components/modal";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { apiDeploy } from "../../services/api";
 
 const ProductPage = () => {
@@ -46,6 +45,8 @@ const ProductPage = () => {
         : setModalImage(modalImage - 1);
     }
   };
+
+  const history = useHistory();
 
   return (
     <>
@@ -152,6 +153,7 @@ const ProductPage = () => {
                 width="206px"
                 bgColor="var(--grey-0)"
                 fontColor="var(--white-fixed)"
+                onClick={() => history.push(`/userProducts/${owner.id}`)}
               >
                 Ver todos anúncios
               </Button>
