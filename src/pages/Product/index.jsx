@@ -1,14 +1,13 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { ModalContainer, ProductMain } from "./styled";
-import PrimaryPhoto from "../../components/Cards/ProductCardAuction/Photo.png";
 import Button from "../../components/Button";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
 import { BsDot } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import AnuncioModal from "../../components/modal";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { apiDeploy } from "../../services/api";
 
 const ProductPage = () => {
@@ -18,6 +17,7 @@ const ProductPage = () => {
   const [frontImage, setFrontImages] = useState([]);
   const [gallery, setGallery] = useState([]);
   const [owner, setOwner] = useState([]);
+  const [modalImage, setModalImage] = useState(0);
 
   const params = useParams();
 
@@ -34,6 +34,20 @@ const ProductPage = () => {
       .catch((err) => console.log(err));
   }, [params.id]);
 
+  const changeModalImage = (comand) => {
+    if (comand === "add") {
+      modalImage === gallery.length - 1
+        ? setModalImage(0)
+        : setModalImage(modalImage + 1);
+    } else if (comand === "sub") {
+      modalImage === 0
+        ? setModalImage(gallery.length - 1)
+        : setModalImage(modalImage - 1);
+    }
+  };
+
+  const history = useHistory();
+
   return (
     <>
       <ModalContainer>
@@ -44,11 +58,24 @@ const ProductPage = () => {
             setModalState={setGalleryModal}
           >
             <figure>
-              <img src={PrimaryPhoto} alt="Car_Primary_Photo" />
-              <figcaption>Car Primary Photo</figcaption>
+              <img
+                src={gallery[modalImage].url}
+                alt={`${product.title}_Image`}
+              />
+              <figcaption>{product.title} Image</figcaption>
               <div className="move-gallery-div">
-                <AiOutlineLeft />
-                <AiOutlineRight />
+                <AiOutlineLeft
+                  onClick={() => {
+                    changeModalImage("sub");
+                    console.log(gallery[modalImage]);
+                  }}
+                />
+                <AiOutlineRight
+                  onClick={() => {
+                    changeModalImage("add");
+                    console.log(gallery[modalImage]);
+                  }}
+                />
               </div>
             </figure>
           </AnuncioModal>
@@ -85,7 +112,6 @@ const ProductPage = () => {
                 bgColor="var(--brand-1)"
                 fontColor="var(--white-fixed)"
                 fontSize="14px"
-                onClick={() => setGalleryModal(!galleryModal)}
               >
                 Comprar
               </Button>
@@ -100,7 +126,10 @@ const ProductPage = () => {
           <section className="product-complementary-section">
             <div className="pictures-div">
               <h3>Fotos</h3>
-              <div>
+              <div
+                onClick={() => setGalleryModal(!galleryModal)}
+                data-testid="galleryDiv"
+              >
                 {gallery.map(({ url, id }) => {
                   return (
                     <figure key={id}>
@@ -124,6 +153,7 @@ const ProductPage = () => {
                 width="206px"
                 bgColor="var(--grey-0)"
                 fontColor="var(--white-fixed)"
+                onClick={() => history.push(`/userProducts/${owner.id}`)}
               >
                 Ver todos anúncios
               </Button>

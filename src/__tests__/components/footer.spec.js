@@ -2,6 +2,8 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Footer from "../../components/Footer";
 
+window.scrollTo = jest.fn();
+
 describe("Test Footer component", () => {
   test("should be able to render the footer", () => {
     render(<Footer />);

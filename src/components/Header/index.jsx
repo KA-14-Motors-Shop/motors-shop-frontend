@@ -22,18 +22,20 @@ const Header = ({ isLoggedIn = false, username }) => {
   const { handleLogout } = useContext(AuthContext);
 
   useEffect(() => {
-    const closeDropdown = (e) => {
-      if (
-        e.target !== ddownRef.current &&
-        e.target !== ddownRef.current.children[0] &&
-        e.target !== ddownRef.current.children[1] &&
-        e.target !== ddownRef.current.children[2]
-      ) {
-        setDdownMenu(false);
-      }
-    };
+    if (ddownRef.current) {
+      const closeDropdown = (e) => {
+        if (
+          e.target !== ddownRef.current &&
+          e.target !== ddownRef.current.children[0] &&
+          e.target !== ddownRef.current.children[1] &&
+          e.target !== ddownRef.current.children[2]
+        ) {
+          setDdownMenu(false);
+        }
+      };
 
-    document.body.addEventListener("click", closeDropdown);
+      document.body.addEventListener("click", closeDropdown);
+    }
   }, []);
 
   return (

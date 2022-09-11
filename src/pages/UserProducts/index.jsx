@@ -3,48 +3,99 @@ import ProductCard from "../../components/Cards/ProductCard";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { apiDeploy } from "../../services/api";
 
 const UserProduct = () => {
+  const [user, setUser] = useState([]);
+  const [carAds, setCarAds] = useState([]);
+  const [motorAds, setMotorAds] = useState([]);
+
+  const params = useParams();
+
+  useEffect(() => {
+    apiDeploy
+      .get(`users/${params.id}`)
+      .then((resp) => {
+        setUser(resp.data);
+        setCarAds(
+          resp.data.advertisements.filter(
+            ({ vehicle_type }) => vehicle_type === "car"
+          )
+        );
+        setMotorAds(
+          resp.data.advertisements.filter(
+            ({ vehicle_type }) => vehicle_type === "motorcycle"
+          )
+        );
+      })
+      .catch((err) => console.log(err));
+  }, [params.id]);
+
   return (
     <>
       <Header />
       <MainProducts>
         <section className="user-infos-section">
           <DefaultProfilePicture
-            username="Samuel Leão"
+            username={user.name}
             width="104px"
             height="104px"
           />
           <div className="user-title-div">
-            <h3>Samuel Leão</h3>
-            <span>Anunciante</span>
+            <h3>{user.name}</h3>
+            <span>
+              {user.type === "advertiser" ? "Anunciante" : "Comprador"}
+            </span>
           </div>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s
-          </p>
+          <p>{user.description}</p>
         </section>
-        <section className="products-section car-list-section">
-          <h2>Carros</h2>
-          <ul className="products-list">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </ul>
-        </section>
-        <section className="products-section motorcycle-list-section">
-          <h2>Motos</h2>
-          <ul className="products-list">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </ul>
-        </section>
+        {carAds.length > 0 && (
+          <section className="products-section car-list-section">
+            <h2>Carros</h2>
+            <ul className="products-list">
+              {carAds.map((ad) => {
+                return (
+                  <ProductCard
+                    key={ad.id}
+                    id={ad.id}
+                    title={ad.title}
+                    description={ad.description}
+                    mileage={ad.mileage}
+                    year={ad.year}
+                    price={ad.price}
+                    owner={{ name: user.name }}
+                    images={ad.images.find(({ is_front }) => is_front === true)}
+                  />
+                );
+              })}
+            </ul>
+          </section>
+        )}
+
+        {motorAds.length > 0 && (
+          <section className="products-section motorcycle-list-section">
+            <h2>Motos</h2>
+            <ul className="products-list">
+              {motorAds.map((ad) => {
+                return (
+                  <ProductCard
+                    key={ad.id}
+                    id={ad.id}
+                    title={ad.title}
+                    description={ad.description}
+                    mileage={ad.mileage}
+                    year={ad.year}
+                    price={ad.price}
+                    owner={{ name: user.name }}
+                    images={ad.images.find(({ is_front }) => is_front === true)}
+                  />
+                );
+              })}
+            </ul>
+          </section>
+        )}
       </MainProducts>
       <Footer />
     </>
