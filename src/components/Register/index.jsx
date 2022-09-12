@@ -3,6 +3,7 @@ import CardRegisterContainer from "./styles";
 import Button from "../Button";
 import Input from "../input";
 import { apiCep } from "../../services/api";
+import { apiDeploy } from "../../services/api";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -46,15 +47,44 @@ const CardRegister = () => {
   });
 
   const onSubmitFunction = async (data) => {
-
-    const newData = { ...data, type: account };
+console.log(data.description)
+    // const newData = { ...data, type: account };
+    const newData = {
+      name: data.name,
+      cpf: data.cpf,
+      email: data.email,
+      password: data.password,
+      description: data.description,
+      cell_phone: data.cell_phone,
+      birthday: data.birthday,
+      type: account,
+  
+      address: {
+        cep: data.cep,
+        state: data.state,
+        city: data.city,
+        street: data.street,
+        number: data.number,
+        complement: data.complement
+      },
+    }
     delete newData.confirm_password;
+
 
     const response = await apiCep
       .get(`${Number(data.cep)}/json/`)
       .catch((err) => {
         toast.error("Este cep é inválido. Tente novamente.");
       });
+
+      apiDeploy
+      .post("/users",newData)
+      .then((response)=>{
+        toast.success("Usuário criado com sucesso!")
+      })
+      .catch((err) =>console.log(err));
+
+
 
     console.log(newData);
 
