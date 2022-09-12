@@ -12,22 +12,7 @@ import { toast } from "react-toastify";
 
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
-  const [cepState, setCepState] = useState("")
-  const [objCep, setObjCep]     = useState(null)
 
-  const handleCepChange = async (e) => {
-    setCepState(e.target.value)
-
-   const cep =  await apiCep
-      .get(`${Number(e.target.value)}/json/`)
-      .then((dataCep) =>  setObjCep(dataCep.data))
-      .catch((err) => {
-        setObjCep(null)
-      });
-
-      // setObjCep(cep.data)
-    console.log(objCep.data)
-  }
 
   const schema = yup.object().shape({
     name: yup.string().required("Nome e um campo obrigatorio"),
@@ -71,7 +56,6 @@ const CardRegister = () => {
         toast.error("Este cep é inválido. Tente novamente.");
       });
 
-    // console.log("OBJETO CEP :",response.data);
     console.log(newData);
 
   };
@@ -162,7 +146,6 @@ const CardRegister = () => {
           height={"48px"}
           label={"CEP"}
           placeholder={"Ex: 00000.000"}
-          onChange = {handleCepChange}
         ></Input>
 
         <div className="div-endereco-row">
@@ -176,8 +159,6 @@ const CardRegister = () => {
             height={"48px"}
             label={"Estado"}
             placeholder={"Digitar Estado"}
-            value = { objCep ? (objCep.uf) :  (null)}
-            // value = { null}
           ></Input>
           <Input
             register={register}
@@ -189,7 +170,6 @@ const CardRegister = () => {
             height={"48px"}
             label={"Cidade"}
             placeholder={"Digitar Cidade"}
-            // value = { objCep && objCep.localidade}
           ></Input>
         </div>
 
@@ -203,7 +183,6 @@ const CardRegister = () => {
           height={"48px"}
           label={"Rua"}
           placeholder={"Digitar Rua"}
-          // value = { objCep && objCep.logradouro}
         ></Input>
 
         <div className="div-endereco-row">
