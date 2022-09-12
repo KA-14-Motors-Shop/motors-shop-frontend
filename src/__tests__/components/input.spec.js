@@ -16,12 +16,26 @@ test("Should be able to render some input component", () => {
         label={"Nome"}
         placeholder={"Ex: Samuel Leão"}
     />)
-    
-
-    
     expect(screen.getByPlaceholderText("Ex: Samuel Leão")).toBeTruthy()
 
 })
 
+
+test("Should be able to render an input type text", () => {
+    render(<Input
+        register={()=>{}}
+        errored={""}
+        name="name"
+        inputOrNot={true}
+        className="div-input"
+        width={"315px"}
+        height={"48px"}
+        label={"Nome"}
+        placeholder={""}
+    />)
+
+   expect(screen.getByRole("textbox")).toBeTruthy()
+
+})
 
 })
