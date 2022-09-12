@@ -19,12 +19,7 @@ const Header = ({ isLoggedIn = false, username }) => {
   useEffect(() => {
     if (ddownRef.current) {
       const closeDropdown = (e) => {
-        if (
-          e.target !== ddownRef.current &&
-          e.target !== ddownRef.current.children[0] &&
-          e.target !== ddownRef.current.children[1] &&
-          e.target !== ddownRef.current.children[2]
-        ) {
+        if (e.target !== ddownRef.current) {
           setDdownMenu(false);
         }
       };

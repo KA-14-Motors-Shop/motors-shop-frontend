@@ -26,7 +26,19 @@ describe("Cards components tests", () => {
   });
 
   test("should be able to render a product card adm", async () => {
-    render(<ProductCardAdm />);
+    render(
+      <ProductCardAdm
+        id={1}
+        title="Mustang"
+        year={2019}
+        mileage={0}
+        price="300000.00"
+        description="Mustang GT muito potente"
+        images={{
+          url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
+        }}
+      />
+    );
 
     expect(screen.getByRole("listitem")).toBeTruthy();
   });
@@ -51,7 +63,19 @@ describe("Cards components tests", () => {
   });
 
   test("should be able to render a product card auction adm", async () => {
-    render(<ProductCardAuctionAdm />);
+    render(
+      <ProductCardAuctionAdm
+        id={1}
+        title="Mustang"
+        year={2019}
+        mileage={0}
+        price="300000.00"
+        description="Mustang GT muito potente"
+        images={{
+          url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
+        }}
+      />
+    );
 
     expect(screen.getByRole("listitem")).toBeTruthy();
   });
