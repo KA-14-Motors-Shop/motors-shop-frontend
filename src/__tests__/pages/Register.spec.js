@@ -114,3 +114,12 @@ describe("Register Page Tests.", () => {
     })
 
 })
+
+/*
+TO DO:
+
+ - no momento que obtiver sucesso na criacao do usuario abrir modal na pagina
+ - com esse modal vou verificar se o user foi criado ou nao
+ 
+
+*/
