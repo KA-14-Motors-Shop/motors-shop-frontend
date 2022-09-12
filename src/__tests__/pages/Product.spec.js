@@ -3,6 +3,7 @@ import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import ProductPage from "../../pages/Product";
 import { apiDeploy } from "../../services/api";
 import MockAdapter from "axios-mock-adapter";
+import { AuthProvider } from "../../providers/auth";
 const apiMock = new MockAdapter(apiDeploy);
 
 const providerProps = {
@@ -59,7 +60,11 @@ describe("Home Page Tests", () => {
   test("should be able to render a product", async () => {
     apiMock.onGet("ads/1").replyOnce(200, providerProps);
 
-    await render(<ProductPage />);
+    await render(
+      <AuthProvider>
+        <ProductPage />
+      </AuthProvider>
+    );
 
     await waitFor(() => {
       expect(screen.getByRole("main")).toBeTruthy();
@@ -76,9 +81,11 @@ describe("Home Page Tests", () => {
     apiMock.onGet("ads/1").replyOnce(200, providerProps);
 
     await render(
-      <div id="root">
-        <ProductPage />
-      </div>
+      <AuthProvider>
+        <div id="root">
+          <ProductPage />
+        </div>
+      </AuthProvider>
     );
 
     const galleryDiv = await screen.findByTestId("galleryDiv");
@@ -94,9 +101,11 @@ describe("Home Page Tests", () => {
     apiMock.onGet("ads/1").replyOnce(200, providerProps);
 
     await render(
-      <div id="root">
-        <ProductPage />
-      </div>
+      <AuthProvider>
+        <div id="root">
+          <ProductPage />
+        </div>
+      </AuthProvider>
     );
 
     const allAdsButton = await screen.findByText(/Ver todos anúncios/);
