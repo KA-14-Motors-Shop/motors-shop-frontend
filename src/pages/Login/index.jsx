@@ -49,7 +49,6 @@ const Login = () => {
         history.push("/profile");
       })
       .catch((err) => {
-        console.log(err);
         toast.error("Erro na autenticação, verifique seu e-mail ou senha");
       });
   };
@@ -103,7 +102,7 @@ const Login = () => {
             <Button
               type="button"
               className="login-form-btn"
-              onClick={() => console.log("click")}
+              onClick={() => history.push("/register")}
             >
               Cadastrar
             </Button>

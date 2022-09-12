@@ -38,10 +38,14 @@ export const InnerContainer = styled.div`
   }
 
   @media (max-width: 768px) {
+    label {
+      padding-left: 20px;
+    }
+
     .forgot-password {
       display: flex;
       justify-content: flex-end;
-      padding-right: 18px;
+      padding-right: 23px;
       color: var(--grey-2);
       font-size: 14px;
       font-weight: 500;
@@ -63,7 +67,6 @@ export const InnerContainer = styled.div`
       .sc-idiyUo {
         /* CONTAINER DO INPUT */
         margin-left: 10px;
-        margin-top: 10px;
       }
 
       .login-form-btn-container {
@@ -87,6 +90,10 @@ export const InnerContainer = styled.div`
   }
 
   @media (min-width: 769px) {
+    label {
+      padding-left: 39px;
+    }
+
     .login-form {
       width: 412px;
       height: 542px;
@@ -110,7 +117,7 @@ export const InnerContainer = styled.div`
         font-size: 14px;
         font-weight: 500;
         font-family: "Inter", sans-serif;
-        padding-right: 50px;
+        padding-right: 55px;
         margin-bottom: 21px;
       }
 
