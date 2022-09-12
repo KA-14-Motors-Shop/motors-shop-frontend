@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import {
   HeaderUpperContainer,
   DesktopNavBar,
@@ -10,27 +10,27 @@ import Button from "../Button";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import DefaultProfilePicture from "../DefaultProfilePicture";
+import { AuthContext } from "../../providers/auth";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Header = ({ isLoggedIn = false, username }) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
   const [ddownMenu, setDdownMenu] = useState(false);
   const ddownRef = useRef();
+  const history = useHistory();
+
+  const { handleLogout } = useContext(AuthContext);
 
   useEffect(() => {
-    if (ddownRef.current) {
-      const closeDropdown = (e) => {
-        if (
-          e.target !== ddownRef.current &&
-          e.target !== ddownRef.current.children[0] &&
-          e.target !== ddownRef.current.children[1] &&
-          e.target !== ddownRef.current.children[2]
-        ) {
+    const closeDropdown = (e) => {
+      if (ddownRef.current) {
+        if (!ddownRef.current.contains(e.target)) {
           setDdownMenu(false);
         }
-      };
+      }
+    };
 
-      document.body.addEventListener("click", closeDropdown);
-    }
+    document.body.addEventListener("click", closeDropdown);
   }, []);
 
   return (
@@ -57,14 +57,29 @@ const Header = ({ isLoggedIn = false, username }) => {
                 <div className="ddown_item">Editar perfil</div>
                 <div className="ddown_item">Editar endereço</div>
                 <div className="ddown_item">Minhas compras</div>
-                <div className="ddown_item">Sair</div>
+                <div
+                  className="ddown_item"
+                  onClick={() => handleLogout(history)}
+                >
+                  Sair
+                </div>
               </DropdownMenu>
             </div>
           ) : (
             <div className="desktop_outer_menu">
-              <div className="d_menu_login">Fazer Login</div>
+              <div
+                className="d_menu_login"
+                onClick={() => history.push("/login")}
+              >
+                Fazer Login
+              </div>
 
-              <Button width="133px" height="48px" borderColor="var(--grey-4)">
+              <Button
+                width="133px"
+                height="48px"
+                borderColor="var(--grey-4)"
+                onClick={() => history.push("/register")}
+              >
                 Cadastrar
               </Button>
             </div>
@@ -101,19 +116,30 @@ const Header = ({ isLoggedIn = false, username }) => {
                   <div className="m_username">{username}</div>
                 </div>
                 <ul className="items_ul">
-                  <li className="menu_item">Sair</li>
+                  <li
+                    className="menu_item"
+                    onClick={() => handleLogout(history)}
+                  >
+                    Sair
+                  </li>
                 </ul>
               </>
             ) : (
               <>
                 <ul className="items_ul">
-                  <li className="menu_item">Fazer Login</li>
+                  <li
+                    className="menu_item"
+                    onClick={() => history.push("/login")}
+                  >
+                    Fazer Login
+                  </li>
                 </ul>
 
                 <Button
                   className="signup_btn"
                   width="88vw"
                   borderColor="var(--grey-4)"
+                  onClick={() => history.push("/register")}
                 >
                   Cadastrar
                 </Button>

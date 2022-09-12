@@ -100,15 +100,12 @@ const CardContainer = styled.li`
         flex-wrap: wrap;
 
         div {
-          width: 50px;
           height: 32px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
           background-color: var(--brand-4);
           border-radius: 4px;
           color: var(--brand-1);
           margin-right: 12px;
+          padding: 5px;
         }
 
         h6 {
@@ -202,12 +199,12 @@ const CardContainer = styled.li`
 
       .auction-div {
         h5 {
-          height: 20px;
+          height: 25px;
           -webkit-line-clamp: 1;
         }
 
         p {
-          height: 22px;
+          height: 25px;
           -webkit-line-clamp: 1;
           margin-bottom: 50px;
         }
