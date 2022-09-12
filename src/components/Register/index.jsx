@@ -10,10 +10,15 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import AnuncioModal from "../modal";
+import { ModalContainer } from "../../pages/Product/styled";
+import { AiOutlineLeft } from "react-icons/ai";
 
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
+  const [showModal, setShowModal] = useState(false);
 
+  // onClick={() => setShowModal(!showModal)}
 
   const schema = yup.object().shape({
     name: yup.string().required("Nome e um campo obrigatorio"),
@@ -95,6 +100,22 @@ console.log(data.description)
 
   return (
     <CardRegisterContainer data-testid="Register-Container" onSubmit={handleSubmit(onSubmitFunction, onErrors)}>
+    <ModalContainer>
+        {showModal && (
+          <AnuncioModal
+            title={"Usuario criado!"}
+            modalState={showModal}
+            setModalState={setShowModal}
+          >
+             <AiOutlineLeft
+                  onClick={() => {
+                    setShowModal(!showModal)
+                  }}
+                />
+           TESTE
+          </AnuncioModal>
+        )}
+      </ModalContainer>
       <h2>Cadastro</h2>
       <p>Informações pessoais</p>
       <Input
@@ -255,7 +276,8 @@ console.log(data.description)
             Comprador
           </Button>
           <Button
-            onClick={() => setAccount("seller")}
+            onClick={() => {setAccount("seller") 
+            setShowModal(!showModal)}}
             bgColor={account === "seller" ? ("var(--brand-1)") : ("var(--grey-4)")}
             borderColor={account === "seller" ? ("var(--brand-1)") : ("var(--grey-4)")}
             fontColor={account === "seller" ? ("var(--white-fixed)") : ("var(--grey-0)")}

@@ -9,11 +9,38 @@ import { apiDeploy ,apiCep} from "../../services/api"
 const apiMock = new MockAdapter(apiDeploy)
 const cepMock = new MockAdapter(apiCep)
 
+const userMock = {
+    name: "Samuel Leão",
+	email: "samuel@kenzie.com",
+	cpf: "00000000000",
+	cell_phone: "9912341234",
+	birthday: "12/12/12",
+	password: "1234",
+	description: "Descricao comum",
+	type: "buyer",
+	is_active: true,
+    id: "d76461ac-a16a-4dba-9f4a-277db8d72c62",
+    createdAt: "2022-09-12T15:27:37.996Z",
+    updatedAt: "2022-09-12T15:27:37.996Z",
+	address: {
+		id: "36f726da-033c-45d6-85b7-1b601236a6a0",
+		cep: "20020030",
+		state: "Rio de Janeiroo",
+		city: "Rio de Janeiroo",
+		street: "Flamengo",
+		number: 22,
+		complement: "Final da rua",
+		createdAt: "2022-09-12T15:27:37.920Z",
+		updatedAt: "2022-09-12T15:27:37.920Z"
+	},
+}
+
+
 
 describe("Register Page Tests.", () => {
 
     it("Should be able to render some input.",async () => {
-        apiMock.onPost("/users").replyOnce(201,{})
+        apiMock.onPost("/users").replyOnce(201,userMock)
         render(<CardRegister/>)
 
         const emailField = screen.getByPlaceholderText("Ex samuel@kenzie.com")
@@ -58,7 +85,7 @@ describe("Register Page Tests.", () => {
         })
         
         fireEvent.change(emailField, {
-            target: {value: "Ex samuel@kenzie.com" }
+            target: {value: "samuel@kenzie.com" }
         })
 
         fireEvent.change(cpfField, {
@@ -90,7 +117,7 @@ describe("Register Page Tests.", () => {
         })
 
         fireEvent.change(streetField, {
-            target: {value: "Centro" }
+            target: {value: "Flamengo" }
         })
 
         fireEvent.change(numberField, {
@@ -98,7 +125,7 @@ describe("Register Page Tests.", () => {
         })
 
         fireEvent.change(complementField, {
-            target: {value: "Complemento comum" }
+            target: {value: "Final da rua" }
         })
 
         fireEvent.change(passwordField, {
