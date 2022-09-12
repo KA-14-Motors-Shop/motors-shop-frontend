@@ -40,13 +40,21 @@ const Login = () => {
       .then((res) => {
         const { Token_JWT } = res.data;
 
-        localStorage.setItem("@MotorShop:token", Token_JWT);
+        apiDeploy
+          .get("users/me", {
+            headers: { Authorization: `Bearer ${Token_JWT}` },
+          })
+          .then((resp) => {
+            localStorage.setItem("@MotorShop:token", Token_JWT);
 
-        toast.success("Login feito com sucesso");
+            toast.success("Login feito com sucesso");
 
-        setAuthenticated(true);
+            setAuthenticated(true);
 
-        history.push("/profile");
+            localStorage.setItem("@MotorShop:user", JSON.stringify(resp.data));
+            history.push("/profile");
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => {
         console.log(err);

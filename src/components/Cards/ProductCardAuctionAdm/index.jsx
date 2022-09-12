@@ -1,26 +1,25 @@
 import CardContainer from "./styled";
-import Car from "./Photo.png";
 import { BsClock } from "react-icons/bs";
 import Button from "../../Button";
 
 const ProductCardAuctionAdm = ({
   id,
   time,
-  img,
+  images,
   title,
   description,
-  kilometers,
+  mileage,
   year,
   price,
   editFunction,
   seeFunction,
 }) => {
   return (
-    <CardContainer>
+    <CardContainer id={id}>
       <section className="product-section">
         <figure>
-          <img src={Car} alt="Car_image" />
-          <figcaption>Car Image</figcaption>
+          <img src={images.url} alt={`${title}_front_image`} />
+          <figcaption>{`${title} Front Image`}</figcaption>
         </figure>
 
         <div className="auction-div">
@@ -30,24 +29,18 @@ const ProductCardAuctionAdm = ({
             </span>
           </div>
 
-          <h5>Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 </h5>
+          <h5>{title}</h5>
 
-          <p>
-            Lorem ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem dolor sit amet consectetur adipisicing elit. Ut
-            exercitationem, doloribus eos voluptate et vero quidem quae
-            voluptates velit, quod ullam praesentium dolorem magnam consequuntur
-            odio sit id cum porro?
-          </p>
+          <p>{description}</p>
 
           <div className="infos-div">
             <div>
-              <span>2013</span>
+              <span>{year}</span>
             </div>
             <div>
-              <span>0 Km</span>
+              <span>{mileage} Km</span>
             </div>
-            <h6>R$ 20.000.00</h6>
+            <h6>R$ {price}</h6>
           </div>
         </div>
       </section>
