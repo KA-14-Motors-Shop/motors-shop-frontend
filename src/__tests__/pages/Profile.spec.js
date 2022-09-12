@@ -1,11 +1,5 @@
-import React, { useRef } from "react";
-import {
-  render,
-  fireEvent,
-  waitFor,
-  screen,
-  renderHook,
-} from "@testing-library/react";
+import React from "react";
+import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 
 import { AuthContext } from "../../providers/auth";
 import Profile from "../../pages/Profile";
@@ -119,6 +113,25 @@ describe("Profile Page Tests", () => {
 
     await waitFor(() => {
       expect(screen.getByText(/Tipo de anúncio/)).toBeInTheDocument();
+    });
+  });
+
+  test("should be able to open the edit ad modal", async () => {
+    await render(
+      <AuthContext.Provider value={{ authenticated: true }}>
+        <div id="root">
+          <Profile />
+        </div>
+      </AuthContext.Provider>
+    );
+    const allEditButtons = await screen.findAllByRole("button", {
+      name: /Editar/i,
+    });
+
+    fireEvent.click(allEditButtons[0]);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Editar anúncio/)).toBeInTheDocument();
     });
   });
 });
