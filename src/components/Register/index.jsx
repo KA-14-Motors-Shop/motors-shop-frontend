@@ -225,7 +225,7 @@ console.log(data.description)
             width={"152px"}
             height={"48px"}
             label={"Numero"}
-            placeholder={"Digitar Estado"}
+            placeholder={"Digitar número"}
           ></Input>
           <Input
             register={register}
@@ -235,7 +235,7 @@ console.log(data.description)
             width={"152px"}
             height={"48px"}
             label={"Complemento"}
-            placeholder={"Digitar Cidade"}
+            placeholder={"Digitar complemento"}
           ></Input>
         </div>
 
@@ -277,7 +277,7 @@ console.log(data.description)
           width={"315px"}
           height={"48px"}
           label={"Senha"}
-          placeholder={"Ex: Samuel Leão"}
+          placeholder={"Sua melhor senha"}
         ></Input>
         <Input
           register={register}
@@ -289,7 +289,7 @@ console.log(data.description)
           width={"315px"}
           height={"48px"}
           label={"Confirmar senha"}
-          placeholder={"Ex: Samuel Leão"}
+          placeholder={"Confirme sua melhor senha"}
         ></Input>
 
         <Button
