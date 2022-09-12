@@ -10,30 +10,49 @@ import { useContext, useState } from "react";
 import UpdateAdModal from "../../components/profileModals/UpdateAd";
 import { AuthContext } from "../../providers/auth";
 import { Redirect } from "react-router-dom";
+import { useEffect } from "react";
+import { apiDeploy } from "../../services/api";
 
 const Profile = () => {
-  const { authenticated } = useContext(AuthContext);
+  const { authenticated, token } = useContext(AuthContext);
 
   const [createAdModal, setCreateAdModal] = useState(false);
   const [updateAdModal, setUpdateAdModal] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    apiDeploy
+      .get("users/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((resp) => {
+        setUser(resp.data);
+
+        localStorage.setItem("@MotorShop:user", JSON.stringify(resp.data));
+      })
+      .catch((err) => console.log(err));
+  }, [user, token]);
 
   if (!authenticated) {
     return <Redirect to="/login" />;
   }
 
-  const user = JSON.parse(localStorage.getItem("@MotorShop:user"));
+  const auctionAds = user
+    ? user.advertisements.filter(({ type }) => type === "auction")
+    : false;
 
-  const auctionAds = user.advertisements.filter(
-    ({ type }) => type === "auction"
-  );
+  const carAds = user
+    ? user.advertisements.filter(
+        ({ type, vehicle_type }) => type === "sale" && vehicle_type === "car"
+      )
+    : false;
 
-  const carAds = user.advertisements.filter(
-    ({ type, vehicle_type }) => type === "sale" && vehicle_type === "car"
-  );
-
-  const motoAds = user.advertisements.filter(
-    ({ type, vehicle_type }) => type === "sale" && vehicle_type === "motorcycle"
-  );
+  const motoAds = user
+    ? user.advertisements.filter(
+        ({ type, vehicle_type }) =>
+          type === "sale" && vehicle_type === "motorcycle"
+      )
+    : false;
 
   return (
     <>

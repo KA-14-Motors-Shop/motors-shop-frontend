@@ -3,30 +3,43 @@ import ModalContainer from "./styled";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import { apiDeploy, apiLocal } from "../../../services/api";
+import { apiDeploy } from "../../../services/api";
 import AnuncioModal from "../../modal";
 import Button from "../../Button";
 import Input from "../../input";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/auth";
+import { toast } from "react-toastify";
 
 const CreateAdModal = ({ modalState, setModalState }) => {
   const [advertisementType, setAdvertisementType] = useState("sale");
   const [vehicleType, setVehicleType] = useState("car");
   const [frontImage, setFrontImage] = useState(null);
   const [galleryImages, setGalleryImages] = useState([]);
+  const [frontImageError, setFrontImageError] = useState(false);
+  const [galleryError, setGalleryError] = useState(false);
+
+  const { token } = useContext(AuthContext);
 
   const schema = yup.object().shape({
     title: yup.string().required("Título é um campo obrigatório"),
     year: yup
       .number()
-      .integer()
-      .positive()
+      .typeError("Ano deve ser um número")
+      .integer("Ano deve ser um inteiro")
+      .positive("Ano deve ser positivo")
       .required("Ano é um campo obrigatório"),
     mileage: yup
       .number()
-      .min(0)
-      .integer()
+      .typeError("Quilometragem deve ser um número")
+      .min(0, "Quilometragem deve ser positivo")
+      .integer("Quilometragem deve ser um inteiro")
       .required("Quilometragem é um campo obrigatório"),
-    price: yup.number().positive().required("Preço é um campo obrigatório"),
+    price: yup
+      .number()
+      .typeError("Preço deve ser um número")
+      .positive("Preço deve ser positivo")
+      .required("Preço é um campo obrigatório"),
     description: yup.string().required("Descrição é um campo obrigatório"),
   });
 
@@ -37,6 +50,14 @@ const CreateAdModal = ({ modalState, setModalState }) => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmitFunction = (data) => {
+    if (!frontImage) {
+      return setFrontImageError(true);
+    }
+
+    if (!galleryImages.length) {
+      return setGalleryError(true);
+    }
+
     const completeData = {
       ...data,
       type: advertisementType,
@@ -44,31 +65,29 @@ const CreateAdModal = ({ modalState, setModalState }) => {
       front: frontImage,
     };
 
-    console.log(completeData);
-    console.log(galleryImages);
+    const request = new FormData();
 
-    // const request = new FormData();
+    Object.keys(completeData).forEach((key) => {
+      request.append(key, completeData[key]);
+    });
 
-    // Object.keys(completeData).forEach((key) => {
-    //   request.append(key, completeData[key]);
-    // });
+    request.append("is_active", true);
 
-    // request.append("is_active", true);
+    galleryImages.forEach((img) => {
+      request.append("image", img);
+    });
 
-    // galleryImages.forEach((img) => {
-    //   request.append("image", img);
-    // });
-
-    // api
-    //   .post("/ads", request, {
-    //     headers: {
-    //       "Content-type": "multipart/form-data",
-    //       Authorization:
-    //         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1aUBtYWlsLmNvbSIsImlhdCI6MTY2MDg5MjkxMywiZXhwIjoxNjYwOTc5MzEzfQ.E6T3WL0ELxkFLSfKRKvzK-3L7nuX85-_f-OZ7p_XYiE",
-    //     },
-    //   })
-    //   .then((resp) => console.log(resp))
-    //   .catch((err) => console.log(err));
+    apiDeploy
+      .post("/ads", request, {
+        headers: {
+          "Content-type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((_) => {
+        toast.success("Novo anúncio criado");
+      })
+      .catch((err) => console.log(err));
 
     setModalState(!modalState);
   };
@@ -116,32 +135,42 @@ const CreateAdModal = ({ modalState, setModalState }) => {
                 label={"Título"}
                 placeholder={"Digitar título"}
               />
+              {errors.title?.message && <span>{errors.title.message}</span>}
             </div>
 
             <div className="vehicle-numbers-div">
               <div className="minors-inputs-div">
-                <Input
-                  register={register}
-                  errored={errors.year}
-                  name="year"
-                  inputOrNot={true}
-                  className="div-input"
-                  width={"315px"}
-                  height={"48px"}
-                  label={"Ano"}
-                  placeholder={"Ex: 2018"}
-                />
-                <Input
-                  register={register}
-                  errored={errors.mileage}
-                  name="mileage"
-                  inputOrNot={true}
-                  className="div-input"
-                  width={"315px"}
-                  height={"48px"}
-                  label={"Quilometragem"}
-                  placeholder={"Ex: 0"}
-                />
+                <div>
+                  <Input
+                    register={register}
+                    errored={errors.year}
+                    name="year"
+                    inputOrNot={true}
+                    className="div-input"
+                    width={"315px"}
+                    height={"48px"}
+                    label={"Ano"}
+                    placeholder={"Ex: 2018"}
+                  />
+                  {errors.year?.message && <span>{errors.year.message}</span>}
+                </div>
+
+                <div>
+                  <Input
+                    register={register}
+                    errored={errors.mileage}
+                    name="mileage"
+                    inputOrNot={true}
+                    className="div-input"
+                    width={"315px"}
+                    height={"48px"}
+                    label={"Quilometragem"}
+                    placeholder={"Ex: 0"}
+                  />
+                  {errors.mileage?.message && (
+                    <span>{errors.mileage.message}</span>
+                  )}
+                </div>
               </div>
 
               <div className="price-input-div">
@@ -158,6 +187,7 @@ const CreateAdModal = ({ modalState, setModalState }) => {
                   }
                   placeholder={"Ex: 50.000,00"}
                 />
+                {errors.price?.message && <span>{errors.price.message}</span>}
               </div>
             </div>
 
@@ -173,6 +203,9 @@ const CreateAdModal = ({ modalState, setModalState }) => {
                 label={"Descrição"}
                 placeholder={"Digitar descrição"}
               />
+              {errors.description?.message && (
+                <span>{errors.description.message}</span>
+              )}
             </div>
           </section>
 
@@ -205,9 +238,17 @@ const CreateAdModal = ({ modalState, setModalState }) => {
                 type="file"
                 accept="image/png, image/jpg, image/jpeg"
                 id="select-principal-image"
-                onChange={(e) => setFrontImage(e.target.files[0])}
+                onChange={(e) => {
+                  setFrontImage(e.target.files[0]);
+                  setFrontImageError(false);
+                }}
               />
               {frontImage && <span>{frontImage.name} Selecionada</span>}
+              {frontImageError && (
+                <span className="images-error-span">
+                  Imagem de capa é obrigatório
+                </span>
+              )}
             </div>
 
             <div className="gallery-images-div">
@@ -218,9 +259,10 @@ const CreateAdModal = ({ modalState, setModalState }) => {
                 type="file"
                 accept="image/png, image/jpg, image/jpeg"
                 id="select-gallery-image"
-                onChange={(e) =>
-                  setGalleryImages([...galleryImages, e.target.files[0]])
-                }
+                onChange={(e) => {
+                  setGalleryImages([...galleryImages, e.target.files[0]]);
+                  setGalleryError(false);
+                }}
               />
               <Button
                 type="button"
@@ -241,6 +283,11 @@ const CreateAdModal = ({ modalState, setModalState }) => {
                   ? `${galleryImages.length} imagem foi selecionada`
                   : ""}
               </span>
+              {galleryError && (
+                <span className="images-error-span">
+                  É obrigatório ao menos 1 imagem
+                </span>
+              )}
             </div>
           </section>
 
