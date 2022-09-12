@@ -19,8 +19,4 @@ test("Should be able to render the h2 title", () => {
 
 })
 
-
-
-
-
 })
