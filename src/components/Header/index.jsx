@@ -22,15 +22,15 @@ const Header = ({ isLoggedIn = false, username }) => {
   const { handleLogout } = useContext(AuthContext);
 
   useEffect(() => {
-    if (ddownRef.current) {
-      const closeDropdown = (e) => {
-        if (e.target !== ddownRef.current) {
+    const closeDropdown = (e) => {
+      if (ddownRef.current) {
+        if (!ddownRef.current.contains(e.target)) {
           setDdownMenu(false);
         }
-      };
+      }
+    };
 
-      document.body.addEventListener("click", closeDropdown);
-    }
+    document.body.addEventListener("click", closeDropdown);
   }, []);
 
   return (
