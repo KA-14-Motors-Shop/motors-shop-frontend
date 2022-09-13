@@ -4,6 +4,7 @@ import CardRegister from "../../components/Register"
 
 import MockAdapter from "axios-mock-adapter"
 import { apiDeploy ,apiCep} from "../../services/api"
+import { ModalContainer } from "../../pages/Product/styled"
 
 
 const apiMock = new MockAdapter(apiDeploy)
@@ -40,7 +41,7 @@ const userMock = {
 describe("Register Page Tests.", () => {
 
     it("Should be able to render some input.",async () => {
-        apiMock.onPost("/users").replyOnce(201,userMock)
+        apiMock.onPost("/users").replyOnce(201,{})
         render(<CardRegister/>)
 
         const emailField = screen.getByPlaceholderText("Ex samuel@kenzie.com")
@@ -59,7 +60,7 @@ describe("Register Page Tests.", () => {
     })
 
     it("Should be able register some user.",async () => {
-        apiMock.onPost("/users").replyOnce(200,{})
+        apiMock.onPost("/users").replyOnce(200,userMock)
         cepMock.onGet("20020030/json/").replyOnce(200,{})
 
         render(<CardRegister/>)
@@ -79,7 +80,7 @@ describe("Register Page Tests.", () => {
         const passwordField = screen.getByPlaceholderText("Sua melhor senha")
         const confirmePasswordField = screen.getByPlaceholderText("Confirme sua melhor senha")
         const buttonElement = screen.getByText("Finalizar Cadastro")
-
+    
         fireEvent.change(nameField, {
             target: {value: "Samuel Leão" }
         })
@@ -137,7 +138,12 @@ describe("Register Page Tests.", () => {
         })
 
         fireEvent.click(buttonElement);
+        
+        
+        const modalCard= await screen.findByTestId("Register-Container");
 
+
+        expect(modalCard).toHaveTextContent("TESTE")
     })
 
 })

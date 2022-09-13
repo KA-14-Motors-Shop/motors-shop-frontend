@@ -18,7 +18,7 @@ const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
   const [showModal, setShowModal] = useState(false);
 
-  // onClick={() => setShowModal(!showModal)}
+
 
   const schema = yup.object().shape({
     name: yup.string().required("Nome e um campo obrigatorio"),
@@ -89,6 +89,7 @@ console.log(data.description)
       })
       .catch((err) =>console.log(err));
 
+      setShowModal(!showModal)
 
 
     console.log(newData);
@@ -103,15 +104,11 @@ console.log(data.description)
     <ModalContainer>
         {showModal && (
           <AnuncioModal
-            title={"Usuario criado!"}
+            title={"Usuário criado com sucesso!"}
             modalState={showModal}
             setModalState={setShowModal}
           >
-             <AiOutlineLeft
-                  onClick={() => {
-                    setShowModal(!showModal)
-                  }}
-                />
+            
            TESTE
           </AnuncioModal>
         )}
@@ -276,8 +273,7 @@ console.log(data.description)
             Comprador
           </Button>
           <Button
-            onClick={() => {setAccount("seller") 
-            setShowModal(!showModal)}}
+            onClick={() => setAccount("seller")}
             bgColor={account === "seller" ? ("var(--brand-1)") : ("var(--grey-4)")}
             borderColor={account === "seller" ? ("var(--brand-1)") : ("var(--grey-4)")}
             fontColor={account === "seller" ? ("var(--white-fixed)") : ("var(--grey-0)")}
