@@ -18,19 +18,22 @@ const Profile = () => {
 
   const [createAdModal, setCreateAdModal] = useState(false);
   const [updateAdModal, setUpdateAdModal] = useState(false);
+  const [updateInfos, setUpdateInfos] = useState({});
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    apiDeploy
-      .get("users/me", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((resp) => {
-        setUser(resp.data);
+    setTimeout(() => {
+      apiDeploy
+        .get("users/me", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((resp) => {
+          setUser(resp.data);
 
-        localStorage.setItem("@MotorShop:user", JSON.stringify(resp.data));
-      })
-      .catch((err) => console.log(err));
+          localStorage.setItem("@MotorShop:user", JSON.stringify(resp.data));
+        })
+        .catch((err) => console.log(err));
+    }, 1000);
   }, [user, token]);
 
   if (!authenticated) {
@@ -54,6 +57,16 @@ const Profile = () => {
       )
     : false;
 
+  const completeUpdateInfos = (e) => {
+    const advertisementID = e.target.parentElement.parentElement.id;
+
+    const ad = user.advertisements.find(({ id }) => id === advertisementID);
+
+    setUpdateInfos(ad);
+
+    setUpdateAdModal(!updateAdModal);
+  };
+
   return (
     <>
       {createAdModal && (
@@ -66,6 +79,7 @@ const Profile = () => {
         <UpdateAdModal
           modalState={updateAdModal}
           setModalState={setUpdateAdModal}
+          infos={updateInfos}
         />
       )}
 
@@ -102,7 +116,7 @@ const Profile = () => {
                   {auctionAds.map((ad) => {
                     return (
                       <ProductCardAuctionAdm
-                        editFunction={() => setUpdateAdModal(!updateAdModal)}
+                        editFunction={(e) => completeUpdateInfos(e)}
                         key={ad.id}
                         id={ad.id}
                         title={ad.title}
