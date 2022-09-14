@@ -14,7 +14,9 @@ flex-direction: column;
 
 padding: 44px 48px;
 
-
+#h3-modal{
+    margin-bottom: -30px;
+}
 
 .div-endereco-row{
     max-width: 300px;

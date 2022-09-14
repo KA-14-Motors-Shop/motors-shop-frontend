@@ -12,6 +12,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import AnuncioModal from "../modal";
 import { ModalContainer } from "../../pages/Product/styled";
+import SucessoModal from "../successModal";
 
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
@@ -105,19 +106,27 @@ console.log(data.description)
 
   return (
     <CardRegisterContainer  onSubmit={handleSubmit(onSubmitFunction, onErrors)}>
-    <ModalContainer >
         {showModal && (
-          <AnuncioModal 
+          <SucessoModal  style={{right:0, top:0}}
             data-testid="Register-Container"
             title={"Usuário criado com sucesso!"}
             modalState={showModal}
-            setModalState={setShowModal}
-          >
-            
-           TESTE
-          </AnuncioModal>
+            setModalState={setShowModal} >
+           <h3 id="h3-modal">Seu usuário foi registrado com sucesso!</h3>
+           <p>Agora você poderá ver seus negócios crescendo em grande escala!</p>
+           <Button
+            className="btn-finalizar"
+            bgColor={"var(--brand-1)"}
+            borderColor={"var(--brand-1)"}
+            fontColor={"var(--white-fixed)"}
+            type="submit"
+            width={"150px"}
+            height={"38px"}
+           >
+            Voltar para Login
+           </Button>
+          </SucessoModal>
         )}
-      </ModalContainer>
       <h2>Cadastro</h2>
       <p>Informações pessoais</p>
       <Input
