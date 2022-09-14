@@ -5,9 +5,12 @@ import ProductCard from "../../components/Cards/ProductCard";
 import Footer from "../../components/Footer";
 import { useContext } from "react";
 import { AdvertisementsContext } from "../../providers/advertisements";
+import { AuthContext } from "../../providers/auth";
 
 const Home = () => {
   const { advertisements } = useContext(AdvertisementsContext);
+
+  const { authenticated } = useContext(AuthContext);
 
   const auctionAds = advertisements.filter(({ type }) => type === "auction");
 
@@ -19,9 +22,14 @@ const Home = () => {
     ({ type, vehicle_type }) => type === "sale" && vehicle_type === "motorcycle"
   );
 
+  const user = JSON.parse(localStorage.getItem("@MotorShop:user"));
+
   return (
     <>
-      <HomeHeader />
+      <HomeHeader
+        isLoggedIn={authenticated}
+        username={authenticated && user.name}
+      />
       <MainHome>
         <section className="home-section">
           <h2>Leilão</h2>
