@@ -7,7 +7,7 @@ export const MainContainer = styled.div`
 
 export const InnerContainer = styled.div`
   width: 100%;
-  height: 76.55vh;
+  padding: 60px 0px;
   background-color: var(--grey-8);
   display: flex;
   align-items: center;
