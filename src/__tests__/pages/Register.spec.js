@@ -4,7 +4,6 @@ import CardRegister from "../../components/Register"
 
 import MockAdapter from "axios-mock-adapter"
 import { apiDeploy ,apiCep} from "../../services/api"
-import { ModalContainer } from "../../pages/Product/styled"
 
 
 const apiMock = new MockAdapter(apiDeploy)
@@ -63,7 +62,11 @@ describe("Register Page Tests.", () => {
         apiMock.onPost("/users").replyOnce(200,userMock)
         cepMock.onGet("20020030/json/").replyOnce(200,{})
 
-        render(<CardRegister/>)
+       await render(
+        <div id="root">
+       <CardRegister/>
+       </div>
+       )
 
         const nameField = screen.getByPlaceholderText("Ex: Samuel Leão")
         const emailField = screen.getByPlaceholderText("Ex samuel@kenzie.com")
@@ -79,7 +82,9 @@ describe("Register Page Tests.", () => {
         const complementField = screen.getByPlaceholderText("Digitar complemento")
         const passwordField = screen.getByPlaceholderText("Sua melhor senha")
         const confirmePasswordField = screen.getByPlaceholderText("Confirme sua melhor senha")
-        const buttonElement = screen.getByText("Finalizar Cadastro")
+        const buttonElement = screen.getByRole("button", {
+            name:"Finalizar Cadastro"
+        })
     
         fireEvent.change(nameField, {
             target: {value: "Samuel Leão" }
@@ -106,7 +111,7 @@ describe("Register Page Tests.", () => {
         })
 
         fireEvent.change(cepField, {
-            target: {value: "20020030" } // mockar resposta
+            target: {value: "20020030" } 
         })
 
         fireEvent.change(stateField, {
@@ -140,19 +145,12 @@ describe("Register Page Tests.", () => {
         fireEvent.click(buttonElement);
         
         
-        const modalCard= await screen.findByTestId("Register-Container");
+        const modalCard= await screen.findByText("Usuário criado com sucesso!");
 
 
-        expect(modalCard).toHaveTextContent("TESTE")
+        expect(modalCard).toBeTruthy()
+        expect(modalCard).toBeInTheDocument();
     })
 
 })
 
-/*
-TO DO:
-
- - no momento que obtiver sucesso na criacao do usuario abrir modal na pagina
- - com esse modal vou verificar se o user foi criado ou nao
- 
-
-*/

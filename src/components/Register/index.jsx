@@ -100,10 +100,11 @@ console.log(data.description)
   };
 
   return (
-    <CardRegisterContainer data-testid="Register-Container" onSubmit={handleSubmit(onSubmitFunction, onErrors)}>
-    <ModalContainer>
+    <CardRegisterContainer  onSubmit={handleSubmit(onSubmitFunction, onErrors)}>
+    <ModalContainer >
         {showModal && (
-          <AnuncioModal
+          <AnuncioModal 
+            data-testid="Register-Container"
             title={"Usuário criado com sucesso!"}
             modalState={showModal}
             setModalState={setShowModal}
