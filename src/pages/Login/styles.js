@@ -12,6 +12,8 @@ export const InnerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
 
   label {
     font-size: 14px;
