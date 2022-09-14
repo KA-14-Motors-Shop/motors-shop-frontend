@@ -12,7 +12,6 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import AnuncioModal from "../modal";
 import { ModalContainer } from "../../pages/Product/styled";
-import { AiOutlineLeft } from "react-icons/ai";
 
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
@@ -82,19 +81,24 @@ console.log(data.description)
         toast.error("Este cep é inválido. Tente novamente.");
       });
 
-      apiDeploy
-      .post("/users",newData)
-      .then((response)=>{
-        toast.success("Usuário criado com sucesso!")
-      })
-      .catch((err) =>console.log(err));
 
-      setShowModal(!showModal)
 
 
     console.log(newData);
 
+    if(response){
+      apiDeploy
+      .post("/users",newData)
+      .then((response)=>{
+        setShowModal(!showModal)
+        toast.success("Usuário criado com sucesso!")
+      })
+      .catch((err) =>console.log(err));
+
+    }
   };
+
+
   const onErrors = (er) => {
     console.log(er);
   };
