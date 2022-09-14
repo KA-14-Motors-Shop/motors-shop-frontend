@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 const ModalContainer = styled.section`
+  svg {
+    cursor: pointer;
+  }
+
   form {
     display: flex;
     flex-wrap: wrap;
@@ -72,6 +76,11 @@ const ModalContainer = styled.section`
   .title-input-div {
     margin-bottom: 24px;
 
+    span {
+      color: var(--alert-1);
+      margin-top: 5px;
+    }
+
     .container {
       div {
       }
@@ -82,13 +91,18 @@ const ModalContainer = styled.section`
     display: flex;
     flex-wrap: wrap;
 
+    span {
+      color: var(--alert-1);
+      margin-top: 5px;
+    }
+
     .minors-inputs-div {
       display: flex;
       gap: 10%;
       margin-bottom: 24px;
 
       .container {
-        width: 45%;
+        width: 100%;
       }
     }
 
@@ -104,6 +118,12 @@ const ModalContainer = styled.section`
 
   .description-input-div {
     margin-bottom: 24px;
+
+    span {
+      color: var(--alert-1);
+      margin-top: 5px;
+    }
+
     textarea {
       height: 80px;
     }
@@ -132,6 +152,10 @@ const ModalContainer = styled.section`
       props.vhType === "motorcycle" ? "var(--brand-1)" : "var(--grey-4)"};
     color: ${(props) =>
       props.vhType === "motorcycle" ? "var(--white-fixed)" : "var(--grey-0)"};
+  }
+
+  .images-error-span {
+    color: var(--alert-1);
   }
 
   .select-images-section {
@@ -214,7 +238,7 @@ const ModalContainer = styled.section`
       .minors-inputs-div {
         gap: 11px;
 
-        .container {
+        div {
           width: 146px;
         }
       }

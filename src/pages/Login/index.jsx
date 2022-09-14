@@ -18,7 +18,7 @@ const Login = () => {
     password: yup.string().required("Campo obrigatório"),
   });
 
-  const { authenticated, setAuthenticated } = useContext(AuthContext);
+  const { authenticated, setAuthenticated, setToken } = useContext(AuthContext);
 
   const {
     register,
@@ -40,21 +40,15 @@ const Login = () => {
       .then((res) => {
         const { Token_JWT } = res.data;
 
-        apiDeploy
-          .get("users/me", {
-            headers: { Authorization: `Bearer ${Token_JWT}` },
-          })
-          .then((resp) => {
-            localStorage.setItem("@MotorShop:token", Token_JWT);
+        localStorage.setItem("@MotorShop:token", Token_JWT);
 
-            toast.success("Login feito com sucesso");
+        setToken(Token_JWT);
 
-            setAuthenticated(true);
+        toast.success("Login feito com sucesso");
 
-            localStorage.setItem("@MotorShop:user", JSON.stringify(resp.data));
-            history.push("/profile");
-          })
-          .catch((err) => console.log(err));
+        setAuthenticated(true);
+
+        history.push("/profile");
       })
       .catch((err) => {
         toast.error("Erro na autenticação, verifique seu e-mail ou senha");

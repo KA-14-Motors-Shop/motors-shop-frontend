@@ -67,13 +67,11 @@ const ProductPage = () => {
                 <AiOutlineLeft
                   onClick={() => {
                     changeModalImage("sub");
-                    console.log(gallery[modalImage]);
                   }}
                 />
                 <AiOutlineRight
                   onClick={() => {
                     changeModalImage("add");
-                    console.log(gallery[modalImage]);
                   }}
                 />
               </div>
@@ -130,13 +128,15 @@ const ProductPage = () => {
                 onClick={() => setGalleryModal(!galleryModal)}
                 data-testid="galleryDiv"
               >
-                {gallery.map(({ url, id }) => {
-                  return (
-                    <figure key={id}>
-                      <img src={url} alt="Car_Photo" />
-                      <figcaption>Car Photo</figcaption>
-                    </figure>
-                  );
+                {gallery.map(({ url, id }, index) => {
+                  if (index <= 5) {
+                    return (
+                      <figure key={id}>
+                        <img src={url} alt="Car_Photo" />
+                        <figcaption>Car Photo</figcaption>
+                      </figure>
+                    );
+                  }
                 })}
               </div>
             </div>

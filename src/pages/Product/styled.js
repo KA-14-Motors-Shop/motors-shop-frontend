@@ -159,6 +159,7 @@ export const ProductMain = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 15px;
 
     h3 {
       font-size: 20px;
@@ -172,7 +173,6 @@ export const ProductMain = styled.main`
       flex-wrap: wrap;
       justify-content: center;
       gap: 5px;
-      margin-bottom: 36px;
       width: 93%;
       height: 275px;
       cursor: pointer;
@@ -186,7 +186,6 @@ export const ProductMain = styled.main`
       align-items: center;
       border-radius: 4px;
       background-color: var(--grey-7);
-      margin-top: auto;
     }
 
     img {
@@ -493,6 +492,10 @@ export const ProductMain = styled.main`
     .pictures-div {
       h3 {
         margin-bottom: 32px;
+      }
+
+      div {
+        margin-bottom: 36px;
       }
 
       figure {

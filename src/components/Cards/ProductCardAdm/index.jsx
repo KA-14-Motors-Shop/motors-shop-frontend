@@ -1,5 +1,6 @@
 import CardContainer from "./styled";
 import Button from "../../Button";
+import { useHistory } from "react-router-dom";
 
 const ProductCardAdm = ({
   id,
@@ -10,8 +11,9 @@ const ProductCardAdm = ({
   year,
   price,
   editFunction,
-  seeFunction,
 }) => {
+  const history = useHistory();
+
   return (
     <CardContainer id={id}>
       <figure>
@@ -48,7 +50,7 @@ const ProductCardAdm = ({
           height="38px"
           fontColor="var(--grey-1)"
           fontSize="14px"
-          onClick={seeFunction}
+          onClick={() => history.push(`/product/${id}`)}
         >
           Ver como
         </Button>
