@@ -8,63 +8,6 @@ import MockAdapter from "axios-mock-adapter";
 
 const apiMock = new MockAdapter(apiDeploy);
 
-const getReturn = {
-  id: 1,
-  name: "Pedro Santos",
-  description: "Vendedor de carros e motos",
-  type: "advertiser",
-  advertisements: [
-    {
-      id: 1,
-      title: "Mustang",
-      description: "Mustang GT muito potente",
-      mileage: 0,
-      year: 2019,
-      price: "300000.00",
-      type: "auction",
-      vehicle_type: "car",
-      images: [
-        {
-          url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
-          is_front: true,
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "Dodge",
-      description: "Dodge GT muito potente",
-      mileage: 0,
-      year: 2019,
-      price: "300000.00",
-      type: "sale",
-      vehicle_type: "car",
-      images: [
-        {
-          url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
-          is_front: true,
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "Moto",
-      description: "Moto GT muito potente",
-      mileage: 0,
-      year: 2019,
-      price: "300000.00",
-      type: "sale",
-      vehicle_type: "motorcycle",
-      images: [
-        {
-          url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
-          is_front: true,
-        },
-      ],
-    },
-  ],
-};
-
 const mockHistory = jest.fn();
 
 jest.mock("react-router-dom", () => ({
@@ -78,7 +21,7 @@ jest.mock("react-router-dom", () => ({
 describe("Login page", () => {
   test("Should be able to sign in", async () => {
     apiMock.onPost("login").replyOnce(200, {});
-    apiMock.onGet("users/me").replyOnce(200, getReturn);
+
     render(
       <BrowserRouter>
         <AuthProvider>
