@@ -13,6 +13,10 @@ const ModalContainer = styled.section`
     font-weight: 500;
   }
 
+  svg {
+    cursor: pointer;
+  }
+
   .advertisement-buttons-div {
     width: 100%;
     display: flex;
@@ -189,6 +193,56 @@ const ModalContainer = styled.section`
 
       span {
         margin-top: 10px;
+      }
+    }
+  }
+
+  .gallery-section {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+
+    .trash-div {
+      position: absolute;
+      background: var(--brand-2);
+      padding: 6px;
+      border-radius: 5px;
+      margin-left: calc(100% - 70px);
+      margin-top: -15px;
+
+      svg {
+        color: var(--white-fixed);
+        width: 20px;
+        height: 18px;
+      }
+    }
+
+    figure {
+      width: 100%;
+      height: 275px;
+    }
+
+    img {
+      width: 100%;
+      max-height: 87%;
+    }
+
+    figcaption {
+      display: none;
+    }
+
+    .move-gallery-div {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      svg {
+        color: var(--brand-1);
+        width: 33px;
+        height: 33px;
       }
     }
   }

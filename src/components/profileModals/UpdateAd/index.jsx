@@ -8,6 +8,8 @@ import Button from "../../Button";
 import Input from "../../input";
 import ModalContainer from "./styled";
 import { AuthContext } from "../../../providers/auth";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const UpdateAdModal = ({ modalState, setModalState, infos }) => {
@@ -15,11 +17,15 @@ const UpdateAdModal = ({ modalState, setModalState, infos }) => {
   const [vehicleType, setVehicleType] = useState(infos.vehicle_type);
   const [frontImage, setFrontImage] = useState(null);
   const [galleryImages, setGalleryImages] = useState([]);
+  const [actualGallery, setActualGallery] = useState(
+    infos.images.filter(({ is_front }) => !is_front)
+  );
   const [title, setTitle] = useState(infos.title);
   const [year, setYear] = useState(infos.year);
   const [mileage, setMileage] = useState(infos.mileage);
   const [price, setPrice] = useState(Number(infos.price));
   const [description, setDescription] = useState(infos.description);
+  const [modalImage, setModalImage] = useState(0);
 
   const { token } = useContext(AuthContext);
 
@@ -44,6 +50,41 @@ const UpdateAdModal = ({ modalState, setModalState, infos }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  const changeModalImage = (comand) => {
+    if (comand === "add") {
+      modalImage === actualGallery.length - 1
+        ? setModalImage(0)
+        : setModalImage(modalImage + 1);
+    } else if (comand === "sub") {
+      modalImage === 0
+        ? setModalImage(actualGallery.length - 1)
+        : setModalImage(modalImage - 1);
+    }
+  };
+
+  const deleteImage = () => {
+    if (actualGallery.length === 1) {
+      return toast.error(
+        "Salve com ao menos 1 imagem nova para a galeria antes!"
+      );
+    }
+
+    apiDeploy
+      .delete(`ads/${infos.id}/image/${actualGallery[modalImage].id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((_) => {
+        toast.success("Imagem deletada");
+
+        setActualGallery(
+          actualGallery.filter(({ id }) => id !== actualGallery[modalImage].id)
+        );
+
+        setModalImage(0);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const onSubmitFunction = (data) => {
     const completeData = {
@@ -78,7 +119,6 @@ const UpdateAdModal = ({ modalState, setModalState, infos }) => {
         },
       })
       .then((resp) => {
-        console.log(resp);
         toast.success("Anúncio atualizado!");
         setModalState(!modalState);
       })
@@ -267,6 +307,33 @@ const UpdateAdModal = ({ modalState, setModalState, infos }) => {
                   : ""}
               </span>
             </div>
+          </section>
+
+          <section className="gallery-section">
+            <h6>Galeria atual</h6>
+
+            <figure>
+              <div className="trash-div">
+                <FaTrash onClick={deleteImage} />
+              </div>
+              <img
+                src={actualGallery[modalImage].url}
+                alt={`${infos.title}_Image`}
+              />
+              <figcaption>{infos.title} Image</figcaption>
+              <div className="move-gallery-div">
+                <AiOutlineLeft
+                  onClick={() => {
+                    changeModalImage("sub");
+                  }}
+                />
+                <AiOutlineRight
+                  onClick={() => {
+                    changeModalImage("add");
+                  }}
+                />
+              </div>
+            </figure>
           </section>
 
           <div className="finalize-ad-div">

@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import { apiDeploy } from "../../services/api";
 
 const Profile = () => {
-  const { authenticated, token } = useContext(AuthContext);
+  const { authenticated, token, setAuthenticated } = useContext(AuthContext);
 
   const [createAdModal, setCreateAdModal] = useState(false);
   const [updateAdModal, setUpdateAdModal] = useState(false);
@@ -32,7 +32,11 @@ const Profile = () => {
 
           localStorage.setItem("@MotorShop:user", JSON.stringify(resp.data));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          localStorage.clear();
+          setAuthenticated(false);
+        });
     }, 1000);
   }, [user, token]);
 
@@ -141,7 +145,7 @@ const Profile = () => {
                   {carAds.map((ad) => {
                     return (
                       <ProductCardAdm
-                        editFunction={() => setUpdateAdModal(!updateAdModal)}
+                        editFunction={(e) => completeUpdateInfos(e)}
                         key={ad.id}
                         id={ad.id}
                         title={ad.title}
@@ -166,7 +170,7 @@ const Profile = () => {
                   {motoAds.map((ad) => {
                     return (
                       <ProductCardAdm
-                        editFunction={() => setUpdateAdModal(!updateAdModal)}
+                        editFunction={(e) => completeUpdateInfos(e)}
                         key={ad.id}
                         id={ad.id}
                         title={ad.title}
