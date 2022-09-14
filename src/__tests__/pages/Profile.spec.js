@@ -15,7 +15,7 @@ let providerProps = {
   type: "advertiser",
   advertisements: [
     {
-      id: 1,
+      id: "1",
       title: "Mustang",
       description: "Mustang GT muito potente",
       mileage: 0,
@@ -28,10 +28,14 @@ let providerProps = {
           url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
           is_front: true,
         },
+        {
+          url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
+          is_front: false,
+        },
       ],
     },
     {
-      id: 2,
+      id: "2",
       title: "Dodge",
       description: "Dodge GT muito potente",
       mileage: 0,
@@ -44,10 +48,14 @@ let providerProps = {
           url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
           is_front: true,
         },
+        {
+          url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
+          is_front: false,
+        },
       ],
     },
     {
-      id: 3,
+      id: "3",
       title: "Moto",
       description: "Moto GT muito potente",
       mileage: 0,
@@ -59,6 +67,10 @@ let providerProps = {
         {
           url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
           is_front: true,
+        },
+        {
+          url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
+          is_front: false,
         },
       ],
     },
@@ -86,10 +98,6 @@ jest.mock("react-router-dom", () => ({
   Redirect: jest.fn(),
 }));
 
-window.scrollTo = jest.fn();
-
-JSON.parse = (value) => value;
-
 describe("Profile Page Tests", () => {
   test("should be able to render a profile", async () => {
     apiMock.onGet("users/me").replyOnce(200, providerProps);
@@ -110,44 +118,44 @@ describe("Profile Page Tests", () => {
     });
   });
 
-  // test("should be able to open the create ad modal", async () => {
-  //   apiMock.onGet("users/me").replyOnce(200, providerProps);
-  //   await render(
-  //     <AuthContext.Provider
-  //       value={{ authenticated: true, setAuthenticated: jest.fn(), token: 1 }}
-  //     >
-  //       <div id="root">
-  //         <Profile />
-  //       </div>
-  //     </AuthContext.Provider>
-  //   );
-  //   const createButton = await screen.findByText(/Criar Anúncio/);
-  //   fireEvent.click(createButton);
+  test("should be able to open the create ad modal", async () => {
+    apiMock.onGet("users/me").replyOnce(200, providerProps);
+    await render(
+      <AuthContext.Provider
+        value={{ authenticated: true, setAuthenticated: jest.fn(), token: 1 }}
+      >
+        <div id="root">
+          <Profile />
+        </div>
+      </AuthContext.Provider>
+    );
+    const createButton = await screen.findByText(/Criar Anúncio/);
+    fireEvent.click(createButton);
 
-  //   await waitFor(() => {
-  //     expect(screen.getByText(/Tipo de anúncio/)).toBeInTheDocument();
-  //   });
-  // });
+    await waitFor(() => {
+      expect(screen.getByText(/Tipo de anúncio/)).toBeInTheDocument();
+    });
+  });
 
-  // test("should be able to open the edit ad modal", async () => {
-  //   apiMock.onGet("users/me").replyOnce(200, providerProps);
-  //   await render(
-  //     <AuthContext.Provider
-  //       value={{ authenticated: true, setAuthenticated: jest.fn(), token: 1 }}
-  //     >
-  //       <div id="root">
-  //         <Profile />
-  //       </div>
-  //     </AuthContext.Provider>
-  //   );
-  //   const allEditButtons = await screen.findAllByRole("button", {
-  //     name: /Editar/i,
-  //   });
+  test("should be able to open the edit ad modal", async () => {
+    apiMock.onGet("users/me").replyOnce(200, providerProps);
+    await render(
+      <AuthContext.Provider
+        value={{ authenticated: true, setAuthenticated: jest.fn(), token: 1 }}
+      >
+        <div id="root">
+          <Profile />
+        </div>
+      </AuthContext.Provider>
+    );
+    const allEditButtons = await screen.findAllByRole("button", {
+      name: /Editar/i,
+    });
 
-  //   fireEvent.click(allEditButtons[0]);
+    fireEvent.click(allEditButtons[0]);
 
-  //   await waitFor(() => {
-  //     expect(screen.getByText(/Editar anúncio/)).toBeInTheDocument();
-  //   });
-  // });
+    await waitFor(() => {
+      expect(screen.getByText(/Editar anúncio/)).toBeInTheDocument();
+    });
+  });
 });

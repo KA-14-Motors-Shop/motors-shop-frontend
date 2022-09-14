@@ -12,7 +12,13 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 
-const UpdateAdModal = ({ modalState, setModalState, infos }) => {
+const UpdateAdModal = ({
+  modalState,
+  setModalState,
+  infos,
+  makeGet,
+  setMakeGet,
+}) => {
   const [advertisementType, setAdvertisementType] = useState(infos.type);
   const [vehicleType, setVehicleType] = useState(infos.vehicle_type);
   const [frontImage, setFrontImage] = useState(null);
@@ -82,6 +88,8 @@ const UpdateAdModal = ({ modalState, setModalState, infos }) => {
         );
 
         setModalImage(0);
+
+        setMakeGet(!makeGet);
       })
       .catch((err) => console.log(err));
   };
@@ -120,6 +128,7 @@ const UpdateAdModal = ({ modalState, setModalState, infos }) => {
       })
       .then((resp) => {
         toast.success("Anúncio atualizado!");
+        setMakeGet(!makeGet);
         setModalState(!modalState);
       })
       .catch((err) => {

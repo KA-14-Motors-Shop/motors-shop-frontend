@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../providers/auth";
 import { toast } from "react-toastify";
 
-const CreateAdModal = ({ modalState, setModalState }) => {
+const CreateAdModal = ({ modalState, setModalState, makeGet, setMakeGet }) => {
   const [advertisementType, setAdvertisementType] = useState("sale");
   const [vehicleType, setVehicleType] = useState("car");
   const [frontImage, setFrontImage] = useState(null);
@@ -86,6 +86,7 @@ const CreateAdModal = ({ modalState, setModalState }) => {
       })
       .then((_) => {
         toast.success("Novo anúncio criado");
+        setMakeGet(!makeGet);
       })
       .catch((err) => console.log(err));
 
