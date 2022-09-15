@@ -6,18 +6,17 @@ import { apiCep } from "../../services/api";
 import { apiDeploy } from "../../services/api";
 
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import AnuncioModal from "../modal";
-import { ModalContainer } from "../../pages/Product/styled";
 import SucessoModal from "../successModal";
 
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
   const [showModal, setShowModal] = useState(false);
-
+  const history = useHistory()
 
 
   const schema = yup.object().shape({
@@ -94,7 +93,10 @@ console.log(data.description)
         setShowModal(!showModal)
         toast.success("Usuário criado com sucesso!")
       })
-      .catch((err) =>console.log(err));
+      .catch((err) =>{
+        toast.error(err)
+        console.log(err)
+      });
 
     }
   };
@@ -122,6 +124,7 @@ console.log(data.description)
             type="submit"
             width={"150px"}
             height={"38px"}
+            onClick={()=> history.push("/login")}
            >
             Voltar para Login
            </Button>
