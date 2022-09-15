@@ -1,6 +1,7 @@
 import CardContainer from "./styled";
 import { BsClock } from "react-icons/bs";
 import Button from "../../Button";
+import { useHistory } from "react-router-dom";
 
 const ProductCardAuctionAdm = ({
   id,
@@ -12,8 +13,9 @@ const ProductCardAuctionAdm = ({
   year,
   price,
   editFunction,
-  seeFunction,
 }) => {
+  const history = useHistory();
+
   return (
     <CardContainer id={id}>
       <section className="product-section">
@@ -66,7 +68,7 @@ const ProductCardAuctionAdm = ({
           borderColor="var(--grey-10)"
           fontSize="14px"
           className="see-button"
-          onClick={seeFunction}
+          onClick={() => history.push(`/product/${id}`)}
         >
           Ver como
         </Button>
