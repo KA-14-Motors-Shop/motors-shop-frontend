@@ -7,6 +7,10 @@ export const EditProfileContainer = styled.div`
   max-width: 500px;
   border-radius: 8px;
   font-family: "Lexend", sans-serif;
+  background-color: var(--white-fixed);
+  position: absolute;
+  top: 120px;
+  z-index: 1;
 
   .close__icon {
     cursor: pointer;
@@ -56,4 +60,12 @@ export const EditProfileContainer = styled.div`
   }
 `;
 
-export const ModalBackground = styled.div``;
+export const ModalBackground = styled.div`
+  display: ${(props) => (props.isActive ? "flex" : "none")};
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: ${(props) => props.height};
+  background: rgba(0, 0, 0, 0.5);
+`;
