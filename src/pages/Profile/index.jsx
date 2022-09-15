@@ -13,6 +13,7 @@ import { Redirect } from "react-router-dom";
 import { useEffect } from "react";
 import { apiDeploy } from "../../services/api";
 import EditProfileModal from "../../components/profileModals/EditProfileModal";
+import { EditPfModalContext } from "../../providers/editPfModal";
 
 const Profile = () => {
   const { authenticated, token, setAuthenticated } = useContext(AuthContext);
@@ -25,6 +26,8 @@ const Profile = () => {
   const [carAds, setCarAds] = useState([]);
   const [motoAds, setMotoAds] = useState([]);
   const [makeGet, setMakeGet] = useState(false);
+
+  const { editPfModal } = useContext(EditPfModalContext);
 
   useEffect(() => {
     apiDeploy
@@ -91,7 +94,7 @@ const Profile = () => {
         />
       )}
 
-      <EditProfileModal user={user} editPfModal={true} />
+      <EditProfileModal user={user} editPfModal={editPfModal} />
 
       <Header isLoggedIn username={user.name} />
       <MainProfile>
