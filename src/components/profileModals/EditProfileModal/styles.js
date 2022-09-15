@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const EditProfileContainer = styled.div`
   padding-bottom: 30px;
-
+  display: ${(props) => (props.editPfModal ? "block" : "none")};
   width: 90%;
   max-width: 500px;
   border-radius: 8px;

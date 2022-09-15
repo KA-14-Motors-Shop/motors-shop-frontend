@@ -91,7 +91,7 @@ const Profile = () => {
         />
       )}
 
-      <EditProfileModal user={user} />
+      <EditProfileModal user={user} editPfModal={true} />
 
       <Header isLoggedIn username={user.name} />
       <MainProfile>

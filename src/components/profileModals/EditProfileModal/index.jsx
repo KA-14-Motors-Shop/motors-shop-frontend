@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
-const EditProfileModal = ({ isOpen = false, user }) => {
+const EditProfileModal = ({ editPfModal, user }) => {
   const schema = yup.object().shape({
     name: yup.string(),
     email: yup.string().email("Email invalido"),
@@ -29,7 +29,7 @@ const EditProfileModal = ({ isOpen = false, user }) => {
   };
 
   return (
-    <EditProfileContainer>
+    <EditProfileContainer editPfModal={editPfModal}>
       <div className="edit__profile__header">
         <h4 className="edit__profile__title">Editar perfil</h4>
         <GrClose className="close__icon" size={15} />
@@ -108,7 +108,6 @@ const EditProfileModal = ({ isOpen = false, user }) => {
             borderColor="var(--grey-6)"
             fontColor="var(--grey-2)"
             fontSize="14px"
-            onClick={() => !isOpen}
           >
             Cancelar
           </Button>
