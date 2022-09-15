@@ -12,6 +12,7 @@ import { AuthContext } from "../../providers/auth";
 import { Redirect } from "react-router-dom";
 import { useEffect } from "react";
 import { apiDeploy } from "../../services/api";
+import EditProfileModal from "../../components/profileModals/EditProfileModal";
 
 const Profile = () => {
   const { authenticated, token, setAuthenticated } = useContext(AuthContext);
@@ -89,6 +90,8 @@ const Profile = () => {
           setMakeGet={setMakeGet}
         />
       )}
+
+      <EditProfileModal user={user} />
 
       <Header isLoggedIn username={user.name} />
       <MainProfile>

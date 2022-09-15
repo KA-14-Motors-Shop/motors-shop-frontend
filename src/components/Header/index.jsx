@@ -36,7 +36,12 @@ const Header = ({ isLoggedIn = false, username }) => {
   return (
     <>
       <HeaderUpperContainer>
-        <img className="logo" src={header_logo} alt="header_logo" />
+        <img
+          className="logo"
+          src={header_logo}
+          alt="header_logo"
+          onClick={() => history.push("/")}
+        />
 
         <DesktopNavBar>
           <div className="desktop_inner_menu">
