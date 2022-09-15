@@ -52,7 +52,6 @@ const CardRegister = () => {
 
   const onSubmitFunction = async (data) => {
 console.log(data.description)
-    // const newData = { ...data, type: account };
     const newData = {
       name: data.name,
       cpf: data.cpf,
@@ -81,10 +80,6 @@ console.log(data.description)
         toast.error("Este cep é inválido. Tente novamente.");
       });
 
-
-
-
-    console.log(newData);
 
     if(response){
       apiDeploy

@@ -13,7 +13,7 @@ const SucessoModal = ({ title, children, modalState, setModalState }) => {
 
   return (
     <originalModal.GenericModal height={rootHeight} style={{right:0, top:0}}>
-      <div className="generic-modal" style={{height:"300px",    padding: "10px 15px",}}>
+      <div className="generic-modal" style={{height:"300px", padding: "10px 15px",}}>
         <div className="modal-header-div">
           <h2>{title}</h2>
           <IoMdClose
