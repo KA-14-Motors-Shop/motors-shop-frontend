@@ -5,8 +5,10 @@ import Button from "../../Button";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { EditPfModalContext } from "../../../providers/editPfModal";
 
-const EditProfileModal = ({ editPfModal, user }) => {
+const EditProfileModal = ({ user }) => {
   const schema = yup.object().shape({
     name: yup.string(),
     email: yup.string().email("Email invalido"),
@@ -15,6 +17,8 @@ const EditProfileModal = ({ editPfModal, user }) => {
     birthday: yup.string(),
     description: yup.string(),
   });
+
+  const { editPfModal, setEditPfModal } = useContext(EditPfModalContext);
 
   const {
     register,
@@ -32,7 +36,11 @@ const EditProfileModal = ({ editPfModal, user }) => {
     <EditProfileContainer editPfModal={editPfModal}>
       <div className="edit__profile__header">
         <h4 className="edit__profile__title">Editar perfil</h4>
-        <GrClose className="close__icon" size={15} />
+        <GrClose
+          className="close__icon"
+          size={15}
+          onClick={() => setEditPfModal(false)}
+        />
       </div>
       <h6 className="personal__info__text">Informações pessoais</h6>
       <form
@@ -108,6 +116,7 @@ const EditProfileModal = ({ editPfModal, user }) => {
             borderColor="var(--grey-6)"
             fontColor="var(--grey-2)"
             fontSize="14px"
+            onClick={() => setEditPfModal(false)}
           >
             Cancelar
           </Button>
