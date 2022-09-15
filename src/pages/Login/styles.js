@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const InnerContainer = styled.div`
@@ -12,6 +14,7 @@ export const InnerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-grow: 1;
 
   label {
     font-size: 14px;
