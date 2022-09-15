@@ -43,7 +43,7 @@ const EditProfileModal = ({ isOpen = false, user }) => {
           label="Nome"
           name="name"
           width="98%"
-          height="50px"
+          height="48px"
           register={register}
           errored={errors?.name}
           placeholder={user?.name}
@@ -53,7 +53,7 @@ const EditProfileModal = ({ isOpen = false, user }) => {
           label="Email"
           name="email"
           width="98%"
-          height="50px"
+          height="48px"
           register={register}
           errored={errors?.email}
           placeholder={user?.email}
@@ -63,7 +63,7 @@ const EditProfileModal = ({ isOpen = false, user }) => {
           label="CPF"
           name="cpf"
           width="98%"
-          height="50px"
+          height="48px"
           register={register}
           errored={errors?.cpf}
           placeholder={user?.cpf}
@@ -73,7 +73,7 @@ const EditProfileModal = ({ isOpen = false, user }) => {
           label="Celular"
           name="cellphone"
           width="98%"
-          height="50px"
+          height="48px"
           register={register}
           errored={errors?.cellphone}
           placeholder={user?.cell_phone}
@@ -83,7 +83,7 @@ const EditProfileModal = ({ isOpen = false, user }) => {
           label="Data de nascimento"
           name="birthday"
           width="98%"
-          height="50px"
+          height="48px"
           register={register}
           errored={errors?.birthday}
           placeholder={user?.birthday}

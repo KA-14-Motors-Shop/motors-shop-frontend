@@ -3,11 +3,8 @@ import styled from "styled-components";
 export const EditProfileContainer = styled.div`
   padding-bottom: 30px;
 
-  @media (max-width: 768px) {
-    width: 365px;
-  }
-
-  width: 450px;
+  width: 90%;
+  max-width: 500px;
   border-radius: 8px;
   font-family: "Lexend", sans-serif;
 
@@ -58,3 +55,5 @@ export const EditProfileContainer = styled.div`
     }
   }
 `;
+
+export const ModalBackground = styled.div``;
