@@ -4,20 +4,29 @@ import { ModalContainer, ProductMain } from "./styled";
 import Button from "../../components/Button";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
 import { BsDot } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AnuncioModal from "../../components/modal";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useHistory, useParams } from "react-router-dom";
 import { apiDeploy } from "../../services/api";
+import { AuthContext } from "../../providers/auth";
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
+  const { authenticated, token } = useContext(AuthContext);
+
   const [galleryModal, setGalleryModal] = useState(false);
   const [commentValue, setCommentValue] = useState();
   const [product, setProduct] = useState([]);
   const [frontImage, setFrontImages] = useState([]);
   const [gallery, setGallery] = useState([]);
   const [owner, setOwner] = useState([]);
+  const [comments, setComments] = useState([]);
   const [modalImage, setModalImage] = useState(0);
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@MotorShop:user")) || []
+  );
+  const [makeGet, setMakeGet] = useState(false);
 
   const params = useParams();
 
@@ -29,10 +38,11 @@ const ProductPage = () => {
         setFrontImages(resp.data.images.find(({ is_front }) => is_front));
         setGallery(resp.data.images.filter(({ is_front }) => !is_front));
         setOwner(resp.data.owner);
+        setComments(resp.data.comments);
         window.scrollTo(0, 0);
       })
       .catch((err) => console.log(err));
-  }, [params.id]);
+  }, [params.id, makeGet]);
 
   const changeModalImage = (comand) => {
     if (comand === "add") {
@@ -44,6 +54,27 @@ const ProductPage = () => {
         ? setModalImage(gallery.length - 1)
         : setModalImage(modalImage - 1);
     }
+  };
+
+  const createComment = () => {
+    if (!commentValue) {
+      return toast.error("Campo vazio!");
+    }
+
+    apiDeploy
+      .post(
+        `comments/${product.id}`,
+        {
+          type: product.type,
+          value: commentValue,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((_) => {
+        toast.success("Comentário criado!");
+        setMakeGet(!makeGet);
+      })
+      .catch((err) => console.log(err));
   };
 
   const history = useHistory();
@@ -80,7 +111,10 @@ const ProductPage = () => {
         )}
       </ModalContainer>
 
-      <Header />
+      <Header
+        isLoggedIn={authenticated}
+        username={authenticated && user.name}
+      />
       <ProductMain>
         <section className="product-main-section">
           <section className="product-infos-section">
@@ -162,84 +196,59 @@ const ProductPage = () => {
 
           <section className="product-comments-section">
             <div className="list-comments-div">
-              <h3>Comentários</h3>
+              <h3>{product.type === "sale" ? "Comentários" : "Lances"}</h3>
               <ul>
-                <li>
-                  <div className="comment-header-div">
-                    <DefaultProfilePicture
-                      username="Júlia Lima"
-                      width="32px"
-                      height="32px"
-                    />
-                    <span className="coment-name-span">Júlia Lima</span>
+                {comments.map((comment) => {
+                  return (
+                    <li key={comment.id}>
+                      <div className="comment-header-div">
+                        <DefaultProfilePicture
+                          username={comment.user.name}
+                          width="32px"
+                          height="32px"
+                        />
+                        <span className="coment-name-span">
+                          {comment.user.name}
+                        </span>
 
-                    <BsDot />
+                        <BsDot />
 
-                    <span className="comment-date-span">há 3 dias</span>
-                  </div>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </p>
-                </li>
-
-                <li>
-                  <div className="comment-header-div">
-                    <DefaultProfilePicture
-                      username="Júlia Lima"
-                      width="32px"
-                      height="32px"
-                    />
-                    <span className="coment-name-span">Júlia Lima</span>
-
-                    <BsDot />
-
-                    <span className="comment-date-span">há 3 dias</span>
-                  </div>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </p>
-                </li>
-                <li>
-                  <div className="comment-header-div">
-                    <DefaultProfilePicture
-                      username="Júlia Lima"
-                      width="32px"
-                      height="32px"
-                    />
-                    <span className="coment-name-span">Júlia Lima</span>
-
-                    <BsDot />
-
-                    <span className="comment-date-span">há 3 dias</span>
-                  </div>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </p>
-                </li>
+                        <span className="comment-date-span">
+                          {parseInt(
+                            (new Date() - new Date(comment.createdAt)) /
+                              (1000 * 60 * 60 * 24)
+                          ) === 0
+                            ? "Hoje"
+                            : parseInt(
+                                (new Date() - new Date(comment.createdAt)) /
+                                  (1000 * 60 * 60 * 24)
+                              ) === 1
+                            ? "há 1 dia"
+                            : `há ${parseInt(
+                                (new Date() - new Date(comment.createdAt)) /
+                                  (1000 * 60 * 60 * 24)
+                              )} dias`}
+                        </span>
+                      </div>
+                      <p>{comment.value}</p>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
             <div className="create-comment-div">
-              <div className="creator-comment-div">
-                <DefaultProfilePicture
-                  username="Samuel Leão"
-                  width="32px"
-                  height="32px"
-                />
-                <span>Samuel Leão</span>
-              </div>
+              {authenticated && (
+                <div className="creator-comment-div">
+                  <DefaultProfilePicture
+                    username={user.name}
+                    width="32px"
+                    height="32px"
+                  />
+                  <span>{user.name}</span>
+                </div>
+              )}
+
               <div className="write-comment-div">
                 <textarea
                   value={commentValue}
@@ -254,6 +263,7 @@ const ProductPage = () => {
                   borderColor="var(--brand-1)"
                   fontColor="var(--white-fixed)"
                   fontSize="14px"
+                  onClick={createComment}
                 >
                   Comentar
                 </Button>
