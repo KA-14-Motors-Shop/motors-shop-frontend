@@ -3,31 +3,21 @@ import CardRegisterContainer from "./styles";
 import Button from "../Button";
 import Input from "../input";
 import { apiCep } from "../../services/api";
+import { apiDeploy } from "../../services/api";
 
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import SucessoModal from "../successModal";
 
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
-  const [cepState, setCepState] = useState("")
-  const [objCep, setObjCep]     = useState(null)
+  const [showModal, setShowModal] = useState(false);
+  const history = useHistory()
 
-  const handleCepChange = async (e) => {
-    setCepState(e.target.value)
-
-   const cep =  await apiCep
-      .get(`${Number(e.target.value)}/json/`)
-      .then((dataCep) =>  setObjCep(dataCep.data))
-      .catch((err) => {
-        setObjCep(null)
-      });
-
-      // setObjCep(cep.data)
-    console.log(objCep.data)
-  }
 
   const schema = yup.object().shape({
     name: yup.string().required("Nome e um campo obrigatorio"),
@@ -61,9 +51,28 @@ const CardRegister = () => {
   });
 
   const onSubmitFunction = async (data) => {
-
-    const newData = { ...data, type: account };
+console.log(data.description)
+    const newData = {
+      name: data.name,
+      cpf: data.cpf,
+      email: data.email,
+      password: data.password,
+      description: data.description,
+      cell_phone: data.cell_phone,
+      birthday: data.birthday,
+      type: account,
+  
+      address: {
+        cep: data.cep,
+        state: data.state,
+        city: data.city,
+        street: data.street,
+        number: data.number,
+        complement: data.complement
+      },
+    }
     delete newData.confirm_password;
+
 
     const response = await apiCep
       .get(`${Number(data.cep)}/json/`)
@@ -71,16 +80,51 @@ const CardRegister = () => {
         toast.error("Este cep é inválido. Tente novamente.");
       });
 
-    // console.log("OBJETO CEP :",response.data);
-    console.log(newData);
 
+    if(response){
+      apiDeploy
+      .post("/users",newData)
+      .then((response)=>{
+        setShowModal(!showModal)
+        toast.success("Usuário criado com sucesso!")
+      })
+      .catch((err) =>{
+        toast.error(err)
+        console.log(err)
+      });
+
+    }
   };
+
+
   const onErrors = (er) => {
     console.log(er);
   };
 
   return (
-    <CardRegisterContainer onSubmit={handleSubmit(onSubmitFunction, onErrors)}>
+    <CardRegisterContainer  onSubmit={handleSubmit(onSubmitFunction, onErrors)}>
+        {showModal && (
+          <SucessoModal  style={{right:0, top:0}}
+            data-testid="Register-Container"
+            title={"Usuário criado com sucesso!"}
+            modalState={showModal}
+            setModalState={setShowModal} >
+           <h3 id="h3-modal">Seu usuário foi registrado com sucesso!</h3>
+           <p>Agora você poderá ver seus negócios crescendo em grande escala!</p>
+           <Button
+            className="btn-finalizar"
+            bgColor={"var(--brand-1)"}
+            borderColor={"var(--brand-1)"}
+            fontColor={"var(--white-fixed)"}
+            type="submit"
+            width={"150px"}
+            height={"38px"}
+            onClick={()=> history.push("/login")}
+           >
+            Voltar para Login
+           </Button>
+          </SucessoModal>
+        )}
       <h2>Cadastro</h2>
       <p>Informações pessoais</p>
       <Input
@@ -162,7 +206,6 @@ const CardRegister = () => {
           height={"48px"}
           label={"CEP"}
           placeholder={"Ex: 00000.000"}
-          onChange = {handleCepChange}
         ></Input>
 
         <div className="div-endereco-row">
@@ -176,8 +219,6 @@ const CardRegister = () => {
             height={"48px"}
             label={"Estado"}
             placeholder={"Digitar Estado"}
-            value = { objCep ? (objCep.uf) :  (null)}
-            // value = { null}
           ></Input>
           <Input
             register={register}
@@ -189,7 +230,6 @@ const CardRegister = () => {
             height={"48px"}
             label={"Cidade"}
             placeholder={"Digitar Cidade"}
-            // value = { objCep && objCep.localidade}
           ></Input>
         </div>
 
@@ -203,7 +243,6 @@ const CardRegister = () => {
           height={"48px"}
           label={"Rua"}
           placeholder={"Digitar Rua"}
-          // value = { objCep && objCep.logradouro}
         ></Input>
 
         <div className="div-endereco-row">
@@ -216,7 +255,7 @@ const CardRegister = () => {
             width={"152px"}
             height={"48px"}
             label={"Numero"}
-            placeholder={"Digitar Estado"}
+            placeholder={"Digitar número"}
           ></Input>
           <Input
             register={register}
@@ -226,7 +265,7 @@ const CardRegister = () => {
             width={"152px"}
             height={"48px"}
             label={"Complemento"}
-            placeholder={"Digitar Cidade"}
+            placeholder={"Digitar complemento"}
           ></Input>
         </div>
 
@@ -268,7 +307,7 @@ const CardRegister = () => {
           width={"315px"}
           height={"48px"}
           label={"Senha"}
-          placeholder={"Ex: Samuel Leão"}
+          placeholder={"Sua melhor senha"}
         ></Input>
         <Input
           register={register}
@@ -280,7 +319,7 @@ const CardRegister = () => {
           width={"315px"}
           height={"48px"}
           label={"Confirmar senha"}
-          placeholder={"Ex: Samuel Leão"}
+          placeholder={"Confirme sua melhor senha"}
         ></Input>
 
         <Button
