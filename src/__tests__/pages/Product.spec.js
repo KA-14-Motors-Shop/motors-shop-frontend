@@ -35,6 +35,17 @@ const providerProps = {
       is_front: true,
     },
   ],
+  comments: [
+    {
+      id: "dfc0bc7b-cfdb-4414-b242-2f0c86bc41cc",
+      value: "Linda moto, poderia postar mais fotos?",
+      createdAt: "2022-09-16T07:08:06.693Z",
+      user: {
+        id: "40012b49-920d-486c-8b68-89c2bf979a83",
+        name: "Gui",
+      },
+    },
+  ],
   owner: {
     name: "Gabriel Santos",
     id: 1,
