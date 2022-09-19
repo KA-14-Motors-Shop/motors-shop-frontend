@@ -61,12 +61,20 @@ const ProductPage = () => {
       return toast.error("Campo vazio!");
     }
 
+    if (
+      product.type === "auction" &&
+      Number(commentValue) < Number(product.price)
+    ) {
+      return toast.error("Valor é menor do que o lance inicial!");
+    }
+
     apiDeploy
       .post(
         `comments/${product.id}`,
         {
           type: product.type,
-          value: commentValue,
+          value:
+            product.type === "auction" ? Number(commentValue) : commentValue,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -249,36 +257,68 @@ const ProductPage = () => {
                 </div>
               )}
 
-              <div className="write-comment-div">
-                <textarea
-                  value={commentValue}
-                  onChange={(evt) => setCommentValue(evt.target.value)}
-                  placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
-                />
+              {product.type === "sale" ? (
+                <div className="write-comment-div">
+                  <textarea
+                    value={commentValue}
+                    onChange={(evt) => setCommentValue(evt.target.value)}
+                    placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
+                  />
 
-                <Button
-                  width="108px"
-                  height="38px"
-                  bgColor="var(--brand-1)"
-                  borderColor="var(--brand-1)"
-                  fontColor="var(--white-fixed)"
-                  fontSize="14px"
-                  onClick={createComment}
-                >
-                  Comentar
-                </Button>
-              </div>
-              <div className="comment-examples-div">
-                <span onClick={(evt) => setCommentValue(evt.target.innerText)}>
-                  Gostei muito!
-                </span>
-                <span onClick={(evt) => setCommentValue(evt.target.innerText)}>
-                  Incrível
-                </span>
-                <span onClick={(evt) => setCommentValue(evt.target.innerText)}>
-                  Recomendarei para meus amigos!
-                </span>
-              </div>
+                  <Button
+                    width="108px"
+                    height="38px"
+                    bgColor="var(--brand-1)"
+                    borderColor="var(--brand-1)"
+                    fontColor="var(--white-fixed)"
+                    fontSize="14px"
+                    onClick={createComment}
+                  >
+                    Comentar
+                  </Button>
+                </div>
+              ) : product.type === "auction" ? (
+                <div className="auction-comment-div">
+                  <label>Lance</label>
+                  <input
+                    type="number"
+                    placeholder="Inserir valor do lance"
+                    value={commentValue}
+                    onChange={(evt) => setCommentValue(evt.target.value)}
+                  />
+                  <Button
+                    width="179px"
+                    bgColor="var(--brand-1)"
+                    fontColor="var(--white-fixed)"
+                    borderColor="var(--brand-1)"
+                    onClick={createComment}
+                  >
+                    Inserir proposta
+                  </Button>
+                </div>
+              ) : (
+                false
+              )}
+
+              {product.type === "sale" && (
+                <div className="comment-examples-div">
+                  <span
+                    onClick={(evt) => setCommentValue(evt.target.innerText)}
+                  >
+                    Gostei muito!
+                  </span>
+                  <span
+                    onClick={(evt) => setCommentValue(evt.target.innerText)}
+                  >
+                    Incrível
+                  </span>
+                  <span
+                    onClick={(evt) => setCommentValue(evt.target.innerText)}
+                  >
+                    Recomendarei para meus amigos!
+                  </span>
+                </div>
+              )}
             </div>
           </section>
         </section>

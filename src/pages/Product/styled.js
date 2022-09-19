@@ -345,6 +345,23 @@ export const ProductMain = styled.main`
     }
   }
 
+  .auction-comment-div {
+    margin: 0px 0px 24px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    input {
+      padding: 0px 16px;
+      height: 48px;
+      border-radius: 4px;
+      border: 2px solid var(--grey-7);
+      color: var(--grey-3);
+      font-size: 16px;
+      max-width: 315px;
+    }
+  }
+
   .comment-examples-div {
     width: 80%;
     margin-left: 26px;
@@ -458,8 +475,23 @@ export const ProductMain = styled.main`
       }
     }
 
+    .auction-comment-div {
+      margin-left: 6%;
+    }
+
     .comment-examples-div {
       margin-left: 6%;
+    }
+  }
+
+  @media (min-width: 550px) {
+    .auction-comment-div {
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      label {
+        width: 100%;
+      }
     }
   }
 
