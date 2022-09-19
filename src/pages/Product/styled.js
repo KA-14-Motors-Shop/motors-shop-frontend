@@ -298,6 +298,7 @@ export const ProductMain = styled.main`
   }
 
   .create-comment-div {
+    padding-top: 15px;
     width: 95%;
     max-width: 752px;
     background-color: var(--white-fixed);

@@ -85,6 +85,16 @@ const ProductPage = () => {
       .catch((err) => console.log(err));
   };
 
+  const commentDisable = () => {
+    if (!authenticated) {
+      return toast.error("Faça o login para comentar!");
+    }
+
+    if (user.id === owner.id) {
+      return toast.error("Você não pode comentar no seu próprio anúncio!");
+    }
+  };
+
   const history = useHistory();
 
   return (
@@ -143,18 +153,20 @@ const ProductPage = () => {
                 <div>
                   <span>{product.mileage} KM</span>
                 </div>
-                <h6>R$ {product.price}</h6>
+                <h6>R$ {product.price && product.price.replace(".", ",")}</h6>
               </div>
 
-              <Button
-                width="100px"
-                height="38px"
-                bgColor="var(--brand-1)"
-                fontColor="var(--white-fixed)"
-                fontSize="14px"
-              >
-                Comprar
-              </Button>
+              {product.type === "sale" && (
+                <Button
+                  width="100px"
+                  height="38px"
+                  bgColor="var(--brand-1)"
+                  fontColor="var(--white-fixed)"
+                  fontSize="14px"
+                >
+                  Comprar
+                </Button>
+              )}
             </div>
 
             <div className="description-div">
@@ -238,7 +250,13 @@ const ProductPage = () => {
                               )} dias`}
                         </span>
                       </div>
-                      <p>{comment.value}</p>
+                      <p>
+                        {product.type === "auction"
+                          ? `R$ ${parseFloat(comment.value)
+                              .toFixed(2)
+                              .replace(".", ",")}`
+                          : comment.value}
+                      </p>
                     </li>
                   );
                 })}
@@ -268,11 +286,29 @@ const ProductPage = () => {
                   <Button
                     width="108px"
                     height="38px"
-                    bgColor="var(--brand-1)"
-                    borderColor="var(--brand-1)"
+                    bgColor={
+                      !authenticated
+                        ? "var(--grey-5)"
+                        : user.id === owner.id
+                        ? "var(--grey-5)"
+                        : "var(--brand-1)"
+                    }
+                    borderColor={
+                      !authenticated
+                        ? "var(--grey-5)"
+                        : user.id === owner.id
+                        ? "var(--grey-5)"
+                        : "var(--brand-1)"
+                    }
                     fontColor="var(--white-fixed)"
                     fontSize="14px"
-                    onClick={createComment}
+                    onClick={
+                      !authenticated
+                        ? commentDisable
+                        : user.id === owner.id
+                        ? commentDisable
+                        : createComment
+                    }
                   >
                     Comentar
                   </Button>
@@ -288,10 +324,28 @@ const ProductPage = () => {
                   />
                   <Button
                     width="179px"
-                    bgColor="var(--brand-1)"
+                    bgColor={
+                      !authenticated
+                        ? "var(--grey-5)"
+                        : user.id === owner.id
+                        ? "var(--grey-5)"
+                        : "var(--brand-1)"
+                    }
                     fontColor="var(--white-fixed)"
-                    borderColor="var(--brand-1)"
-                    onClick={createComment}
+                    borderColor={
+                      !authenticated
+                        ? "var(--grey-5)"
+                        : user.id === owner.id
+                        ? "var(--grey-5)"
+                        : "var(--brand-1)"
+                    }
+                    onClick={
+                      !authenticated
+                        ? commentDisable
+                        : user.id === owner.id
+                        ? commentDisable
+                        : createComment
+                    }
                   >
                     Inserir proposta
                   </Button>
