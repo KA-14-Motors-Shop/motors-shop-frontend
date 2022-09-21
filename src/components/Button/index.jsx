@@ -8,7 +8,7 @@ const Button = ({
   fontColor = "var(--grey-0)",
   fontSize = "16px",
   borderColor = "var(--grey-0)",
-  onHoverColor,
+  onHoverColor = "var(--grey-5)",
   ...rest
 }) => {
   return (
