@@ -12,12 +12,14 @@ import { AuthContext } from "../../providers/auth";
 import { Redirect } from "react-router-dom";
 import { useEffect } from "react";
 import { apiDeploy } from "../../services/api";
+import DeleteAdModal from "../../components/profileModals/DeleteAd";
 
 const Profile = () => {
   const { authenticated, token, setAuthenticated } = useContext(AuthContext);
 
   const [createAdModal, setCreateAdModal] = useState(false);
   const [updateAdModal, setUpdateAdModal] = useState(false);
+  const [deleteAdModal, setDeleteAdModal] = useState(false);
   const [updateInfos, setUpdateInfos] = useState({});
   const [user, setUser] = useState([]);
   const [auctionAds, setAuctionAds] = useState([]);
@@ -87,6 +89,17 @@ const Profile = () => {
           infos={updateInfos}
           makeGet={makeGet}
           setMakeGet={setMakeGet}
+          deleteState={deleteAdModal}
+          setDeleteState={setDeleteAdModal}
+        />
+      )}
+      {deleteAdModal && (
+        <DeleteAdModal
+          modalState={deleteAdModal}
+          setModalState={setDeleteAdModal}
+          makeGet={makeGet}
+          setMakeGet={setMakeGet}
+          id={updateInfos.id}
         />
       )}
 
