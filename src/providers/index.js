@@ -1,10 +1,13 @@
 import { AuthProvider } from "./auth";
 import { AdvertisemenstProvider } from "./advertisements";
+import { EditPfModalProvider } from "./editPfModal";
 
 const Providers = ({ children }) => {
   return (
     <AuthProvider>
-      <AdvertisemenstProvider> {children}</AdvertisemenstProvider>
+      <AdvertisemenstProvider>
+        <EditPfModalProvider> {children} </EditPfModalProvider>
+      </AdvertisemenstProvider>
     </AuthProvider>
   );
 };

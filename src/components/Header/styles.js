@@ -11,6 +11,7 @@ export const HeaderUpperContainer = styled.div`
     width: 153px;
     height: 26px;
     margin-left: 16px;
+    cursor: pointer;
   }
 
   .mobile_menu_btn {

@@ -5,6 +5,7 @@ import { AuthProvider } from "../../providers/auth";
 import { BrowserRouter } from "react-router-dom";
 import { apiDeploy } from "../../services/api";
 import MockAdapter from "axios-mock-adapter";
+import { EditPfModalProvider } from "../../providers/editPfModal";
 
 const apiMock = new MockAdapter(apiDeploy);
 
@@ -25,7 +26,9 @@ describe("Login page", () => {
     render(
       <BrowserRouter>
         <AuthProvider>
-          <Login />
+          <EditPfModalProvider>
+            <Login />
+          </EditPfModalProvider>
         </AuthProvider>
       </BrowserRouter>
     );

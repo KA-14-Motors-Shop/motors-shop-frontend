@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/auth";
 import Profile from "../../pages/Profile";
 import MockAdapter from "axios-mock-adapter";
 import { apiDeploy } from "../../services/api";
+import { EditPfModalContext } from "../../providers/editPfModal";
 
 const apiMock = new MockAdapter(apiDeploy);
 
@@ -98,6 +99,14 @@ jest.mock("react-router-dom", () => ({
   Redirect: jest.fn(),
 }));
 
+Object.defineProperty(window, "getComputedStyle", {
+  value: () => ({
+    getPropertyValue: (prop) => {
+      return "";
+    },
+  }),
+});
+
 describe("Profile Page Tests", () => {
   test("should be able to render a profile", async () => {
     apiMock.onGet("users/me").replyOnce(200, providerProps);
@@ -105,7 +114,11 @@ describe("Profile Page Tests", () => {
       <AuthContext.Provider
         value={{ authenticated: true, setAuthenticated: jest.fn(), token: 1 }}
       >
-        <Profile />
+        <EditPfModalContext.Provider value={{ editPfModal: false }}>
+          <div id="root">
+            <Profile />
+          </div>
+        </EditPfModalContext.Provider>
       </AuthContext.Provider>
     );
 
@@ -124,9 +137,11 @@ describe("Profile Page Tests", () => {
       <AuthContext.Provider
         value={{ authenticated: true, setAuthenticated: jest.fn(), token: 1 }}
       >
-        <div id="root">
-          <Profile />
-        </div>
+        <EditPfModalContext.Provider value={{ editPfModal: false }}>
+          <div id="root">
+            <Profile />
+          </div>
+        </EditPfModalContext.Provider>
       </AuthContext.Provider>
     );
     const createButton = await screen.findByText(/Criar Anúncio/);
@@ -143,9 +158,11 @@ describe("Profile Page Tests", () => {
       <AuthContext.Provider
         value={{ authenticated: true, setAuthenticated: jest.fn(), token: 1 }}
       >
-        <div id="root">
-          <Profile />
-        </div>
+        <EditPfModalContext.Provider value={{ editPfModal: false }}>
+          <div id="root">
+            <Profile />
+          </div>
+        </EditPfModalContext.Provider>
       </AuthContext.Provider>
     );
     const allEditButtons = await screen.findAllByRole("button", {

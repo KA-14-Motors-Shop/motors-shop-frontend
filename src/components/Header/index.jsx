@@ -12,6 +12,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import DefaultProfilePicture from "../DefaultProfilePicture";
 import { AuthContext } from "../../providers/auth";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { EditPfModalContext } from "../../providers/editPfModal";
 
 const Header = ({ isLoggedIn = false, username }) => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
@@ -20,6 +21,7 @@ const Header = ({ isLoggedIn = false, username }) => {
   const history = useHistory();
 
   const { handleLogout } = useContext(AuthContext);
+  const { setEditPfModal } = useContext(EditPfModalContext);
 
   useEffect(() => {
     const closeDropdown = (e) => {
@@ -33,10 +35,20 @@ const Header = ({ isLoggedIn = false, username }) => {
     document.body.addEventListener("click", closeDropdown);
   }, []);
 
+  const handleEditPfModal = () => {
+    history.push("/profile");
+    setEditPfModal(true);
+  };
+
   return (
     <>
       <HeaderUpperContainer>
-        <img className="logo" src={header_logo} alt="header_logo" />
+        <img
+          className="logo"
+          src={header_logo}
+          alt="header_logo"
+          onClick={() => history.push("/")}
+        />
 
         <DesktopNavBar>
           <div className="desktop_inner_menu">
@@ -54,7 +66,9 @@ const Header = ({ isLoggedIn = false, username }) => {
               <div className="d_user_name_txt">{username}</div>
 
               <DropdownMenu top={"4.5em"} right={"2.5em"} isActive={ddownMenu}>
-                <div className="ddown_item">Editar perfil</div>
+                <div className="ddown_item" onClick={handleEditPfModal}>
+                  Editar perfil
+                </div>
                 <div className="ddown_item">Editar endereço</div>
                 <div className="ddown_item">Minhas compras</div>
                 <div

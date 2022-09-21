@@ -18,6 +18,8 @@ const UpdateAdModal = ({
   infos,
   makeGet,
   setMakeGet,
+  deleteState,
+  setDeleteState,
 }) => {
   const [advertisementType, setAdvertisementType] = useState(infos.type);
   const [vehicleType, setVehicleType] = useState(infos.vehicle_type);
@@ -353,7 +355,10 @@ const UpdateAdModal = ({
               borderColor="var(--grey-6)"
               fontColor="var(--grey-2)"
               className="cancel-button"
-              onClick={() => setModalState(!modalState)}
+              onClick={() => {
+                setModalState(!modalState);
+                setDeleteState(!deleteState);
+              }}
             >
               Excluir anúncio
             </Button>
