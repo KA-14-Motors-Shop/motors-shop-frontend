@@ -6,6 +6,7 @@ import Home from "../../pages/Home";
 import { apiDeploy } from "../../services/api";
 import MockAdapter from "axios-mock-adapter";
 import { AuthProvider } from "../../providers/auth";
+import { EditPfModalProvider } from "../../providers/editPfModal";
 
 const apiMock = new MockAdapter(apiDeploy);
 
@@ -80,7 +81,9 @@ describe("Home Page Tests", () => {
     await render(
       <AdvertisemenstProvider>
         <AuthProvider>
-          <Home />
+          <EditPfModalProvider>
+            <Home />
+          </EditPfModalProvider>
         </AuthProvider>
       </AdvertisemenstProvider>
     );
@@ -102,7 +105,9 @@ describe("Home Page Tests", () => {
     await render(
       <AdvertisemenstProvider>
         <AuthProvider>
-          <Home />
+          <EditPfModalProvider>
+            <Home />
+          </EditPfModalProvider>
         </AuthProvider>
       </AdvertisemenstProvider>
     );
@@ -128,7 +133,9 @@ describe("Home Page Tests", () => {
     await render(
       <AdvertisemenstProvider>
         <AuthProvider>
-          <Home />
+          <EditPfModalProvider>
+            <Home />
+          </EditPfModalProvider>
         </AuthProvider>
       </AdvertisemenstProvider>
     );
@@ -152,7 +159,9 @@ describe("Home Page Tests", () => {
     await render(
       <AdvertisemenstProvider>
         <AuthProvider>
-          <Home />
+          <EditPfModalProvider>
+            <Home />
+          </EditPfModalProvider>
         </AuthProvider>
       </AdvertisemenstProvider>
     );

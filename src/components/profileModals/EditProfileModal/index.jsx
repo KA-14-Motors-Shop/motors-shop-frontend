@@ -30,7 +30,7 @@ const EditProfileModal = ({ user }) => {
   });
 
   const [rootHeight, setRootHeight] = useState(
-    getComputedStyle(document.getElementById("root")).height
+    window.getComputedStyle(document.getElementById("root")).height
   );
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import ProductPage from "../../pages/Product";
 import { apiDeploy } from "../../services/api";
 import MockAdapter from "axios-mock-adapter";
 import { AuthProvider } from "../../providers/auth";
+import { EditPfModalProvider } from "../../providers/editPfModal";
 const apiMock = new MockAdapter(apiDeploy);
 
 const providerProps = {
@@ -73,7 +74,9 @@ describe("Home Page Tests", () => {
 
     await render(
       <AuthProvider>
-        <ProductPage />
+        <EditPfModalProvider>
+          <ProductPage />
+        </EditPfModalProvider>
       </AuthProvider>
     );
 
@@ -93,9 +96,11 @@ describe("Home Page Tests", () => {
 
     await render(
       <AuthProvider>
-        <div id="root">
-          <ProductPage />
-        </div>
+        <EditPfModalProvider>
+          <div id="root">
+            <ProductPage />
+          </div>
+        </EditPfModalProvider>
       </AuthProvider>
     );
 
@@ -113,9 +118,11 @@ describe("Home Page Tests", () => {
 
     await render(
       <AuthProvider>
-        <div id="root">
-          <ProductPage />
-        </div>
+        <EditPfModalProvider>
+          <div id="root">
+            <ProductPage />
+          </div>
+        </EditPfModalProvider>
       </AuthProvider>
     );
 
