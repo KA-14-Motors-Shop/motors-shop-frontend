@@ -24,6 +24,7 @@ let providerProps = {
       price: "300000.00",
       type: "auction",
       vehicle_type: "car",
+      is_active: true,
       images: [
         {
           url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
@@ -44,6 +45,7 @@ let providerProps = {
       price: "300000.00",
       type: "sale",
       vehicle_type: "car",
+      is_active: true,
       images: [
         {
           url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",
@@ -64,6 +66,7 @@ let providerProps = {
       price: "300000.00",
       type: "sale",
       vehicle_type: "motorcycle",
+      is_active: true,
       images: [
         {
           url: "https://storage.googleapis.com/motors-shop.appspot.com/1662612661181.png",

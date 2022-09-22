@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const CardContainer = styled.li`
   max-width: 735px;
@@ -35,6 +35,18 @@ const CardContainer = styled.li`
       width: calc(100%);
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
       border-radius: 4px 4px 0px 0px;
+
+      .is-active-span {
+        position: absolute;
+        top: 40px;
+        right: 16px;
+        color: var(--white-fixed);
+        background-color: ${(props) =>
+          props.is_active ? "var(--brand-1)" : "var(--grey-4)"};
+        padding: 3px 8px;
+        font-weight: 500;
+        font-size: 16px;
+      }
 
       .timer-div {
         margin-top: 35px;
@@ -95,7 +107,6 @@ const CardContainer = styled.li`
 
       .infos-div {
         margin: 0px 22px 33px;
-        width: 135px;
         display: flex;
         flex-wrap: wrap;
 
@@ -109,6 +120,7 @@ const CardContainer = styled.li`
         }
 
         h6 {
+          width: 100%;
           margin-top: 24px;
           font-size: 16px;
           font-weight: 500;
@@ -132,17 +144,28 @@ const CardContainer = styled.li`
     }
   }
 
-  :hover {
-    cursor: pointer;
+  ${(props) => {
+    return (
+      props.is_active &&
+      css`
+        :hover {
+          cursor: pointer;
 
-    .auction-div {
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.71) 0%, #000000 100%);
-    }
+          .auction-div {
+            background: linear-gradient(
+              180deg,
+              rgba(0, 0, 0, 0.71) 0%,
+              #000000 100%
+            );
+          }
 
-    .link-div {
-      background-color: var(--brand-2);
-    }
-  }
+          .link-div {
+            background-color: var(--brand-2);
+          }
+        }
+      `
+    );
+  }}
 
   @media (min-width: 375px) {
     .link-div {
@@ -169,6 +192,7 @@ const CardContainer = styled.li`
           align-items: center;
 
           h6 {
+            width: auto;
             margin-top: 0px;
             margin-left: auto;
           }

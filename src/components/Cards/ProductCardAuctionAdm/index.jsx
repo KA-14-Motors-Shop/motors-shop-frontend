@@ -2,6 +2,7 @@ import CardContainer from "./styled";
 import { BsClock } from "react-icons/bs";
 import Button from "../../Button";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ProductCardAuctionAdm = ({
   id,
@@ -13,11 +14,12 @@ const ProductCardAuctionAdm = ({
   year,
   price,
   editFunction,
+  is_active,
 }) => {
   const history = useHistory();
 
   return (
-    <CardContainer id={id}>
+    <CardContainer is_active={is_active} id={id}>
       <section className="product-section">
         <figure>
           <img src={images.url} alt={`${title}_front_image`} />
@@ -31,17 +33,24 @@ const ProductCardAuctionAdm = ({
             </span>
           </div>
 
+          <span className="is-active-span ">
+            {is_active ? "Ativo" : "Inativo"}
+          </span>
+
           <h5>{title}</h5>
 
           <p>{description}</p>
 
           <div className="infos-div">
+            {/* <section> */}
             <div>
               <span>{year}</span>
             </div>
             <div>
               <span>{mileage} Km</span>
             </div>
+            {/* </section> */}
+
             <h6>R$ {price}</h6>
           </div>
         </div>
@@ -56,7 +65,9 @@ const ProductCardAuctionAdm = ({
           borderColor="var(--grey-10)"
           fontSize="14px"
           className="edit-button"
-          onClick={editFunction}
+          onClick={
+            is_active ? editFunction : () => toast.error("Anúncio desativado")
+          }
         >
           Editar
         </Button>
@@ -68,7 +79,11 @@ const ProductCardAuctionAdm = ({
           borderColor="var(--grey-10)"
           fontSize="14px"
           className="see-button"
-          onClick={() => history.push(`/product/${id}`)}
+          onClick={
+            is_active
+              ? () => history.push(`/product/${id}`)
+              : () => toast.error("Anúncio desativado")
+          }
         >
           Ver como
         </Button>
