@@ -100,6 +100,7 @@ jest.mock("react-router-dom", () => ({
     push: mockHistoryPush,
   }),
   Redirect: jest.fn(),
+  useLocation: () => jest.fn(),
 }));
 
 Object.defineProperty(window, "getComputedStyle", {

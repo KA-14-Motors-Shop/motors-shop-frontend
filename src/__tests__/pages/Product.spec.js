@@ -64,6 +64,7 @@ jest.mock("react-router-dom", () => ({
     push: mockHistoryPush,
   }),
   useParams: () => ({ id: 1 }),
+  useLocation: () => jest.fn(),
 }));
 
 window.scrollTo = jest.fn();

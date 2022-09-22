@@ -29,7 +29,12 @@ const Profile = () => {
   const [motoAds, setMotoAds] = useState([]);
   const [makeGet, setMakeGet] = useState(false);
 
-  const { editPfModal } = useContext(EditPfModalContext);
+  const {
+    setEditPfModal,
+    editPfModal,
+    fromOtherPageModal,
+    setFromOtherPageModal,
+  } = useContext(EditPfModalContext);
 
   useEffect(() => {
     apiDeploy
@@ -54,6 +59,11 @@ const Profile = () => {
           )
         );
         localStorage.setItem("@MotorShop:user", JSON.stringify(resp.data));
+
+        if (fromOtherPageModal) {
+          setEditPfModal(true);
+          setFromOtherPageModal(false);
+        }
       })
       .catch((err) => {
         console.log(err);
