@@ -21,12 +21,13 @@ const UserProduct = () => {
         setUser(resp.data);
         setCarAds(
           resp.data.advertisements.filter(
-            ({ vehicle_type }) => vehicle_type === "car"
+            ({ vehicle_type, is_active }) => vehicle_type === "car" && is_active
           )
         );
         setMotorAds(
           resp.data.advertisements.filter(
-            ({ vehicle_type }) => vehicle_type === "motorcycle"
+            ({ vehicle_type, is_active }) =>
+              vehicle_type === "motorcycle" && is_active
           )
         );
       })
