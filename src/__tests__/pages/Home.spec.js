@@ -72,6 +72,7 @@ jest.mock("react-router-dom", () => ({
   useHistory: () => ({
     push: mockHistoryPush,
   }),
+  useLocation: () => jest.fn(),
 }));
 
 describe("Home Page Tests", () => {
