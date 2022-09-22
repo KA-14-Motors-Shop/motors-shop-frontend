@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const CardContainer = styled.li`
   width: 80%;
@@ -8,18 +8,25 @@ const CardContainer = styled.li`
     width: 312px;
   }
 
-  :hover {
-    figure {
-      border: 2px solid var(--brand-1);
+  ${(props) => {
+    return (
+      props.is_active &&
+      css`
+        :hover {
+          figure {
+            border: 2px solid var(--brand-1);
 
-      img {
-        width: 100%;
-        height: 179px;
-      }
-    }
+            img {
+              width: 100%;
+              height: 179px;
+            }
+          }
 
-    cursor: pointer;
-  }
+          cursor: pointer;
+        }
+      `
+    );
+  }}
 
   figure {
     background-color: var(--grey-7);
@@ -27,6 +34,19 @@ const CardContainer = styled.li`
     justify-content: center;
     align-items: center;
     height: 152px;
+    position: relative;
+
+    span {
+      position: absolute;
+      top: 11px;
+      left: 16px;
+      color: var(--white-fixed);
+      background-color: ${(props) =>
+        props.is_active ? "var(--brand-1)" : "var(--grey-4)"};
+      padding: 3px 8px;
+      font-weight: 500;
+      font-size: 14px;
+    }
 
     img {
       width: 262px;

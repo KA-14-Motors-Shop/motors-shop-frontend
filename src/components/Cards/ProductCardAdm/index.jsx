@@ -1,6 +1,7 @@
 import CardContainer from "./styled";
 import Button from "../../Button";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ProductCardAdm = ({
   id,
@@ -11,12 +12,14 @@ const ProductCardAdm = ({
   year,
   price,
   editFunction,
+  is_active,
 }) => {
   const history = useHistory();
 
   return (
-    <CardContainer id={id}>
+    <CardContainer id={id} is_active={is_active}>
       <figure>
+        <span>{is_active ? "Ativo" : "Inativo"}</span>
         <img src={images.url} alt={`${title}_front_image`} />
         <figcaption>{`${title} Front Image`}</figcaption>
       </figure>
@@ -41,7 +44,9 @@ const ProductCardAdm = ({
           height="38px"
           fontColor="var(--grey-1)"
           fontSize="14px"
-          onClick={editFunction}
+          onClick={
+            is_active ? editFunction : () => toast.error("Anúncio desativado")
+          }
         >
           Editar
         </Button>
@@ -50,7 +55,11 @@ const ProductCardAdm = ({
           height="38px"
           fontColor="var(--grey-1)"
           fontSize="14px"
-          onClick={() => history.push(`/product/${id}`)}
+          onClick={
+            is_active
+              ? () => history.push(`/product/${id}`)
+              : () => toast.error("Anúncio desativado")
+          }
         >
           Ver como
         </Button>

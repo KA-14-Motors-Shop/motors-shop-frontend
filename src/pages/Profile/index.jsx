@@ -149,6 +149,7 @@ const Profile = () => {
                     year={ad.year}
                     price={ad.price}
                     images={ad.images.find(({ is_front }) => is_front === true)}
+                    is_active={ad.is_active}
                   />
                 );
               })}
@@ -172,6 +173,7 @@ const Profile = () => {
                     year={ad.year}
                     price={ad.price}
                     images={ad.images.find(({ is_front }) => is_front === true)}
+                    is_active={ad.is_active}
                   />
                 );
               })}
@@ -195,6 +197,7 @@ const Profile = () => {
                     year={ad.year}
                     price={ad.price}
                     images={ad.images.find(({ is_front }) => is_front === true)}
+                    is_active={ad.is_active}
                   />
                 );
               })}
