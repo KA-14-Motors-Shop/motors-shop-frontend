@@ -6,11 +6,15 @@ import DefaultProfilePicture from "../../components/DefaultProfilePicture";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { apiDeploy } from "../../services/api";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/auth";
 
 const UserProduct = () => {
   const [user, setUser] = useState([]);
   const [carAds, setCarAds] = useState([]);
   const [motorAds, setMotorAds] = useState([]);
+
+  const { authenticated } = useContext(AuthContext);
 
   const params = useParams();
 
@@ -36,7 +40,10 @@ const UserProduct = () => {
 
   return (
     <>
-      <Header />
+      <Header
+        isLoggedIn={authenticated}
+        username={authenticated && user.name}
+      />
       <MainProducts>
         <section className="user-infos-section">
           <DefaultProfilePicture
