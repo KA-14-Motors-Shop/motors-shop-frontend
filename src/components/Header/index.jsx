@@ -4,6 +4,7 @@ import {
   DesktopNavBar,
   MenuOuterContainer,
 } from "./styles";
+import { useLocation } from "react-router-dom";
 import DropdownMenu from "../DropdownMenu";
 import header_logo from "../../assets/header_logo.png";
 import Button from "../Button";
@@ -19,9 +20,11 @@ const Header = ({ isLoggedIn = false, username }) => {
   const [ddownMenu, setDdownMenu] = useState(false);
   const ddownRef = useRef();
   const history = useHistory();
+  const location = useLocation();
 
   const { handleLogout } = useContext(AuthContext);
-  const { setEditPfModal } = useContext(EditPfModalContext);
+  const { setFromOtherPageModal, setEditPfModal } =
+    useContext(EditPfModalContext);
 
   useEffect(() => {
     const closeDropdown = (e) => {
@@ -36,8 +39,11 @@ const Header = ({ isLoggedIn = false, username }) => {
   }, []);
 
   const handleEditPfModal = () => {
+    if (location.pathname === "/profile") {
+      return setEditPfModal(true);
+    }
     history.push("/profile");
-    setEditPfModal(true);
+    setFromOtherPageModal(true);
   };
 
   return (
