@@ -104,7 +104,7 @@ const ProductPage = () => {
       return toast.error("Faça o login para realizar a compra!");
     }
 
-    if (user.id === owner.id) {
+    if (user.id === owner.id && product.type === "sale") {
       return toast.error("Você não pode comprar seu próprio produto!");
     }
 
@@ -290,6 +290,21 @@ const ProductPage = () => {
                               .replace(".", ",")}`
                           : comment.value}
                       </p>
+                      {product.type === "auction" && user.id === owner.id ? (
+                        <Button
+                          width="64px"
+                          height="32px"
+                          bgColor="var(--brand-4)"
+                          borderColor="var(--brand-4)"
+                          fontColor="var(--brand-1)"
+                          fontSize="14px"
+                          onClick={buyOrSellAd}
+                        >
+                          Vender
+                        </Button>
+                      ) : (
+                        false
+                      )}
                     </li>
                   );
                 })}
