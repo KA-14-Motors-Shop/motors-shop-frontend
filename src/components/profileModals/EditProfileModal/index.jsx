@@ -8,6 +8,9 @@ import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { EditPfModalContext } from "../../../providers/editPfModal";
 import { useEffect } from "react";
+import { apiDeploy } from "../../../services/api";
+import { AuthContext } from "../../../providers/auth";
+import { toast } from "react-toastify";
 
 const EditProfileModal = ({ user }) => {
   const schema = yup.object().shape({
@@ -20,6 +23,7 @@ const EditProfileModal = ({ user }) => {
   });
 
   const { editPfModal, setEditPfModal } = useContext(EditPfModalContext);
+  const { token } = useContext(AuthContext);
 
   const {
     register,
@@ -38,7 +42,19 @@ const EditProfileModal = ({ user }) => {
   }, [editPfModal]);
 
   const handleEditProfile = (data) => {
-    console.log(data);
+    for (const [key, value] of Object.entries(data)) {
+      if (!value) {
+        delete data[key];
+      }
+    }
+    apiDeploy
+      .patch("/users", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => toast.success("Usuário atualizado com sucesso"))
+      .catch((err) => console.log(err));
   };
 
   return (
