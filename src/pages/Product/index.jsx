@@ -11,9 +11,13 @@ import { useHistory, useParams } from "react-router-dom";
 import { apiDeploy } from "../../services/api";
 import { AuthContext } from "../../providers/auth";
 import { toast } from "react-toastify";
+import { AdvertisementsContext } from "../../providers/advertisements";
 
 const ProductPage = () => {
   const { authenticated, token } = useContext(AuthContext);
+  const { setGetAdvertisements, getAdvertisements } = useContext(
+    AdvertisementsContext
+  );
 
   const [galleryModal, setGalleryModal] = useState(false);
   const [commentValue, setCommentValue] = useState();
@@ -95,6 +99,34 @@ const ProductPage = () => {
     }
   };
 
+  const buyOrSellAd = () => {
+    if (!authenticated) {
+      return toast.error("Faça o login para realizar a compra!");
+    }
+
+    if (user.id === owner.id && product.type === "sale") {
+      return toast.error("Você não pode comprar seu próprio produto!");
+    }
+
+    apiDeploy
+      .patch(`ads/status/${product.id}`, null, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((_) => {
+        if (product.type === "sale") {
+          toast.success("Compra realizada!");
+        } else {
+          toast.success("Venda realizada!");
+        }
+        setGetAdvertisements(!getAdvertisements);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Problemas com o servidor!");
+      });
+  };
+
   const history = useHistory();
 
   return (
@@ -163,6 +195,7 @@ const ProductPage = () => {
                   bgColor="var(--brand-1)"
                   fontColor="var(--white-fixed)"
                   fontSize="14px"
+                  onClick={buyOrSellAd}
                 >
                   Comprar
                 </Button>
@@ -257,6 +290,21 @@ const ProductPage = () => {
                               .replace(".", ",")}`
                           : comment.value}
                       </p>
+                      {product.type === "auction" && user.id === owner.id ? (
+                        <Button
+                          width="64px"
+                          height="32px"
+                          bgColor="var(--brand-4)"
+                          borderColor="var(--brand-4)"
+                          fontColor="var(--brand-1)"
+                          fontSize="14px"
+                          onClick={buyOrSellAd}
+                        >
+                          Vender
+                        </Button>
+                      ) : (
+                        false
+                      )}
                     </li>
                   );
                 })}

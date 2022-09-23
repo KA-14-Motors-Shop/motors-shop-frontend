@@ -10,9 +10,12 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/auth";
 
 const UserProduct = () => {
-  const [user, setUser] = useState([]);
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@MotorShop:user")) || []
+  );
   const [carAds, setCarAds] = useState([]);
   const [motorAds, setMotorAds] = useState([]);
+  const [owner, setOwner] = useState([]);
 
   const { authenticated } = useContext(AuthContext);
 
@@ -22,7 +25,7 @@ const UserProduct = () => {
     apiDeploy
       .get(`users/${params.id}`)
       .then((resp) => {
-        setUser(resp.data);
+        setOwner(resp.data);
         setCarAds(
           resp.data.advertisements.filter(
             ({ vehicle_type, is_active }) => vehicle_type === "car" && is_active
@@ -47,17 +50,17 @@ const UserProduct = () => {
       <MainProducts>
         <section className="user-infos-section">
           <DefaultProfilePicture
-            username={user.name}
+            username={owner.name}
             width="104px"
             height="104px"
           />
           <div className="user-title-div">
-            <h3>{user.name}</h3>
+            <h3>{owner.name}</h3>
             <span>
-              {user.type === "advertiser" ? "Anunciante" : "Comprador"}
+              {owner.type === "advertiser" ? "Anunciante" : "Comprador"}
             </span>
           </div>
-          <p>{user.description}</p>
+          <p>{owner.description}</p>
         </section>
         {carAds.length > 0 && (
           <section className="products-section car-list-section">
@@ -73,7 +76,7 @@ const UserProduct = () => {
                     mileage={ad.mileage}
                     year={ad.year}
                     price={ad.price}
-                    owner={{ name: user.name }}
+                    owner={{ name: owner.name }}
                     images={ad.images.find(({ is_front }) => is_front === true)}
                   />
                 );
@@ -96,7 +99,7 @@ const UserProduct = () => {
                     mileage={ad.mileage}
                     year={ad.year}
                     price={ad.price}
-                    owner={{ name: user.name }}
+                    owner={{ name: owner.name }}
                     images={ad.images.find(({ is_front }) => is_front === true)}
                   />
                 );
