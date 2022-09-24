@@ -23,7 +23,12 @@ const Header = ({ isLoggedIn = false, username }) => {
   const location = useLocation();
 
   const { handleLogout } = useContext(AuthContext);
-  const { setEditPfOtherPage, setEditPfModal } = useContext(EditPfModalContext);
+  const {
+    setEditPfOtherPage,
+    setEditPfModal,
+    setEditAdrsOtherPage,
+    setEditAdrsModal,
+  } = useContext(EditPfModalContext);
 
   useEffect(() => {
     const closeDropdown = (e) => {
@@ -43,6 +48,14 @@ const Header = ({ isLoggedIn = false, username }) => {
     }
     history.push("/profile");
     setEditPfOtherPage(true);
+  };
+
+  const handleEditAdrsModal = () => {
+    if (location.pathname === "/profile") {
+      setEditAdrsModal(true);
+    }
+    history.push("/profile");
+    setEditAdrsOtherPage(true);
   };
 
   return (
@@ -74,7 +87,9 @@ const Header = ({ isLoggedIn = false, username }) => {
                 <div className="ddown_item" onClick={handleEditPfModal}>
                   Editar perfil
                 </div>
-                <div className="ddown_item">Editar endereço</div>
+                <div className="ddown_item" onClick={handleEditAdrsModal}>
+                  Editar endereço
+                </div>
                 <div className="ddown_item">Minhas compras</div>
                 <div
                   className="ddown_item"

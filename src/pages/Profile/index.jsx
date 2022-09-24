@@ -15,6 +15,7 @@ import { apiDeploy } from "../../services/api";
 import DeleteAdModal from "../../components/profileModals/DeleteAd";
 import EditProfileModal from "../../components/profileModals/EditProfileModal";
 import { EditPfModalContext } from "../../providers/editPfModal";
+import EditAddressModal from "../../components/profileModals/EditAddressModal";
 
 const Profile = () => {
   const { authenticated, token, setAuthenticated } = useContext(AuthContext);
@@ -29,8 +30,16 @@ const Profile = () => {
   const [motoAds, setMotoAds] = useState([]);
   const [makeGet, setMakeGet] = useState(false);
 
-  const { setEditPfModal, editPfModal, editPfOtherPage, setEditPfOtherPage } =
-    useContext(EditPfModalContext);
+  const {
+    setEditPfModal,
+    editPfModal,
+    editPfOtherPage,
+    setEditPfOtherPage,
+    editAdrsModal,
+    setEditAdrsModal,
+    editAdrsOtherPage,
+    setEditAdrsOtherPage,
+  } = useContext(EditPfModalContext);
 
   useEffect(() => {
     apiDeploy
@@ -59,6 +68,11 @@ const Profile = () => {
         if (editPfOtherPage) {
           setEditPfModal(true);
           setEditPfOtherPage(false);
+        }
+
+        if (editAdrsOtherPage) {
+          setEditAdrsModal(true);
+          setEditAdrsOtherPage(false);
         }
       })
       .catch((err) => {
@@ -114,6 +128,13 @@ const Profile = () => {
       )}
 
       <EditProfileModal user={user} editPfModal={editPfModal} />
+
+      {editAdrsModal && (
+        <EditAddressModal
+          modalState={editAdrsModal}
+          setModalState={setEditAdrsModal}
+        />
+      )}
 
       <Header isLoggedIn username={user.name} />
       <MainProfile>

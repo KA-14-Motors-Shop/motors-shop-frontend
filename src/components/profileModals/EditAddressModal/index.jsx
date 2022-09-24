@@ -1,8 +1,16 @@
-import { useState } from "react";
 import AnuncioModal from "../../modal";
+import { EditAdrsContainer } from "./styles";
 
-const EditAddressModal = () => {
-  return <AnuncioModal></AnuncioModal>;
+const EditAddressModal = ({ modalState, setModalState }) => {
+  return (
+    <EditAdrsContainer>
+      <AnuncioModal
+        title="Editar endereço"
+        modalState={modalState}
+        setModalState={setModalState}
+      ></AnuncioModal>
+    </EditAdrsContainer>
+  );
 };
 
 export default EditAddressModal;
