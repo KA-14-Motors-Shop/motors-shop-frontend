@@ -23,8 +23,7 @@ const Header = ({ isLoggedIn = false, username }) => {
   const location = useLocation();
 
   const { handleLogout } = useContext(AuthContext);
-  const { setFromOtherPageModal, setEditPfModal } =
-    useContext(EditPfModalContext);
+  const { setEditPfOtherPage, setEditPfModal } = useContext(EditPfModalContext);
 
   useEffect(() => {
     const closeDropdown = (e) => {
@@ -43,7 +42,7 @@ const Header = ({ isLoggedIn = false, username }) => {
       return setEditPfModal(true);
     }
     history.push("/profile");
-    setFromOtherPageModal(true);
+    setEditPfOtherPage(true);
   };
 
   return (
