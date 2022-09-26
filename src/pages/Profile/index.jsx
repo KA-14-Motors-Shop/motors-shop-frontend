@@ -133,6 +133,7 @@ const Profile = () => {
         <EditAddressModal
           modalState={editAdrsModal}
           setModalState={setEditAdrsModal}
+          user={user}
         />
       )}
 

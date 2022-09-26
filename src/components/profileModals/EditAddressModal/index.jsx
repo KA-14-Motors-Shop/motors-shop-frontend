@@ -3,8 +3,10 @@ import { EditAdrsContainer } from "./styles";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import Input from "../../input";
+import Button from "../../Button";
 
-const EditAddressModal = ({ modalState, setModalState }) => {
+const EditAddressModal = ({ modalState, setModalState, user }) => {
   const schema = yup.object().shape({
     cep: yup.string(),
     state: yup.string(),
@@ -38,6 +40,96 @@ const EditAddressModal = ({ modalState, setModalState }) => {
           onSubmit={handleSubmit(onSubmitFunction)}
         >
           <h6>Informações de endereço</h6>
+
+          <div className="single__input__field__div">
+            <Input
+              label="CEP"
+              register={register}
+              name="cep"
+              errored={errors.cep}
+              height="48px"
+              inputOrNot={true}
+              placeholder={user.address.cep}
+            />
+          </div>
+
+          <div className="double__input__fields__div">
+            <Input
+              label="Estado"
+              register={register}
+              name="state"
+              errored={errors.state}
+              height="48px"
+              inputOrNot={true}
+              placeholder={user.address.state}
+            />
+
+            <Input
+              label="Cidade"
+              register={register}
+              name="city"
+              errored={errors.city}
+              height="48px"
+              inputOrNot={true}
+              placeholder={user.address.city}
+            />
+          </div>
+
+          <div className="single__input__field__div">
+            <Input
+              label="Rua"
+              register={register}
+              name="street"
+              errored={errors.street}
+              height="48px"
+              inputOrNot={true}
+              placeholder={user.address.street}
+            />
+          </div>
+
+          <div className="double__input__fields__div">
+            <Input
+              label="Número"
+              register={register}
+              name="number"
+              errored={errors.number}
+              height="48px"
+              inputOrNot={true}
+              placeholder={user.address.number}
+            />
+
+            <Input
+              label="Complemento"
+              register={register}
+              name="complement"
+              errored={errors.complement}
+              height="48px"
+              inputOrNot={true}
+              placeholder={user.address.complement}
+            />
+          </div>
+
+          <div className="editadrs__btns__container">
+            <Button
+              type="button"
+              fontColor="var(--grey-2)"
+              bgColor="var(--grey-6)"
+              borderColor="var(--grey-6)"
+              onClick={() => setModalState(false)}
+            >
+              Cancelar
+            </Button>
+
+            <Button
+              type="submit"
+              bgColor="var(--brand-3)"
+              borderColor="var(--brand-3)"
+              fontColor="var(--brand-4)"
+              width="180px"
+            >
+              Salvar alterações
+            </Button>
+          </div>
         </form>
       </AnuncioModal>
     </EditAdrsContainer>
