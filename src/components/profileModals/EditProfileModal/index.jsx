@@ -136,7 +136,6 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.description}
             placeholder={user?.description}
-            inputOrNot={true}
           />
 
           <div className="edit__profile__btns__container">

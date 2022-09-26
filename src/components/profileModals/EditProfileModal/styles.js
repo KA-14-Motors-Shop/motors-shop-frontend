@@ -12,6 +12,10 @@ export const EditProfileContainer = styled.div`
   top: 120px;
   z-index: 1;
 
+  textarea {
+    font-size: 14px;
+  }
+
   .close__icon {
     cursor: pointer;
     margin-right: 20px;
