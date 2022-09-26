@@ -81,6 +81,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.name}
             placeholder={user?.name}
+            inputOrNot={true}
           />
 
           <Input
@@ -91,6 +92,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.email}
             placeholder={user?.email}
+            inputOrNot={true}
           />
 
           <Input
@@ -101,6 +103,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.cpf}
             placeholder={user?.cpf}
+            inputOrNot={true}
           />
 
           <Input
@@ -111,6 +114,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.cellphone}
             placeholder={user?.cell_phone}
+            inputOrNot={true}
           />
 
           <Input
@@ -121,6 +125,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.birthday}
             placeholder={user?.birthday}
+            inputOrNot={true}
           />
 
           <Input
@@ -131,6 +136,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.description}
             placeholder={user?.description}
+            inputOrNot={true}
           />
 
           <div className="edit__profile__btns__container">
