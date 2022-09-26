@@ -21,7 +21,7 @@ export const EditProfileContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 18px;
+    padding-top: 30px;
     padding-left: 20px;
   }
 
