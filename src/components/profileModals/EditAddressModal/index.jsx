@@ -29,16 +29,17 @@ const EditAddressModal = ({ modalState, setModalState, user }) => {
   });
 
   const onSubmitFunction = (data) => {
-    for (const [key, value] of Object.entries(data)) {
-      if (!value) {
-        delete data[key];
-      }
-    }
     const isEmpty = Object.values(data).every((v) => v === "" || v === null);
 
     if (isEmpty) {
       setModalState(false);
       return toast.info("Campos vazios, nenhuma alteração feita.");
+    }
+
+    for (const [key, value] of Object.entries(data)) {
+      if (!value) {
+        delete data[key];
+      }
     }
 
     console.log(data);

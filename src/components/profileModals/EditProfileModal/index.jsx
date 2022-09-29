@@ -42,17 +42,17 @@ const EditProfileModal = ({ user, setMakeGet, makeGet }) => {
   }, [editPfModal]);
 
   const handleEditProfile = (data) => {
-    for (const [key, value] of Object.entries(data)) {
-      if (!value) {
-        delete data[key];
-      }
-    }
-
     const isEmpty = Object.values(data).every((v) => v === "");
 
     if (isEmpty) {
       setEditPfModal(false);
       return toast.info("Campos vazios, nenhuma alteração feita.");
+    }
+
+    for (const [key, value] of Object.entries(data)) {
+      if (!value) {
+        delete data[key];
+      }
     }
 
     apiDeploy
