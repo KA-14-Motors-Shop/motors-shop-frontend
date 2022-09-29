@@ -52,7 +52,7 @@ const Header = ({ isLoggedIn = false, username }) => {
 
   const handleEditAdrsModal = () => {
     if (location.pathname === "/profile") {
-      setEditAdrsModal(true);
+      return setEditAdrsModal(true);
     }
     history.push("/profile");
     setEditAdrsOtherPage(true);
