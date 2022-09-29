@@ -66,7 +66,11 @@ const EditProfileModal = ({ user, setMakeGet, makeGet }) => {
         setMakeGet(!makeGet);
         toast.success("Usuário atualizado com sucesso!");
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        toast.error(
+          "Algum erro ocorreu durante a atualização de usuário, por favor tente novamente mais tarde"
+        )
+      );
   };
 
   return (
