@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import Input from "../../input";
 import Button from "../../Button";
+import { toast } from "react-toastify";
 
 const EditAddressModal = ({ modalState, setModalState, user }) => {
   const schema = yup.object().shape({
@@ -12,7 +13,10 @@ const EditAddressModal = ({ modalState, setModalState, user }) => {
     state: yup.string(),
     city: yup.string(),
     street: yup.string(),
-    number: yup.number(),
+    number: yup
+      .number()
+      .nullable(true)
+      .transform((val) => (val === Number(val) ? val : null)),
     complement: yup.string(),
   });
 
@@ -25,6 +29,18 @@ const EditAddressModal = ({ modalState, setModalState, user }) => {
   });
 
   const onSubmitFunction = (data) => {
+    for (const [key, value] of Object.entries(data)) {
+      if (!value) {
+        delete data[key];
+      }
+    }
+    const isEmpty = Object.values(data).every((v) => v === "");
+
+    if (isEmpty) {
+      setModalState(false);
+      return toast.info("Campos vazios, nenhuma alteração feita.");
+    }
+
     console.log(data);
   };
 
