@@ -12,7 +12,7 @@ import { apiDeploy } from "../../../services/api";
 import { AuthContext } from "../../../providers/auth";
 import { toast } from "react-toastify";
 
-const EditProfileModal = ({ user }) => {
+const EditProfileModal = ({ user, setMakeGet, makeGet }) => {
   const schema = yup.object().shape({
     name: yup.string(),
     email: yup.string().email("Email invalido"),
@@ -53,7 +53,11 @@ const EditProfileModal = ({ user }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => toast.success("Usuário atualizado com sucesso"))
+      .then((res) => {
+        setEditPfModal(false);
+        setMakeGet(!makeGet);
+        toast.success("Usuário atualizado com sucesso!");
+      })
       .catch((err) => console.log(err));
   };
 

@@ -127,7 +127,12 @@ const Profile = () => {
         />
       )}
 
-      <EditProfileModal user={user} editPfModal={editPfModal} />
+      <EditProfileModal
+        user={user}
+        editPfModal={editPfModal}
+        setMakeGet={setMakeGet}
+        makeGet={makeGet}
+      />
 
       {editAdrsModal && (
         <EditAddressModal
