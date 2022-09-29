@@ -47,6 +47,14 @@ const EditProfileModal = ({ user, setMakeGet, makeGet }) => {
         delete data[key];
       }
     }
+
+    const isEmpty = Object.values(data).every((v) => v === "");
+
+    if (isEmpty) {
+      setEditPfModal(false);
+      return toast.info("Campos vazios, nenhuma alteração feita.");
+    }
+
     apiDeploy
       .patch("/users", data, {
         headers: {
