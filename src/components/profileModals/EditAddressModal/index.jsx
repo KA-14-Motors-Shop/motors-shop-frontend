@@ -34,7 +34,7 @@ const EditAddressModal = ({ modalState, setModalState, user }) => {
         delete data[key];
       }
     }
-    const isEmpty = Object.values(data).every((v) => v === "");
+    const isEmpty = Object.values(data).every((v) => v === "" || v === null);
 
     if (isEmpty) {
       setModalState(false);
