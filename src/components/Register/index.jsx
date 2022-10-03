@@ -96,7 +96,10 @@ const CardRegister = () => {
   };
 
   return (
-    <CardRegisterContainer onSubmit={handleSubmit(onSubmitFunction, onErrors)}>
+    <CardRegisterContainer
+      data-testid="Register-Container"
+      onSubmit={handleSubmit(onSubmitFunction, onErrors)}
+    >
       {showModal && (
         <SucessoModal
           style={{ right: 0, top: 0 }}

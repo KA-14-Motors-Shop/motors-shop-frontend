@@ -295,6 +295,10 @@ export const ProductMain = styled.main`
       font-weight: 400;
       color: var(--grey-2);
     }
+
+    button {
+      margin-top: 15px;
+    }
   }
 
   .create-comment-div {
