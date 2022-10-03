@@ -15,6 +15,7 @@ import { apiDeploy } from "../../services/api";
 import DeleteAdModal from "../../components/profileModals/DeleteAd";
 import EditProfileModal from "../../components/profileModals/EditProfileModal";
 import { EditPfModalContext } from "../../providers/editPfModal";
+import EditAddressModal from "../../components/profileModals/EditAddressModal";
 
 const Profile = () => {
   const { authenticated, token, setAuthenticated } = useContext(AuthContext);
@@ -32,8 +33,12 @@ const Profile = () => {
   const {
     setEditPfModal,
     editPfModal,
-    fromOtherPageModal,
-    setFromOtherPageModal,
+    editPfOtherPage,
+    setEditPfOtherPage,
+    editAdrsModal,
+    setEditAdrsModal,
+    editAdrsOtherPage,
+    setEditAdrsOtherPage,
   } = useContext(EditPfModalContext);
 
   useEffect(() => {
@@ -60,9 +65,14 @@ const Profile = () => {
         );
         localStorage.setItem("@MotorShop:user", JSON.stringify(resp.data));
 
-        if (fromOtherPageModal) {
+        if (editPfOtherPage) {
           setEditPfModal(true);
-          setFromOtherPageModal(false);
+          setEditPfOtherPage(false);
+        }
+
+        if (editAdrsOtherPage) {
+          setEditAdrsModal(true);
+          setEditAdrsOtherPage(false);
         }
       })
       .catch((err) => {
@@ -117,7 +127,22 @@ const Profile = () => {
         />
       )}
 
-      <EditProfileModal user={user} editPfModal={editPfModal} />
+      <EditProfileModal
+        user={user}
+        editPfModal={editPfModal}
+        setMakeGet={setMakeGet}
+        makeGet={makeGet}
+      />
+
+      {editAdrsModal && (
+        <EditAddressModal
+          modalState={editAdrsModal}
+          setModalState={setEditAdrsModal}
+          user={user}
+          setMakeGet={setMakeGet}
+          makeGet={makeGet}
+        />
+      )}
 
       <Header isLoggedIn username={user.name} />
       <MainProfile>

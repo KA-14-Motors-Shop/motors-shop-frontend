@@ -8,8 +8,11 @@ import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { EditPfModalContext } from "../../../providers/editPfModal";
 import { useEffect } from "react";
+import { apiDeploy } from "../../../services/api";
+import { AuthContext } from "../../../providers/auth";
+import { toast } from "react-toastify";
 
-const EditProfileModal = ({ user }) => {
+const EditProfileModal = ({ user, setMakeGet, makeGet }) => {
   const schema = yup.object().shape({
     name: yup.string(),
     email: yup.string().email("Email invalido"),
@@ -20,6 +23,7 @@ const EditProfileModal = ({ user }) => {
   });
 
   const { editPfModal, setEditPfModal } = useContext(EditPfModalContext);
+  const { token } = useContext(AuthContext);
 
   const {
     register,
@@ -38,7 +42,35 @@ const EditProfileModal = ({ user }) => {
   }, [editPfModal]);
 
   const handleEditProfile = (data) => {
-    console.log(data);
+    const isEmpty = Object.values(data).every((v) => v === "");
+
+    if (isEmpty) {
+      setEditPfModal(false);
+      return toast.info("Campos vazios, nenhuma alteração feita.");
+    }
+
+    for (const [key, value] of Object.entries(data)) {
+      if (!value) {
+        delete data[key];
+      }
+    }
+
+    apiDeploy
+      .patch("/users", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setEditPfModal(false);
+        setMakeGet(!makeGet);
+        toast.success("Usuário atualizado com sucesso!");
+      })
+      .catch((err) =>
+        toast.error(
+          "Algum erro ocorreu durante a atualização de usuário, por favor tente novamente mais tarde"
+        )
+      );
   };
 
   return (
@@ -65,6 +97,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.name}
             placeholder={user?.name}
+            inputOrNot={true}
           />
 
           <Input
@@ -75,6 +108,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.email}
             placeholder={user?.email}
+            inputOrNot={true}
           />
 
           <Input
@@ -85,6 +119,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.cpf}
             placeholder={user?.cpf}
+            inputOrNot={true}
           />
 
           <Input
@@ -95,6 +130,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.cellphone}
             placeholder={user?.cell_phone}
+            inputOrNot={true}
           />
 
           <Input
@@ -105,6 +141,7 @@ const EditProfileModal = ({ user }) => {
             register={register}
             errored={errors?.birthday}
             placeholder={user?.birthday}
+            inputOrNot={true}
           />
 
           <Input

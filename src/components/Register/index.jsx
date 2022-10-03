@@ -16,8 +16,7 @@ import SucessoModal from "../successModal";
 const CardRegister = () => {
   const [account, setAccount] = useState("buyer");
   const [showModal, setShowModal] = useState(false);
-  const history = useHistory()
-
+  const history = useHistory();
 
   const schema = yup.object().shape({
     name: yup.string().required("Nome e um campo obrigatorio"),
@@ -51,7 +50,6 @@ const CardRegister = () => {
   });
 
   const onSubmitFunction = async (data) => {
-console.log(data.description)
     const newData = {
       name: data.name,
       cpf: data.cpf,
@@ -61,18 +59,17 @@ console.log(data.description)
       cell_phone: data.cell_phone,
       birthday: data.birthday,
       type: account,
-  
+
       address: {
         cep: data.cep,
         state: data.state,
         city: data.city,
         street: data.street,
         number: data.number,
-        complement: data.complement
+        complement: data.complement,
       },
-    }
+    };
     delete newData.confirm_password;
-
 
     const response = await apiCep
       .get(`${Number(data.cep)}/json/`)
@@ -80,38 +77,40 @@ console.log(data.description)
         toast.error("Este cep é inválido. Tente novamente.");
       });
 
-
-    if(response){
+    if (response) {
       apiDeploy
-      .post("/users",newData)
-      .then((response)=>{
-        setShowModal(!showModal)
-        toast.success("Usuário criado com sucesso!")
-      })
-      .catch((err) =>{
-        toast.error(err)
-        console.log(err)
-      });
-
+        .post("/users", newData)
+        .then((response) => {
+          setShowModal(!showModal);
+          toast.success("Usuário criado com sucesso!");
+        })
+        .catch((err) => {
+          toast.error(err);
+          console.log(err);
+        });
     }
   };
-
 
   const onErrors = (er) => {
     console.log(er);
   };
 
   return (
-    <CardRegisterContainer  data-testid="Register-Container" onSubmit={handleSubmit(onSubmitFunction, onErrors)}>
-        {showModal && (
-          <SucessoModal  style={{right:0, top:0}}
-            data-testid="Register-Container"
-            title={"Usuário criado com sucesso!"}
-            modalState={showModal}
-            setModalState={setShowModal} >
-           <h3 id="h3-modal">Seu usuário foi registrado com sucesso!</h3>
-           <p>Agora você poderá ver seus negócios crescendo em grande escala!</p>
-           <Button
+    <CardRegisterContainer
+      data-testid="Register-Container"
+      onSubmit={handleSubmit(onSubmitFunction, onErrors)}
+    >
+      {showModal && (
+        <SucessoModal
+          style={{ right: 0, top: 0 }}
+          data-testid="Register-Container"
+          title={"Usuário criado com sucesso!"}
+          modalState={showModal}
+          setModalState={setShowModal}
+        >
+          <h3 id="h3-modal">Seu usuário foi registrado com sucesso!</h3>
+          <p>Agora você poderá ver seus negócios crescendo em grande escala!</p>
+          <Button
             className="btn-finalizar"
             bgColor={"var(--brand-1)"}
             borderColor={"var(--brand-1)"}
@@ -119,12 +118,12 @@ console.log(data.description)
             type="submit"
             width={"150px"}
             height={"38px"}
-            onClick={()=> history.push("/login")}
-           >
+            onClick={() => history.push("/login")}
+          >
             Voltar para Login
-           </Button>
-          </SucessoModal>
-        )}
+          </Button>
+        </SucessoModal>
+      )}
       <h2>Cadastro</h2>
       <p>Informações pessoais</p>
       <Input
@@ -275,9 +274,13 @@ console.log(data.description)
           <Button
             onClick={() => setAccount("buyer")}
             className="btn-comprador"
-            bgColor={account === "buyer" ? ("var(--brand-1)") : ("var(--grey-4)")}
-            borderColor={account === "buyer" ? ("var(--brand-1)") : ("var(--grey-4)")}
-            fontColor={account === "buyer" ? ("var(--white-fixed)") : ("var(--grey-0)")}
+            bgColor={account === "buyer" ? "var(--brand-1)" : "var(--grey-4)"}
+            borderColor={
+              account === "buyer" ? "var(--brand-1)" : "var(--grey-4)"
+            }
+            fontColor={
+              account === "buyer" ? "var(--white-fixed)" : "var(--grey-0)"
+            }
             type={"button"}
             width={"140px"}
             height={"48px"}
@@ -286,9 +289,13 @@ console.log(data.description)
           </Button>
           <Button
             onClick={() => setAccount("seller")}
-            bgColor={account === "seller" ? ("var(--brand-1)") : ("var(--grey-4)")}
-            borderColor={account === "seller" ? ("var(--brand-1)") : ("var(--grey-4)")}
-            fontColor={account === "seller" ? ("var(--white-fixed)") : ("var(--grey-0)")}
+            bgColor={account === "seller" ? "var(--brand-1)" : "var(--grey-4)"}
+            borderColor={
+              account === "seller" ? "var(--brand-1)" : "var(--grey-4)"
+            }
+            fontColor={
+              account === "seller" ? "var(--white-fixed)" : "var(--grey-0)"
+            }
             type={"button"}
             width={"140px"}
             height={"48px"}
