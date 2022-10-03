@@ -139,6 +139,8 @@ const Profile = () => {
           modalState={editAdrsModal}
           setModalState={setEditAdrsModal}
           user={user}
+          setMakeGet={setMakeGet}
+          makeGet={makeGet}
         />
       )}
 

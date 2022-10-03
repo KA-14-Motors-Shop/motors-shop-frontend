@@ -6,8 +6,17 @@ import { useForm } from "react-hook-form";
 import Input from "../../input";
 import Button from "../../Button";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../../providers/auth";
+import { useContext } from "react";
+import { apiDeploy } from "../../../services/api";
 
-const EditAddressModal = ({ modalState, setModalState, user }) => {
+const EditAddressModal = ({
+  modalState,
+  setModalState,
+  user,
+  setMakeGet,
+  makeGet,
+}) => {
   const schema = yup.object().shape({
     cep: yup.string(),
     state: yup.string(),
@@ -19,6 +28,8 @@ const EditAddressModal = ({ modalState, setModalState, user }) => {
       .transform((val) => (val === Number(val) ? val : null)),
     complement: yup.string(),
   });
+
+  const { token } = useContext(AuthContext);
 
   const {
     register,
@@ -41,8 +52,26 @@ const EditAddressModal = ({ modalState, setModalState, user }) => {
         delete data[key];
       }
     }
-
-    console.log(data);
+    apiDeploy
+      .patch(
+        "/users",
+        { address: { ...data } },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        setModalState(false);
+        setMakeGet(!makeGet);
+        toast.success("Endereço atualizado com sucesso!");
+      })
+      .catch((err) =>
+        toast.error(
+          "Algum erro ocorreu durante a atualização de endereço, por favor tente novamente mais tarde"
+        )
+      );
   };
 
   return (
