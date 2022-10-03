@@ -84,13 +84,19 @@ const Header = ({ isLoggedIn = false, username }) => {
               <div className="d_user_name_txt">{username}</div>
 
               <DropdownMenu top={"4.5em"} right={"2.5em"} isActive={ddownMenu}>
+                <div
+                  className="ddown_item"
+                  onClick={() => history.push("/profile")}
+                >
+                  Meu perfil
+                </div>
                 <div className="ddown_item" onClick={handleEditPfModal}>
                   Editar perfil
                 </div>
                 <div className="ddown_item" onClick={handleEditAdrsModal}>
                   Editar endereço
                 </div>
-                <div className="ddown_item">Minhas compras</div>
+
                 <div
                   className="ddown_item"
                   onClick={() => handleLogout(history)}
