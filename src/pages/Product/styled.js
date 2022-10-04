@@ -201,6 +201,7 @@ export const ProductMain = styled.main`
   .owner-div {
     width: 95%;
     max-width: 440px;
+    max-height: 426px;
     background-color: var(--white-fixed);
     border-radius: 4px;
     display: flex;
@@ -226,6 +227,10 @@ export const ProductMain = styled.main`
       text-align: justify;
       color: var(--grey-2);
       max-width: 352px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
 
     button {
