@@ -23,9 +23,9 @@ export const GenericModal = styled.div`
     top: 120px;
     z-index: 10;
     overflow-y: ${({ modalType, height }) =>
-      modalType === "CreateAd" && height <= 1205
+      modalType === "CreateAd" && Number(height.slice(0, -2)) <= 1205
         ? "scroll"
-        : modalType === "UpdateAd" && height <= 1528
+        : modalType === "UpdateAd" && Number(height.slice(0, -2)) <= 1528
         ? "scroll"
         : "initial"};
     max-height: calc(100% - 140px);
