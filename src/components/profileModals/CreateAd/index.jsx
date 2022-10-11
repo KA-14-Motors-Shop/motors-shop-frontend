@@ -99,6 +99,7 @@ const CreateAdModal = ({ modalState, setModalState, makeGet, setMakeGet }) => {
         title={"Criar anúncio"}
         modalState={modalState}
         setModalState={setModalState}
+        modalType={"CreateAd"}
       >
         <form onSubmit={handleSubmit(onSubmitFunction)}>
           <h6>Tipo de anúncio</h6>
