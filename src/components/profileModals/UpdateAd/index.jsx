@@ -145,6 +145,7 @@ const UpdateAdModal = ({
         title={"Editar anúncio"}
         modalState={modalState}
         setModalState={setModalState}
+        modalType={"UpdateAd"}
       >
         <form onSubmit={handleSubmit(onSubmitFunction)}>
           <h6>Tipo de anúncio</h6>

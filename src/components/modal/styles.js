@@ -5,6 +5,7 @@ export const GenericModal = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
+  z-index: 1;
   width: 100%;
   height: ${(props) => props.height};
   background: rgba(0, 0, 0, 0.5);
@@ -20,7 +21,14 @@ export const GenericModal = styled.div`
     border-radius: 8px;
     position: absolute;
     top: 120px;
-    z-index: 1;
+    z-index: 10;
+    overflow-y: ${({ modalType, height }) =>
+      modalType === "CreateAd" && height <= 1205
+        ? "scroll"
+        : modalType === "UpdateAd" && height <= 1528
+        ? "scroll"
+        : "auto"};
+    max-height: calc(100% - 140px);
 
     .modal-header-div {
       margin-top: 30px;

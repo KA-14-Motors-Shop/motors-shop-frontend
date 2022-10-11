@@ -42,7 +42,7 @@ const ProductPage = () => {
         setFrontImages(resp.data.images.find(({ is_front }) => is_front));
         setGallery(resp.data.images.filter(({ is_front }) => !is_front));
         setOwner(resp.data.owner);
-        setComments(resp.data.comments);
+        setComments(resp.data.comments.reverse());
         window.scrollTo(0, 0);
       })
       .catch((err) => console.log(err));

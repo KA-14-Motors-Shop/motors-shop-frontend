@@ -5,9 +5,5 @@ export const apiCep = axios.create({
 });
 
 export const apiDeploy = axios.create({
-  baseURL: "https://motors-shop.herokuapp.com/",
-});
-
-export const apiLocal = axios.create({
-  baseURL: "http://localhost:3001/",
+  baseURL: "https://motors-shop-production.up.railway.app/",
 });
