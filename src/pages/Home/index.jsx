@@ -3,12 +3,13 @@ import HomeHeader from "../../components/HomeHeader";
 import MainHome from "./styled";
 import ProductCard from "../../components/Cards/ProductCard";
 import Footer from "../../components/Footer";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AdvertisementsContext } from "../../providers/advertisements";
 import { AuthContext } from "../../providers/auth";
 
 const Home = () => {
-  const { advertisements } = useContext(AdvertisementsContext);
+  const { advertisements, getAdvertisements, setGetAdvertisements } =
+    useContext(AdvertisementsContext);
 
   const { authenticated } = useContext(AuthContext);
 
@@ -23,6 +24,10 @@ const Home = () => {
   );
 
   const user = JSON.parse(localStorage.getItem("@MotorShop:user"));
+
+  useEffect(() => {
+    setGetAdvertisements(!getAdvertisements);
+  }, []);
 
   return (
     <>

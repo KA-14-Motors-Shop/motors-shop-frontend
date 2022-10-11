@@ -27,7 +27,7 @@ export const GenericModal = styled.div`
         ? "scroll"
         : modalType === "UpdateAd" && height <= 1528
         ? "scroll"
-        : "auto"};
+        : "initial"};
     max-height: calc(100% - 140px);
 
     .modal-header-div {

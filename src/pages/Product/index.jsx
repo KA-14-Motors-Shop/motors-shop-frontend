@@ -83,7 +83,9 @@ const ProductPage = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((_) => {
-        toast.success("Comentário criado!");
+        toast.success(
+          product.type === "sale" ? "Comentário criado!" : "Lançe enviado!"
+        );
         setMakeGet(!makeGet);
       })
       .catch((err) => console.log(err));
@@ -91,11 +93,15 @@ const ProductPage = () => {
 
   const commentDisable = () => {
     if (!authenticated) {
-      return toast.error("Faça o login para comentar!");
+      return toast.error("Faça o login!");
     }
 
     if (user.id === owner.id) {
-      return toast.error("Você não pode comentar no seu próprio anúncio!");
+      return toast.error(
+        `Você não pode ${
+          product.type === "sale" ? "comentar" : "dar lançes"
+        } no seu próprio anúncio!`
+      );
     }
   };
 
