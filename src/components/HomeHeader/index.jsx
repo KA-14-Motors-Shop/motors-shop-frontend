@@ -21,7 +21,6 @@ const HomeHeader = ({ isLoggedIn = false, username }) => {
             borderColor="var(--grey-10)"
             bgColor="transparent"
             fontColor="var(--grey-10)"
-            onHoverColor="var(--grey-4)"
           >
             Leilão
           </Button>
@@ -32,7 +31,6 @@ const HomeHeader = ({ isLoggedIn = false, username }) => {
             borderColor="var(--grey-10)"
             bgColor="transparent"
             fontColor="var(--grey-10)"
-            onHoverColor="var(--grey-4)"
           >
             Carros
           </Button>
@@ -43,7 +41,6 @@ const HomeHeader = ({ isLoggedIn = false, username }) => {
             borderColor="var(--grey-10)"
             bgColor="transparent"
             fontColor="var(--grey-10)"
-            onHoverColor="var(--grey-4)"
           >
             Motos
           </Button>

@@ -177,7 +177,6 @@ const EditProfileModal = ({ user, setMakeGet, makeGet }) => {
               borderColor="var(--brand-1)"
               fontColor="var(--grey-10)"
               fontSize="14px"
-              onHoverColor="var(--brand-3)"
             >
               Salvar alterações
             </Button>

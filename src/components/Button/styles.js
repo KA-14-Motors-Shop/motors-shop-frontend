@@ -9,9 +9,4 @@ export const StyledButton = styled.button`
   border-radius: 4px;
   font-size: ${(props) => props.fontSize};
   font-weight: 600;
-
-  :hover {
-    transition: 0.3s;
-    background-color: ${(props) => props.onHoverColor && props.onHoverColor};
-  }
 `;
