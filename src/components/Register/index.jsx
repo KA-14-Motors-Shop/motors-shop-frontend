@@ -19,26 +19,26 @@ const CardRegister = () => {
   const history = useHistory();
 
   const schema = yup.object().shape({
-    name: yup.string().required("Nome e um campo obrigatorio"),
-    email: yup.string().required("email e um campo obrigatorio").email(),
-    cpf: yup.string().required("CPF e um campo obrigatorio"),
-    cell_phone: yup.string().required("Celular e um campo obrigatorio"),
+    name: yup.string().required("Nome é um campo obrigatório"),
+    email: yup.string().required("Email é um campo obrigatório").email(),
+    cpf: yup.string().required("CPF é um campo obrigatório"),
+    cell_phone: yup.string().required("Celular é um campo obrigatório"),
     birthday: yup
       .string()
-      .required("Data de Nascimento e um campo obrigatorio"),
-    description: yup.string().required("Descricao e um campo obrigatorio"),
-    cep: yup.string().required("CEP e um campo obrigatorio"),
-    state: yup.string().required("Estado e um campo obrigatorio"),
-    city: yup.string().required("Cidade e um campo obrigatorio"),
-    street: yup.string().required("Rua e um campo obrigatorio"),
-    number: yup.number().required("Numero e um campo obrigatorio"),
-    complement: yup.string(),
+      .required("Data de Nascimento é um campo obrigatório"),
+    description: yup.string().required("Descricao é um campo obrigatório"),
+    cep: yup.string().required("CEP é um campo obrigatório"),
+    state: yup.string().required("Estado é um campo obrigatório"),
+    city: yup.string().required("Cidade é um campo obrigatório"),
+    street: yup.string().required("Rua é um campo obrigatório"),
+    number: yup.number().required("Numero é um campo obrigatório"),
+    complement: yup.string().required("Complemento é um campo obrigatório"),
     type: yup.string(),
-    password: yup.string().required("Senha e um campo obrigatorio"),
+    password: yup.string().required("Senha é um campo obrigatório"),
     confirm_password: yup
       .string()
       .oneOf([yup.ref("password")], "As senhas devem coincidir")
-      .required("Senha e um campo obrigatorio"),
+      .required("Senha é um campo obrigatório"),
   });
 
   const {
@@ -50,18 +50,20 @@ const CardRegister = () => {
   });
 
   const onSubmitFunction = async (data) => {
+    const dataPartes = data.birthday.split("/");
+
     const newData = {
       name: data.name,
-      cpf: data.cpf,
+      cpf: data.cpf.replace(/\D/g, ""),
       email: data.email,
       password: data.password,
       description: data.description,
-      cell_phone: data.cell_phone,
-      birthday: data.birthday,
+      cell_phone: data.cell_phone.replace(/\D/g, ""),
+      birthday: `${dataPartes[1]}/${dataPartes[0]}/${dataPartes[2]}`,
       type: account,
 
       address: {
-        cep: data.cep,
+        cep: data.cep.replace(/\D/g, ""),
         state: data.state,
         city: data.city,
         street: data.street,
@@ -71,11 +73,9 @@ const CardRegister = () => {
     };
     delete newData.confirm_password;
 
-    const response = await apiCep
-      .get(`${Number(data.cep)}/json/`)
-      .catch((err) => {
-        toast.error("Este cep é inválido. Tente novamente.");
-      });
+    const response = await apiCep.get(`${data.cep}/json/`).catch((err) => {
+      toast.error("Este cep é inválido. Tente novamente.");
+    });
 
     if (response) {
       apiDeploy
@@ -158,6 +158,7 @@ const CardRegister = () => {
         height={"48px"}
         label={"CPF"}
         placeholder={"000.000.000-00"}
+        placeholderMask={"999.999.999-99"}
       ></Input>
       <Input
         register={register}
@@ -169,6 +170,7 @@ const CardRegister = () => {
         height={"48px"}
         label={"Celular"}
         placeholder={"(DDD) 90000-0000"}
+        placeholderMask={"(99) 99999-9999"}
       ></Input>
       <Input
         register={register}
@@ -179,7 +181,8 @@ const CardRegister = () => {
         width={"315px"}
         height={"48px"}
         label={"Data de Nascimento"}
-        placeholder={"00/00/00"}
+        placeholder={"00/00/0000"}
+        placeholderMask={"99/99/9999"}
       ></Input>
       <Input
         register={register}
@@ -190,7 +193,7 @@ const CardRegister = () => {
         width={"315px"}
         height={"80px"}
         label={"Descrição"}
-        placeholder={"Digitar Descrição"}
+        placeholder={"Fale sobre você"}
       ></Input>
 
       <div className="register-down-size">
@@ -205,6 +208,7 @@ const CardRegister = () => {
           height={"48px"}
           label={"CEP"}
           placeholder={"Ex: 00000.000"}
+          placeholderMask={"99999-999"}
         ></Input>
 
         <div className="div-endereco-row">
@@ -217,7 +221,7 @@ const CardRegister = () => {
             width={"152px"}
             height={"48px"}
             label={"Estado"}
-            placeholder={"Digitar Estado"}
+            placeholder={"Ex: Pará"}
           ></Input>
           <Input
             register={register}
@@ -228,7 +232,7 @@ const CardRegister = () => {
             width={"152px"}
             height={"48px"}
             label={"Cidade"}
-            placeholder={"Digitar Cidade"}
+            placeholder={"Ex: Cotia"}
           ></Input>
         </div>
 
@@ -241,7 +245,7 @@ const CardRegister = () => {
           width={"315px"}
           height={"48px"}
           label={"Rua"}
-          placeholder={"Digitar Rua"}
+          placeholder={"Ex: Rua Abacaxi"}
         ></Input>
 
         <div className="div-endereco-row">
@@ -254,17 +258,18 @@ const CardRegister = () => {
             width={"152px"}
             height={"48px"}
             label={"Numero"}
-            placeholder={"Digitar número"}
+            placeholder={"Ex: 456"}
           ></Input>
           <Input
             register={register}
+            errored={errors.complement}
             name="complement"
             inputOrNot={true}
             className="div-input"
             width={"152px"}
             height={"48px"}
             label={"Complemento"}
-            placeholder={"Digitar complemento"}
+            placeholder={"Ex: Fundos"}
           ></Input>
         </div>
 
@@ -326,7 +331,7 @@ const CardRegister = () => {
           width={"315px"}
           height={"48px"}
           label={"Confirmar senha"}
-          placeholder={"Confirme sua melhor senha"}
+          placeholder={"Confirme sua senha"}
         ></Input>
 
         <Button

@@ -8,7 +8,6 @@ const Button = ({
   fontColor = "var(--grey-0)",
   fontSize = "16px",
   borderColor = "var(--grey-0)",
-  onHoverColor = "var(--grey-5)",
   ...rest
 }) => {
   return (
@@ -19,7 +18,6 @@ const Button = ({
       fontColor={fontColor}
       fontSize={fontSize}
       borderColor={borderColor}
-      onHoverColor={onHoverColor}
       {...rest}
     >
       {children}

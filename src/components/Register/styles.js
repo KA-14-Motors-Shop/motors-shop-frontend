@@ -1,79 +1,74 @@
 import styled from "styled-components";
 
 const CardRegisterContainer = styled.form`
-max-width: 411px;
-height: 1630px;
+  max-width: 411px;
 
-border: none ;
-border-radius: 4px;
+  border: none;
+  border-radius: 4px;
 
-background-color: var(--white-fixed);
+  background-color: var(--white-fixed);
 
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-padding: 44px 48px;
+  padding: 44px 48px;
 
-#h3-modal{
+  #h3-modal {
     margin-bottom: -30px;
-}
+  }
 
-.div-endereco-row{
+  .div-endereco-row {
     max-width: 300px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding-left: 9px;
-}
-.div-endereco-row .container div{
-padding: 5px 0; 
-}
-.div-endereco-row .container input{
-padding: 0 0 0 10px ;
-} 
+  }
+  .div-endereco-row .container div {
+    padding: 5px 0;
+  }
+  .div-endereco-row .container input {
+    padding: 0 0 0 10px;
+  }
 
-.container{
+  .container {
     margin: 10px 0px 12px 0px;
-}
+  }
 
-.container label{
+  .container label {
     /* color: var(--grey-1); */
     font-size: 17px;
-}
+  }
 
-p{
+  p {
     margin: 32px 0px 22px 0;
     font-weight: 500;
     color: var(--black-1);
-}
+  }
 
-.span-errored{
+  .span-errored {
     height: 0px;
     color: var(--alert-1);
     margin-left: 50%;
-}
+  }
 
-
-@media  (max-width: 320px){
-
+  @media (max-width: 320px) {
     width: 100%;
 
-    .btn-comprador{
-        margin-right: 10px;
+    .btn-comprador {
+      margin-right: 10px;
     }
-    .btn-finalizar{
-        width: 230px;
-
+    .btn-finalizar {
+      width: 230px;
     }
 
-    .div-endereco-row .container input{
-    padding: 0 0 0 5px ;
-    } 
-    .container label{
-    font-size: 13px;
+    .div-endereco-row .container input {
+      padding: 0 0 0 5px;
     }
-}
+    .container label {
+      font-size: 13px;
+    }
+  }
+`;
 
-`
-
-export default CardRegisterContainer
+export default CardRegisterContainer;
