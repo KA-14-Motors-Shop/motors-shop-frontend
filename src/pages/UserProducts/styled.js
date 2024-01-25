@@ -9,6 +9,7 @@ const MainProducts = styled.main`
     var(--grey-8) 84%,
     var(--brand-1) 16%
   );
+  flex-grow: 1;
 
   .user-infos-section {
     width: 95%;

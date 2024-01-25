@@ -3,6 +3,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
 import Button from "../../components/Button";
+import PageComponent from "../../components/PageComponent";
 import ProductCardAdm from "../../components/Cards/ProductCardAdm";
 import ProductCardAuctionAdm from "../../components/Cards/ProductCardAuctionAdm";
 import CreateAdModal from "../../components/profileModals/CreateAd";
@@ -97,7 +98,7 @@ const Profile = () => {
   };
 
   return (
-    <>
+    <PageComponent>
       {createAdModal && (
         <CreateAdModal
           modalState={createAdModal}
@@ -241,7 +242,7 @@ const Profile = () => {
         )}
       </MainProfile>
       <Footer />
-    </>
+    </PageComponent>
   );
 };
 

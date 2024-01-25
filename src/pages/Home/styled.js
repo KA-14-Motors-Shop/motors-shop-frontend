@@ -5,6 +5,7 @@ const MainHome = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-grow: 1;
 
   .home-section {
     display: flex;

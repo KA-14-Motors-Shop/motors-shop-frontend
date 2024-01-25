@@ -1,24 +1,21 @@
-import CardRegisterSection from "./styled"
-
-import Footer from "../../components/Footer"
-import Header from "../../components/Header"
-import CardRegister from "../../components/Register"
-
-
+import CardRegisterSection from "./styled";
+import PageComponent from "../../components/PageComponent";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import CardRegister from "../../components/Register";
 
 const RegisterUserPage = () => {
+  return (
+    <PageComponent>
+      <Header username={"Samuel Leão"}></Header>
 
-    return(
-        <>
-        <Header  username={"Samuel Leão"}></Header>
+      <CardRegisterSection className="section-register">
+        <CardRegister />
+      </CardRegisterSection>
 
-        <CardRegisterSection className="section-register">
-        <CardRegister/>
-        </CardRegisterSection>
+      <Footer />
+    </PageComponent>
+  );
+};
 
-        <Footer />
-        </>
-    )
-}
-
-export default RegisterUserPage
+export default RegisterUserPage;

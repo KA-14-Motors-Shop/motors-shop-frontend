@@ -3,6 +3,7 @@ import HomeHeader from "../../components/HomeHeader";
 import MainHome from "./styled";
 import ProductCard from "../../components/Cards/ProductCard";
 import Footer from "../../components/Footer";
+import PageComponent from "../../components/PageComponent";
 import { useContext, useEffect } from "react";
 import { AdvertisementsContext } from "../../providers/advertisements";
 import { AuthContext } from "../../providers/auth";
@@ -30,7 +31,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <PageComponent>
       <HomeHeader
         isLoggedIn={authenticated}
         username={authenticated && user.name}
@@ -98,7 +99,7 @@ const Home = () => {
         </section>
       </MainHome>
       <Footer />
-    </>
+    </PageComponent>
   );
 };
 

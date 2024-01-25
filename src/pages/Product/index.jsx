@@ -12,6 +12,7 @@ import { apiDeploy } from "../../services/api";
 import { AuthContext } from "../../providers/auth";
 import { toast } from "react-toastify";
 import { AdvertisementsContext } from "../../providers/advertisements";
+import PageComponent from "../../components/PageComponent";
 
 const ProductPage = () => {
   const { authenticated, token } = useContext(AuthContext);
@@ -136,7 +137,7 @@ const ProductPage = () => {
   const history = useHistory();
 
   return (
-    <>
+    <PageComponent>
       <ModalContainer>
         {galleryModal && (
           <AnuncioModal
@@ -432,7 +433,7 @@ const ProductPage = () => {
         </section>
       </ProductMain>
       <Footer />
-    </>
+    </PageComponent>
   );
 };
 

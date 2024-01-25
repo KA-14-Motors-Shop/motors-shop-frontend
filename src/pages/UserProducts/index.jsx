@@ -3,6 +3,7 @@ import ProductCard from "../../components/Cards/ProductCard";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import DefaultProfilePicture from "../../components/DefaultProfilePicture";
+import PageComponent from "../../components/PageComponent";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { apiDeploy } from "../../services/api";
@@ -42,7 +43,7 @@ const UserProduct = () => {
   }, [params.id]);
 
   return (
-    <>
+    <PageComponent>
       <Header
         isLoggedIn={authenticated}
         username={authenticated && user.name}
@@ -109,7 +110,7 @@ const UserProduct = () => {
         )}
       </MainProducts>
       <Footer />
-    </>
+    </PageComponent>
   );
 };
 

@@ -6,6 +6,7 @@ export const HeaderLowerContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 20px;
 
   .lower_header_h2 {
     font-family: "Lexend", sans-serif;
