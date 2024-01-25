@@ -6,6 +6,7 @@ const FooterContainer = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 75px;
 
   h3 {
     margin-top: 45px;

@@ -46,6 +46,7 @@ export const ProductMain = styled.main`
   );
   display: flex;
   justify-content: center;
+  flex-grow: 1;
 
   .product-infos-section {
     display: flex;
