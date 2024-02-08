@@ -1,8 +1,12 @@
 import { HeaderLowerContainer } from "./styles";
 import Button from "../Button";
 import Header from "../Header";
+import { useContext } from "react";
+import { AdFilterContext } from "../../providers/adFilter";
 
 const HomeHeader = ({ isLoggedIn = false, username }) => {
+  const { setAdFilter } = useContext(AdFilterContext);
+
   return (
     <>
       <Header isLoggedIn={isLoggedIn} username={username} />
@@ -21,6 +25,7 @@ const HomeHeader = ({ isLoggedIn = false, username }) => {
             borderColor="var(--grey-10)"
             bgColor="transparent"
             fontColor="var(--grey-10)"
+            onClick={() => setAdFilter("auction")}
           >
             Leilão
           </Button>
@@ -31,6 +36,7 @@ const HomeHeader = ({ isLoggedIn = false, username }) => {
             borderColor="var(--grey-10)"
             bgColor="transparent"
             fontColor="var(--grey-10)"
+            onClick={() => setAdFilter("car")}
           >
             Carros
           </Button>
@@ -41,8 +47,20 @@ const HomeHeader = ({ isLoggedIn = false, username }) => {
             borderColor="var(--grey-10)"
             bgColor="transparent"
             fontColor="var(--grey-10)"
+            onClick={() => setAdFilter("motorcycle")}
           >
             Motos
+          </Button>
+          <Button
+            className="lower_header_btn"
+            width="80vw"
+            height="48px"
+            borderColor="var(--grey-10)"
+            bgColor="transparent"
+            fontColor="var(--grey-10)"
+            onClick={() => setAdFilter(false)}
+          >
+            Todos
           </Button>
         </div>
       </HeaderLowerContainer>

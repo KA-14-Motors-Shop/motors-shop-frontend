@@ -12,6 +12,7 @@ const MainHome = styled.main`
     flex-direction: column;
     width: 100%;
     padding-left: 12px;
+    margin-bottom: 20px;
   }
 
   li {

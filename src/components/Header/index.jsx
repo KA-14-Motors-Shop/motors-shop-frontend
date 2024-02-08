@@ -70,9 +70,9 @@ const Header = ({ isLoggedIn = false, username }) => {
 
         <DesktopNavBar>
           <div className="desktop_inner_menu">
-            <div className="d_menu_item">Carros</div>
-            <div className="d_menu_item">Motos</div>
-            <div className="d_menu_item">Leilão</div>
+            <div className="d_menu_item" onClick={() => history.push("/")}>
+              Início
+            </div>
           </div>
           {isLoggedIn ? (
             <div
@@ -142,28 +142,48 @@ const Header = ({ isLoggedIn = false, username }) => {
         <MenuOuterContainer>
           <div className="inner_items">
             <ul className="items_ul">
-              <li className="menu_item">Carros</li>
-              <li className="menu_item">Motos</li>
-              <li className="menu_item">Leilão</li>
+              <li className="menu_item" onClick={() => history.push("/")}>
+                Início
+              </li>
             </ul>
           </div>
 
           <div className="outer_items">
             {isLoggedIn ? (
-              <>
-                <div className="m_usercontainer">
-                  <DefaultProfilePicture username={username} />
-                  <div className="m_username">{username}</div>
-                </div>
-                <ul className="items_ul">
-                  <li
-                    className="menu_item"
+              <div
+                ref={ddownRef}
+                className="d_user_container"
+                onClick={() => setDdownMenu(!ddownMenu)}
+              >
+                <DefaultProfilePicture username={username} />
+                <div className="d_user_name_txt">{username}</div>
+
+                <DropdownMenu
+                  top={"4.5em"}
+                  right={"2.5em"}
+                  isActive={ddownMenu}
+                >
+                  <div
+                    className="ddown_item"
+                    onClick={() => history.push("/profile")}
+                  >
+                    Meu perfil
+                  </div>
+                  <div className="ddown_item" onClick={handleEditPfModal}>
+                    Editar perfil
+                  </div>
+                  <div className="ddown_item" onClick={handleEditAdrsModal}>
+                    Editar endereço
+                  </div>
+
+                  <div
+                    className="ddown_item"
                     onClick={() => handleLogout(history)}
                   >
                     Sair
-                  </li>
-                </ul>
-              </>
+                  </div>
+                </DropdownMenu>
+              </div>
             ) : (
               <>
                 <ul className="items_ul">

@@ -27,7 +27,7 @@ export const HeaderUpperContainer = styled.div`
       background: none;
       margin-right: 16px;
     }
-  } ;
+  }
 `;
 
 export const DesktopNavBar = styled.div`
@@ -36,7 +36,6 @@ export const DesktopNavBar = styled.div`
   }
   display: flex;
   height: inherit;
-  width: 73vw;
   max-width: 600px;
   font-family: "Inter", sans-serif;
 
@@ -79,6 +78,9 @@ export const DesktopNavBar = styled.div`
     display: flex;
     align-items: center;
     height: inherit;
+    gap: 5px;
+    padding-right: 10px;
+
     .d_menu_login {
       height: inherit;
       display: flex;
@@ -103,6 +105,7 @@ export const DesktopNavBar = styled.div`
     justify-content: center;
     position: relative;
     cursor: pointer;
+    max-width: 332px;
 
     :hover {
       transition: 0.4s;
@@ -121,8 +124,6 @@ export const MenuOuterContainer = styled.div`
   @media (min-width: 769px) {
     display: none;
   }
-
-  height: 421px;
 
   @keyframes growDown {
     0% {
@@ -149,6 +150,7 @@ export const MenuOuterContainer = styled.div`
     color: var(--grey-2);
     padding-left: 16px;
     cursor: pointer;
+    margin-bottom: 10px;
 
     :hover {
       transition: 0.3s;
@@ -161,26 +163,42 @@ export const MenuOuterContainer = styled.div`
   }
 
   .signup_btn {
-    margin-left: 16px;
-    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    width: 93vw;
   }
 
-  .m_usercontainer {
-    height: 78px;
+  .d_user_container {
+    height: inherit;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    padding: 15px;
+
+    :hover {
+      transition: 0.4s;
+      background-color: var(--grey-6);
+    }
+
+    .d_user_name_txt {
+      margin-left: 10px;
+      color: var(--grey-2);
+      font-size: 16px;
+    }
+  }
+
+  .ddown_item {
+    padding-left: 22px;
+    color: var(--grey-2);
+    height: 50px;
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding-left: 16px;
     :hover {
       transition: 0.4s;
-      background-color: var(--grey-5);
-    }
-
-    .m_username {
-      margin-left: 10px;
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--grey-2);
+      background: var(--grey-6);
     }
   }
 `;

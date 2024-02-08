@@ -5,11 +5,11 @@ export const ModalContainer = styled.section`
     height: 239px;
     margin-top: 48px;
     margin-bottom: 28px;
-    background-color: var(--grey-7);
     border-radius: 4px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-around;
   }
 
   img {
@@ -23,8 +23,7 @@ export const ModalContainer = styled.section`
 
   .move-gallery-div {
     margin: 0;
-    position: absolute;
-    width: calc(102%);
+    width: 100%;
     display: flex;
     justify-content: space-between;
   }
@@ -191,7 +190,9 @@ export const ProductMain = styled.main`
 
     img {
       width: 100%;
-      height: 54px;
+      height: 100%;
+      border: 3px solid var(--brand-1);
+      border-radius: 10px;
     }
 
     figcaption {
