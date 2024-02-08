@@ -7,12 +7,15 @@ import PageComponent from "../../components/PageComponent";
 import { useContext, useEffect } from "react";
 import { AdvertisementsContext } from "../../providers/advertisements";
 import { AuthContext } from "../../providers/auth";
+import { AdFilterContext } from "../../providers/adFilter";
 
 const Home = () => {
   const { advertisements, getAdvertisements, setGetAdvertisements } =
     useContext(AdvertisementsContext);
 
   const { authenticated } = useContext(AuthContext);
+
+  const { adFilter } = useContext(AdFilterContext);
 
   const auctionAds = advertisements.filter(({ type }) => type === "auction");
 
@@ -37,66 +40,80 @@ const Home = () => {
         username={authenticated && user.name}
       />
       <MainHome>
-        <section className="home-section">
-          <h2>Leilão</h2>
-          <ul className="auction-list home-list">
-            {auctionAds.map((ad) => {
-              return (
-                <ProductCardAuction
-                  key={ad.id}
-                  id={ad.id}
-                  images={ad.images}
-                  title={ad.title}
-                  description={ad.description}
-                  owner={ad.owner}
-                  mileage={ad.mileage}
-                  year={ad.year}
-                  price={ad.price}
-                />
-              );
-            })}
-          </ul>
-        </section>
-        <section className="home-section car-list-section">
-          <h2>Carros</h2>
-          <ul className="home-list">
-            {carAds.map((ad) => {
-              return (
-                <ProductCard
-                  key={ad.id}
-                  id={ad.id}
-                  images={ad.images}
-                  title={ad.title}
-                  description={ad.description}
-                  owner={ad.owner}
-                  mileage={ad.mileage}
-                  year={ad.year}
-                  price={ad.price}
-                />
-              );
-            })}
-          </ul>
-        </section>
-        <section className="home-section motorcycle-list-section">
-          <h2>Motos</h2>
-          <ul className="home-list">
-            {motoAds.map((ad) => {
-              return (
-                <ProductCard
-                  key={ad.id}
-                  id={ad.id}
-                  images={ad.images}
-                  title={ad.title}
-                  description={ad.description}
-                  owner={ad.owner}
-                  mileage={ad.mileage}
-                  year={ad.year}
-                  price={ad.price}
-                />
-              );
-            })}
-          </ul>
-        </section>
+        {adFilter === "auction" || !adFilter ? (
+          <section className="home-section">
+            <h2>Leilão</h2>
+            <ul className="auction-list home-list">
+              {auctionAds.map((ad) => {
+                return (
+                  <ProductCardAuction
+                    key={ad.id}
+                    id={ad.id}
+                    images={ad.images}
+                    title={ad.title}
+                    description={ad.description}
+                    owner={ad.owner}
+                    mileage={ad.mileage}
+                    year={ad.year}
+                    price={ad.price}
+                  />
+                );
+              })}
+            </ul>
+          </section>
+        ) : (
+          ""
+        )}
+
+        {adFilter === "car" || !adFilter ? (
+          <section className="home-section car-list-section">
+            <h2>Carros</h2>
+            <ul className="home-list">
+              {carAds.map((ad) => {
+                return (
+                  <ProductCard
+                    key={ad.id}
+                    id={ad.id}
+                    images={ad.images}
+                    title={ad.title}
+                    description={ad.description}
+                    owner={ad.owner}
+                    mileage={ad.mileage}
+                    year={ad.year}
+                    price={ad.price}
+                  />
+                );
+              })}
+            </ul>
+          </section>
+        ) : (
+          ""
+        )}
+
+        {adFilter === "motorcycle" || !adFilter ? (
+          <section className="home-section motorcycle-list-section">
+            <h2>Motos</h2>
+            <ul className="home-list">
+              {motoAds.map((ad) => {
+                return (
+                  <ProductCard
+                    key={ad.id}
+                    id={ad.id}
+                    images={ad.images}
+                    title={ad.title}
+                    description={ad.description}
+                    owner={ad.owner}
+                    mileage={ad.mileage}
+                    year={ad.year}
+                    price={ad.price}
+                  />
+                );
+              })}
+            </ul>
+          </section>
+        ) : (
+          ""
+        )}
       </MainHome>
       <Footer />
     </PageComponent>

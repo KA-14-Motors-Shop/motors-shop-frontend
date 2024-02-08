@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const HeaderLowerContainer = styled.div`
-  height: 503px;
   background-color: var(--brand-2);
   display: flex;
   align-items: center;
@@ -23,7 +22,6 @@ export const HeaderLowerContainer = styled.div`
     width: 75vw;
     display: flex;
     justify-content: space-evenly;
-    max-width: 650px;
   }
 
   @media (min-width: 769px) {
@@ -43,9 +41,19 @@ export const HeaderLowerContainer = styled.div`
       font-size: 16px;
     }
   }
+  @media (max-width: 965px) {
+    .buttons_container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      width: 100vw;
+      gap: 10px;
+    }
+  }
 
   @media (max-width: 768px) {
-    height: 623px;
+    /* height: 623px; */
 
     .lower_header_btn {
       width: 80vw;
@@ -68,15 +76,6 @@ export const HeaderLowerContainer = styled.div`
       width: 80vw;
       text-align: center;
       margin-bottom: 52px;
-    }
-
-    .buttons_container {
-      display: flex;
-      height: 190px;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-around;
-      width: 100vw;
     }
   }
 `;
