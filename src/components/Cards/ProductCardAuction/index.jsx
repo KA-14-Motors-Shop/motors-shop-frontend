@@ -3,6 +3,8 @@ import { BsClock } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
 import DefaultProfilePicture from "../../DefaultProfilePicture";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const ProductCardAuction = ({
   id,
@@ -16,6 +18,31 @@ const ProductCardAuction = ({
   price,
 }) => {
   const history = useHistory();
+
+  const [counter, setCounter] = useState(7200);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounter((prevCounter) => {
+        if (prevCounter === 0) {
+          return 7200;
+        } else {
+          return prevCounter - 1;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secondsRemaining = seconds % 60;
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${secondsRemaining.toString().padStart(2, "0")}`;
+  };
 
   return (
     <CardContainer
@@ -32,7 +59,7 @@ const ProductCardAuction = ({
         <div className="auction-div">
           <div className="timer-div">
             <span>
-              <BsClock /> 01:58:00
+              <BsClock /> {formatTime(counter)}
             </span>
           </div>
 

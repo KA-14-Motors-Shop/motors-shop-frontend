@@ -91,6 +91,7 @@ const CreateAdModal = ({ modalState, setModalState, makeGet, setMakeGet }) => {
       .catch((err) => console.log(err));
 
     setModalState(!modalState);
+    document.body.style.overflow = "auto";
   };
 
   return (
@@ -301,7 +302,10 @@ const CreateAdModal = ({ modalState, setModalState, makeGet, setMakeGet }) => {
               borderColor="var(--grey-6)"
               fontColor="var(--grey-2)"
               className="cancel-button"
-              onClick={() => setModalState(!modalState)}
+              onClick={() => {
+                setModalState(!modalState);
+                document.body.style.overflow = "auto";
+              }}
             >
               Cancelar
             </Button>

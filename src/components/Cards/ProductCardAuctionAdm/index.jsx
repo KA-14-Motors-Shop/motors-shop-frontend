@@ -3,6 +3,8 @@ import { BsClock } from "react-icons/bs";
 import Button from "../../Button";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const ProductCardAuctionAdm = ({
   id,
@@ -18,6 +20,31 @@ const ProductCardAuctionAdm = ({
 }) => {
   const history = useHistory();
 
+  const [counter, setCounter] = useState(7200);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounter((prevCounter) => {
+        if (prevCounter === 0) {
+          return 7200;
+        } else {
+          return prevCounter - 1;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secondsRemaining = seconds % 60;
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${secondsRemaining.toString().padStart(2, "0")}`;
+  };
+
   return (
     <CardContainer is_active={is_active} id={id}>
       <section className="product-section">
@@ -29,7 +56,7 @@ const ProductCardAuctionAdm = ({
         <div className="auction-div">
           <div className="timer-div">
             <span>
-              <BsClock /> 01:58:00
+              <BsClock /> {formatTime(counter)}
             </span>
           </div>
 
