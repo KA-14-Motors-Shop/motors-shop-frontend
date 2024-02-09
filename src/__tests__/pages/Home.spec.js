@@ -7,6 +7,7 @@ import { apiDeploy } from "../../services/api";
 import MockAdapter from "axios-mock-adapter";
 import { AuthProvider } from "../../providers/auth";
 import { EditPfModalProvider } from "../../providers/editPfModal";
+import { AdFilterProvider } from "../../providers/adFilter";
 
 const apiMock = new MockAdapter(apiDeploy);
 
@@ -83,7 +84,9 @@ describe("Home Page Tests", () => {
       <AdvertisemenstProvider>
         <AuthProvider>
           <EditPfModalProvider>
-            <Home />
+            <AdFilterProvider>
+              <Home />
+            </AdFilterProvider>
           </EditPfModalProvider>
         </AuthProvider>
       </AdvertisemenstProvider>
@@ -107,7 +110,9 @@ describe("Home Page Tests", () => {
       <AdvertisemenstProvider>
         <AuthProvider>
           <EditPfModalProvider>
-            <Home />
+            <AdFilterProvider>
+              <Home />
+            </AdFilterProvider>
           </EditPfModalProvider>
         </AuthProvider>
       </AdvertisemenstProvider>
@@ -135,7 +140,9 @@ describe("Home Page Tests", () => {
       <AdvertisemenstProvider>
         <AuthProvider>
           <EditPfModalProvider>
-            <Home />
+            <AdFilterProvider>
+              <Home />
+            </AdFilterProvider>
           </EditPfModalProvider>
         </AuthProvider>
       </AdvertisemenstProvider>
@@ -161,7 +168,9 @@ describe("Home Page Tests", () => {
       <AdvertisemenstProvider>
         <AuthProvider>
           <EditPfModalProvider>
-            <Home />
+            <AdFilterProvider>
+              <Home />
+            </AdFilterProvider>
           </EditPfModalProvider>
         </AuthProvider>
       </AdvertisemenstProvider>
