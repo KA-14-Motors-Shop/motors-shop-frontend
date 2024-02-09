@@ -132,6 +132,7 @@ const UpdateAdModal = ({
         toast.success("Anúncio atualizado!");
         setMakeGet(!makeGet);
         setModalState(!modalState);
+        document.body.style.overflow = "auto";
       })
       .catch((err) => {
         console.log(err);

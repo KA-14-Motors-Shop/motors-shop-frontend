@@ -15,6 +15,11 @@ const AnuncioModal = ({
 
   useEffect(() => {
     setRootHeight(getComputedStyle(document.getElementById("root")).height);
+
+    if (modalState) {
+      document.body.style.overflow = "hidden";
+      window.scrollTo(0, 0);
+    }
   }, [modalState]);
 
   return (
@@ -25,6 +30,7 @@ const AnuncioModal = ({
           <IoMdClose
             onClick={() => {
               setModalState(!modalState);
+              document.body.style.overflow = "auto";
             }}
           />
         </div>

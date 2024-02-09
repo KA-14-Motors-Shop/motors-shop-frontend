@@ -66,6 +66,7 @@ const EditAddressModal = ({
         setModalState(false);
         setMakeGet(!makeGet);
         toast.success("Endereço atualizado com sucesso!");
+        document.body.style.overflow = "auto";
       })
       .catch((err) =>
         toast.error(
@@ -161,7 +162,10 @@ const EditAddressModal = ({
               fontColor="var(--grey-2)"
               bgColor="var(--grey-6)"
               borderColor="var(--grey-6)"
-              onClick={() => setModalState(false)}
+              onClick={() => {
+                setModalState(false);
+                document.body.style.overflow = "auto";
+              }}
             >
               Cancelar
             </Button>

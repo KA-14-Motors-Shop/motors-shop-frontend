@@ -24,6 +24,7 @@ const DeleteAdModal = ({
         toast.success("Anúncio excluido!");
         setMakeGet(!makeGet);
         setModalState(!modalState);
+        document.body.style.overflow = "auto";
       })
       .catch((err) => {
         console.log(err);
@@ -50,7 +51,10 @@ const DeleteAdModal = ({
             bgColor="var(--grey-6)"
             borderColor="var(--grey-6)"
             fontColor="var(--grey-2)"
-            onClick={() => setModalState(!modalState)}
+            onClick={() => {
+              setModalState(!modalState);
+              document.body.style.overflow = "auto";
+            }}
           >
             Cancelar
           </Button>

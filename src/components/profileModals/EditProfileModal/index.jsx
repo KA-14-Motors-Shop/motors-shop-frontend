@@ -39,6 +39,11 @@ const EditProfileModal = ({ user, setMakeGet, makeGet }) => {
 
   useEffect(() => {
     setRootHeight(getComputedStyle(document.getElementById("root")).height);
+
+    if (editPfModal) {
+      document.body.style.overflow = "hidden";
+      window.scrollTo(0, 0);
+    }
   }, [editPfModal]);
 
   const handleEditProfile = (data) => {
@@ -65,6 +70,7 @@ const EditProfileModal = ({ user, setMakeGet, makeGet }) => {
         setEditPfModal(false);
         setMakeGet(!makeGet);
         toast.success("Usuário atualizado com sucesso!");
+        document.body.style.overflow = "auto";
       })
       .catch((err) =>
         toast.error(
@@ -81,7 +87,10 @@ const EditProfileModal = ({ user, setMakeGet, makeGet }) => {
           <GrClose
             className="close__icon"
             size={15}
-            onClick={() => setEditPfModal(false)}
+            onClick={() => {
+              setEditPfModal(false);
+              document.body.style.overflow = "auto";
+            }}
           />
         </div>
         <h6 className="personal__info__text">Informações pessoais</h6>
@@ -163,7 +172,10 @@ const EditProfileModal = ({ user, setMakeGet, makeGet }) => {
               borderColor="var(--grey-6)"
               fontColor="var(--grey-2)"
               fontSize="14px"
-              onClick={() => setEditPfModal(false)}
+              onClick={() => {
+                setEditPfModal(false);
+                document.body.style.overflow = "auto";
+              }}
             >
               Cancelar
             </Button>
