@@ -51,7 +51,6 @@ const CardRegister = () => {
 
   const onSubmitFunction = async (data) => {
     const dataPartes = data.birthday.split("/");
-
     const newData = {
       name: data.name,
       cpf: data.cpf.replace(/\D/g, ""),
@@ -118,7 +117,10 @@ const CardRegister = () => {
             type="submit"
             width={"150px"}
             height={"38px"}
-            onClick={() => history.push("/login")}
+            onClick={() => {
+              history.push("/login");
+              document.body.style.overflow = "auto";
+            }}
           >
             Voltar para Login
           </Button>
@@ -293,13 +295,15 @@ const CardRegister = () => {
             Comprador
           </Button>
           <Button
-            onClick={() => setAccount("seller")}
-            bgColor={account === "seller" ? "var(--brand-1)" : "var(--grey-4)"}
+            onClick={() => setAccount("advertiser")}
+            bgColor={
+              account === "advertiser" ? "var(--brand-1)" : "var(--grey-4)"
+            }
             borderColor={
-              account === "seller" ? "var(--brand-1)" : "var(--grey-4)"
+              account === "advertiser" ? "var(--brand-1)" : "var(--grey-4)"
             }
             fontColor={
-              account === "seller" ? "var(--white-fixed)" : "var(--grey-0)"
+              account === "advertiser" ? "var(--white-fixed)" : "var(--grey-0)"
             }
             type={"button"}
             width={"140px"}

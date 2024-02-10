@@ -48,6 +48,7 @@ export const GenericModal = styled.div`
         width: 24px;
         height: 24px;
         color: var(--grey-4);
+        cursor: pointer;
       }
     }
   }
