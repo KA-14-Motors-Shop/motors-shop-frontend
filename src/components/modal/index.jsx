@@ -15,7 +15,6 @@ const AnuncioModal = ({
 
   useEffect(() => {
     setRootHeight(getComputedStyle(document.getElementById("root")).height);
-
     if (modalState) {
       document.body.style.overflow = "hidden";
       window.scrollTo(0, 0);
@@ -23,7 +22,10 @@ const AnuncioModal = ({
   }, [modalState]);
 
   return (
-    <styles.GenericModal height={rootHeight} modalType={modalType}>
+    <styles.GenericModal
+      height={rootHeight ? rootHeight : "500px"}
+      modalType={modalType}
+    >
       <div className="generic-modal" id="generic-modal">
         <div className="modal-header-div">
           <h2>{title}</h2>

@@ -102,7 +102,6 @@ jest.mock("react-router-dom", () => ({
   Redirect: jest.fn(),
   useLocation: () => jest.fn(),
 }));
-
 Object.defineProperty(window, "getComputedStyle", {
   value: () => ({
     getPropertyValue: (prop) => {
@@ -110,6 +109,8 @@ Object.defineProperty(window, "getComputedStyle", {
     },
   }),
 });
+
+window.scrollTo = jest.fn();
 
 describe("Profile Page Tests", () => {
   test("should be able to render a profile", async () => {
