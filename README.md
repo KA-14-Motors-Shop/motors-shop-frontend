@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# 🚗 Motors Shop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Site de venda e leilão de automóveis, com armazenamento local.** Este projeto apresenta páginas bem completas para interação e visualização de anúncios e perfis, incluindo um sistema simples de compra/venda e funcionalidades para envio de imagens.
 
-## Available Scripts
+🚀 **Acesse o ambiente em produção:** [https://motors-shop-alpha.vercel.app/](https://motors-shop-alpha.vercel.app/)
 
-In the project directory, you can run:
+---
 
-### `yarn start`
+## 🎯 Funcionalidades
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Vitrine de Veículos:** Navegação, pesquisa e visualização completa dos anúncios de vendas e leilões.
+- **Painel de Usuário:** Criação de perfil, atualização de dados pessoais e gerenciamento de endereços.
+- **Gestão de Anúncios:** Criação (com envio de imagens), edição, exclusão e visualização de produtos criados pelo usuário.
+- **Leilões e Vendas:** Interface intuitiva focado em uma experiência interativa e imersiva.
+- **Filtros Avançados:** Busca aprimorada para localizar o veículo perfeito.
+- **Persistência de Dados Local:** Armazenamento seguro de estados e sessões por local storage, incluindo mock de rotas.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tecnologias Utilizadas
 
-### `yarn test`
+Este projeto foi desenvolvido utilizando as melhores práticas do ecossistema React:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **[React 18](https://reactjs.org/)**: Biblioteca principal para renderização de interfaces;
+- **[Styled Components](https://styled-components.com/)**: Estilização baseada em componentes (CSS-in-JS);
+- **[React Router Dom v5](https://v5.reactrouter.com/)**: Gerenciamento das rotas e navegação da aplicação;
+- **[React Hook Form](https://react-hook-form.com/) & [Yup](https://github.com/jquense/yup)**: Criação de formulários performáticos com validação de esquemas de dados;
+- **[Axios](https://axios-http.com/) & [Axios Mock Adapter](https://github.com/ctimmerm/axios-mock-adapter)**: Comunicação HTTP facilitada e simulação eficiente do backend;
+- **[Cypress](https://www.cypress.io/) & [RTL](https://testing-library.com/)**: Cobertura sólida de testes de componentes e End-to-End (E2E);
+- **[React Toastify](https://fkhadra.github.io/react-toastify/)**: Sistema de notificações (Toasts) personalizadas;
+- **[React Input Mask](https://github.com/sanniassin/react-input-mask)**: Máscaras de input dinâmicas em formulários de registro;
 
-### `yarn build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 💻 Como Rodar o Projeto Localmente
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone do Repositório**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   git clone <url-do-repositorio>
+   cd motors-shop-frontend
+   ```
 
-### `yarn eject`
+2. **Instalação das Dependências**
+   Utilizando `npm` ou `yarn`:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```bash
+   npm install
+   # ou
+   yarn install
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Iniciando a Aplicação**
+   ```bash
+   npm start
+   # ou
+   yarn start
+   ```
+   A aplicação será iniciada por padrão na porta `3000`. Acesse [http://localhost:3000](http://localhost:3000).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🧪 Testes
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+A aplicação possui um conjunto rigoroso de testes:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Para rodar os testes unitários/componentes (Jest + React Testing Library):
+  ```bash
+  npm test
+  # ou
+  yarn test
+  ```
+- O Cypress também está configurado para garantir o fluxo E2E, validando cadastros, interações simuladas e comportamento visual da interface.
